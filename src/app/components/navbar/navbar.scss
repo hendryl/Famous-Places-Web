@@ -1,0 +1,21 @@
+.navbar {
+  background-color: $color-blue;
+  min-height: 30px;
+}
+
+
+.btn-nav {
+  border: none;
+  background: none;
+  outline: none;
+  color: $color-white;
+  padding: 4px;
+}
+
+.btn-nav > i {
+  font-size: 30px;
+}
+
+.btn-nav:hover {
+  color: $color-gold;
+}

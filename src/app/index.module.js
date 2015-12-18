@@ -5,6 +5,8 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 
+import NavbarDirective from './components/navbar/navbar.directive';
+
 var lodash = require('lodash');
 
 angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngAudio', 'ngStorage', 'btford.socket-io'])
@@ -14,4 +16,6 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .config(config)
   .config(routerConfig)
   .run(runBlock)
-  .controller('MainController', MainController);
+  .controller('MainController', MainController)
+
+  .directive('navbar', () => new NavbarDirective());
