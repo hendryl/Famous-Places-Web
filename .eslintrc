@@ -4,7 +4,8 @@
   "env": {
     "es6": true,
     "browser": true,
-    "jasmine": true
+    "jasmine": true,
+    "amd": true
   },
   "ecmaFeatures": {
     "modules": true
@@ -13,5 +14,11 @@
     "angular": true,
     "module": true,
     "inject": true
+  },
+  "rules": {
+    "no-unused-vars": [2, {
+      "vars": "all",
+      "args": "none"
+    }]
   }
 }
