@@ -1,21 +1,27 @@
 .navbar {
   background-color: $color-blue;
   min-height: 30px;
+  padding: 8px 0;
 }
 
-
-.btn-nav {
-  border: none;
-  background: none;
-  outline: none;
+.btn.btn-nav {
+  font-weight: 700;
+  padding: 4px 8px;
+  max-height: 36px;
+  min-height: 36px;
+  background-color: $color-red;
   color: $color-white;
-  padding: 4px;
 }
 
-.btn-nav > i {
-  font-size: 30px;
+.btn-nav>i {
+  font-size: 28px;
 }
 
 .btn-nav:hover {
-  color: $color-gold;
+  color: $color-white;
+}
+
+#title {
+  margin: 8px 0 0 0;
+  color: $color-white;
 }

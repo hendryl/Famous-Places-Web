@@ -9,6 +9,12 @@
     outline: 0 none;
 }
 
+.btn-unstyled {  border: none;
+  background: none;
+  outline: none;
+  color: $color-white;
+}
+
 .btn-primary,
 .btn-primary:focus {
   background-color: $color-green;

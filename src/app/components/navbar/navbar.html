@@ -1,17 +1,27 @@
 <nav class="navbar navbar-static-top" id="nav">
   <div class="container-fluid">
     <div class="row">
-      <button class="btn-nav" ngsf-toggle-fullscreen ng-hide="fullscreen">
-        <i class="material-icons">
-          fullscreen
-        </i>
-      </button>
-      <button class="btn-nav" ngsf-toggle-fullscreen ng-show="fullscreen">
-        <i class="material-icons">
-          fullscreen_exit
-        </i>
-      </button>
+      <div class="col-xs-4">
+        <button class="btn btn-nav">
+          ABOUT
+        </button>
+      </div>
+      <div class="col-xs-4 text-center">
+        <!-- TODO: Change this into logo text  -->
+        <h3 id="title">Famous Places</h3>
+      </div>
+      <div class="col-xs-4 text-right">
+        <button class="btn btn-nav" ngsf-toggle-fullscreen ng-hide="fullscreen">
+          <i class="material-icons">
+            fullscreen
+          </i>
+        </button>
+        <button class="btn btn-nav" ngsf-toggle-fullscreen ng-show="fullscreen">
+          <i class="material-icons">
+            fullscreen_exit
+          </i>
+        </button>
+      </div>
     </div>
   </div>
-
 </nav>
