@@ -14,5 +14,11 @@
     "angular": true,
     "module": true,
     "inject": true
+  },
+  "rules": {
+    "no-unused-vars": [2, {
+      "vars": "all",
+      "args": "none"
+    }]
   }
 }
