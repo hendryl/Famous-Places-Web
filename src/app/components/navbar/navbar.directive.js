@@ -12,7 +12,7 @@ class NavbarDirective {
 }
 
 class NavbarController {
-  constructor ($scope) {
+  constructor ($scope, $state) {
     'ngInject';
 
     $scope.fullscreen = false;
@@ -20,6 +20,14 @@ class NavbarController {
     $scope.toggleFullscreen = function() {
       $scope.fullscreen = !$scope.fullscreen;
     }
+
+    $scope.handleAbout = function() {
+      if($state.is('home')) {
+        $state.go('about');
+      } else {
+        $state.go('home');
+      }
+    };
   }
 }
 
