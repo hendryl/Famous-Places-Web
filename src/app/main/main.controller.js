@@ -1,5 +1,5 @@
 export class MainController {
-  constructor (toastr) {
+  constructor () {
     'ngInject';
   }
 }
