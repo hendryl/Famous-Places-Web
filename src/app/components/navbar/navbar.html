@@ -11,14 +11,14 @@
         <h3 id="title">Famous Places</h3>
       </div>
       <div class="col-xs-4 text-right">
-        <button class="btn btn-nav" ngsf-toggle-fullscreen ng-hide="fullscreen">
+        <button class="btn btn-nav btn-nav-spacing" ngsf-toggle-fullscreen ng-click="toggleFullscreen()">
           <i class="material-icons">
-            fullscreen
+            {{fullscreen}}
           </i>
         </button>
-        <button class="btn btn-nav" ngsf-toggle-fullscreen ng-show="fullscreen">
+        <button class="btn btn-nav" ng-click="toggleAudio()">
           <i class="material-icons">
-            fullscreen_exit
+            {{audio}}
           </i>
         </button>
       </div>

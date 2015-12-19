@@ -15,10 +15,20 @@ class NavbarController {
   constructor ($scope, $state) {
     'ngInject';
 
-    $scope.fullscreen = false;
+    var audioOn = "volume_up";
+    var audioOff = "volume_off";
+    var enterFull = "fullscreen";
+    var exitFull = "fullscreen_exit";
+
+    $scope.fullscreen = enterFull;
+    $scope.audio = audioOn;
 
     $scope.toggleFullscreen = function() {
-      $scope.fullscreen = !$scope.fullscreen;
+      $scope.fullscreen = $scope.fullscreen === enterFull ? exitFull : enterFull;
+    }
+
+    $scope.toggleAudio = function() {
+      $scope.audio = $scope.audio === audioOn ? audioOff : audioOn;
     }
 
     $scope.handleAbout = function() {
