@@ -18,7 +18,9 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('_', lodash)
 
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
-
+  .constant('audioOn', 'volume_up')
+  .constant('audioOff', 'volume_off')
+  
   .config(config)
   .config(routerConfig)
   .run(runBlock)

@@ -1,22 +1,19 @@
-const AudioPlayer = new WeakMap();
-
 class AudioPlayerService {
-  constructor(ngAudio) {
+  constructor(ngAudio, $localStorage, $sessionStorage, audioOn) {
     'ngInject';
 
-    AudioPlayer.set(this, ngAudio);
+    this.ngAudio = ngAudio;
+    this.local = $localStorage;
+    this.session = $sessionStorage;
+    this.audioOn = audioOn;
   }
 
-  play(music) {
-    if (music == null) {
-      return;
-    }
-
-    if(this.audio) {
+  play() {
+    if (this.audio) {
       this.stop();
     }
 
-    this.audio = AudioPlayer.get(this).load(music);
+    this.audio = this.ngAudio.load(this.session.currentMusic);
     this.audio.loop = true;
     this.audio.play();
   }
@@ -25,6 +22,18 @@ class AudioPlayerService {
     if (this.audio != null) {
       this.audio.stop();
     }
+  }
+
+  shouldPlayMusic() {
+    if (this.local.audioStatus === this.audioOn) {
+      if (this.audio == null) {
+        return true;
+      } else if (this.audio.id !== this.session.currentMusic) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
 
