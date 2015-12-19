@@ -8,6 +8,8 @@ import { AboutController } from './about/about.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
+import AudioPlayerService from './components/audioplayer/player.service';
+
 var lodash = require('lodash');
 
 angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngAudio', 'ngStorage', 'btford.socket-io'])
@@ -20,4 +22,6 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('MainController', MainController)
   .controller('AboutController', AboutController)
 
-  .directive('navbar', () => new NavbarDirective());
+  .directive('navbar', () => new NavbarDirective())
+
+  .service('AudioPlayerService',AudioPlayerService);
