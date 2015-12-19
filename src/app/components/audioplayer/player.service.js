@@ -17,6 +17,7 @@ class AudioPlayerService {
     }
 
     this.audio = AudioPlayer.get(this).load(music);
+    this.audio.loop = true;
     this.audio.play();
   }
 
