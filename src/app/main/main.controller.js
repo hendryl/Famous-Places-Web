@@ -1,5 +1,7 @@
 export class MainController {
-  constructor () {
+  constructor ($sessionStorage, baseMusic) {
     'ngInject';
+
+    $sessionStorage.currentMusic = baseMusic;
   }
 }
