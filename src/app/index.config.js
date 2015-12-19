@@ -1,4 +1,4 @@
-export function config ($logProvider, toastrConfig) {
+export function config ($logProvider, toastrConfig, $sessionStorageProvider, baseMusic) {
   'ngInject';
   // Enable log
   $logProvider.debugEnabled(true);
@@ -9,4 +9,6 @@ export function config ($logProvider, toastrConfig) {
   toastrConfig.positionClass = 'toast-top-right';
   toastrConfig.preventDuplicates = true;
   toastrConfig.progressBar = true;
+
+  $sessionStorageProvider.set('currentMusic', baseMusic);
 }
