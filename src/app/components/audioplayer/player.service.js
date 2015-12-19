@@ -12,6 +12,10 @@ class AudioPlayerService {
       return;
     }
 
+    if(this.audio) {
+      this.stop();
+    }
+
     this.audio = AudioPlayer.get(this).load(music);
     this.audio.play();
   }
