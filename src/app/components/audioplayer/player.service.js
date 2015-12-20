@@ -8,14 +8,26 @@ class AudioPlayerService {
     this.audioOn = audioOn;
   }
 
-  play() {
+  play(loop = true) {
     if (this.audio) {
       this.stop();
     }
 
     this.audio = this.ngAudio.load(this.session.currentMusic);
-    this.audio.loop = true;
+    this.audio.loop = loop;
     this.audio.play();
+  }
+
+  playPause() {
+    if (this.audio != null) {
+      if(this.audio.paused) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
+    } else {
+      this.play();
+    }
   }
 
   stop() {

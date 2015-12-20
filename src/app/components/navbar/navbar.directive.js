@@ -23,19 +23,15 @@ class NavbarController {
 
     $scope.toggleFullscreen = function() {
       $scope.fullscreen = $scope.fullscreen === enterFull ? exitFull : enterFull;
-    }
+    };
 
     $scope.toggleAudio = function() {
       var current = $scope.$storage.audioStatus;
       current = current === audioOn ? audioOff : audioOn;
       $scope.$storage.audioStatus = current;
 
-      if(current === audioOn) {
-        AudioPlayerService.play();
-      } else {
-        AudioPlayerService.stop();
-      }
-    }
+      AudioPlayerService.playPause();
+    };
 
     $scope.handleAbout = function() {
       if($state.is('home')) {
