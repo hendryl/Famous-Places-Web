@@ -3,9 +3,9 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
-import { MainController } from './main/main.controller';
-import { AboutController } from './about/about.controller';
-import { SelectController } from './select/select.controller';
+import MainController from './main/main.controller';
+import AboutController from './about/about.controller';
+import SelectController from './select/select.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -23,7 +23,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
   .constant('audioOn', 'volume_up')
   .constant('audioOff', 'volume_off')
-  
+
   .config(config)
   .config(routerConfig)
   .run(runBlock)
@@ -33,6 +33,6 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .directive('navbar', () => new NavbarDirective())
 
-  .service('AudioPlayerService', AudioPlayerService)
+  .service('AudioPlayerService', AudioPlayerService);
 
-  .factory('ModeFactory', ()=> new ModeFactory());
+//  .factory('ModeFactory', ()=> new ModeFactory());
