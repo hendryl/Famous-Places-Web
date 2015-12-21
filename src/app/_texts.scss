@@ -1,3 +1,17 @@
+//Text coloring
+.text-inverted {
+  color: $color-white;
+}
+
+.text-inverted-pale {
+  color: $color-lightyellow;
+}
+
+.text-gold {
+  color: $color-gold;
+}
+
+
 //http://snapcode.co/snap/show/49/bootstrap-3-responsive-text-size-with-media-queries-css-font-style-classes-1
 
 /* Large desktops and laptops */
@@ -263,13 +277,4 @@
     font-size: 8px;
     line-height: normal;
   }
-}
-
-//Text coloring
-.text-inverted {
-  color: $color-white;
-}
-
-.text-inverted-pale {
-  color: $color-lightyellow;
 }
