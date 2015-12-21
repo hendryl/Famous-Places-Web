@@ -1,50 +1,50 @@
 const credits = [{
   "image": "assets/images/angular.png",
-  "title": "AngularJS - Javascript framework",
+  "title": "AngularJS",
   "url": "https://angularjs.org/"
 }, {
   "image": "assets/images/babel.png",
-  "title": "Babel - Javascript transpiler",
+  "title": "Babel",
   "url": "https://babeljs.io/"
 }, {
   "image": "assets/images/bootstrap.png",
-  "title": "Bootstrap - CSS framework",
+  "title": "Bootstrap",
   "url": "http://getbootstrap.com/"
 }, {
   "image": "assets/images/gulp.png",
-  "title": "GulpJS - Javascript build system",
+  "title": "GulpJS",
   "url": "http://gulpjs.com/"
 }, {
   "image": "assets/images/node-sass.png",
-  "title": "Sass Node version - CSS preprocessor",
+  "title": "Sass Node version",
   "url": "http://sass-lang.com/"
 }, {
   "image": "assets/images/yeoman.png",
-  "title": "Yeoman - Webapp scaffolder",
+  "title": "Yeoman",
   "url": "http://yeoman.io/"
 }, {
   "image": "assets/images/nodejs.png",
-  "title": "NodeJS - Server-side Javascript ",
+  "title": "NodeJS",
   "url": "https://nodejs.org/en/"
 }, {
   "image": "assets/images/expressjs.png",
-  "title": "ExpressJS - Web framework",
+  "title": "ExpressJS",
   "url": "http://expressjs.com/en/index.html"
 }, {
-  "image": "assets/images/socketio.svg",
-  "title": "Socket.io - Websocket library",
+  "image": "assets/images/socketio.png",
+  "title": "Socket.io",
   "url": "http://socket.io/"
 }, {
   "image": "assets/images/PostgreSQL.png",
-  "title": "PostgreSQL - Open source RDBMS",
+  "title": "PostgreSQL",
   "url": "http://www.postgresql.org/"
 }, {
   "image": "assets/images/heroku.png",
-  "title": "Heroku - Cloud application platform",
+  "title": "Heroku",
   "url": "https://www.heroku.com"
 }, {
-  "image": "",
-  "title": "BitBalloon - Static site hosting platform",
+  "image": "http://placehold.it/100/100",
+  "title": "BitBalloon",
   "url": "https://www.bitballoon.com"
 }];
 
