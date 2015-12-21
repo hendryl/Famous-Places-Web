@@ -5,10 +5,13 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 import { AboutController } from './about/about.controller';
+import { SelectController } from './select/select.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
 import AudioPlayerService from './components/audioplayer/player.service';
+
+import ModeFactory from './select/mode.factory.js';
 
 var lodash = require('lodash');
 
@@ -26,7 +29,10 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .run(runBlock)
   .controller('MainController', MainController)
   .controller('AboutController', AboutController)
+  .controller('SelectController', SelectController)
 
   .directive('navbar', () => new NavbarDirective())
 
-  .service('AudioPlayerService',AudioPlayerService);
+  .service('AudioPlayerService', AudioPlayerService)
+
+  .factory('ModeFactory', ()=> new ModeFactory());
