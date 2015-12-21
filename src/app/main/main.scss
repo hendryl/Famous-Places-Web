@@ -2,6 +2,12 @@
   background-color: $color-white;
 }
 
+#main-subtitle {
+  padding: 50px 2% 100px 2%;
+}
+
 #main-image {
-  padding: 0 20% 10% 20%;
+  max-width: 500px;
+  width: 45%;
+  padding-bottom: 4%;
 }
