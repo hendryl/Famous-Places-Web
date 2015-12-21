@@ -22,14 +22,14 @@
 
 .btn-primary,
 .btn-primary:focus {
-  background-color: $color-green;
+  background-color: $color-gold;
   color:$color-white;
 }
 .btn-primary:hover {
-  background-color: darken($color-green, 10%);
+  background-color: darken($color-gold, 10%);
 }
 .btn-primary:active:focus {
-  background-color: darken($color-green, 20%);
+  background-color: darken($color-gold, 20%);
 }
 .btn-primary:disabled,
 .btn-primary:disabled:hover {
