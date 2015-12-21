@@ -33,6 +33,6 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .directive('navbar', () => new NavbarDirective())
 
-  .service('AudioPlayerService', AudioPlayerService);
+  .service('AudioPlayerService', AudioPlayerService)
 
-//  .factory('ModeFactory', ()=> new ModeFactory());
+  .factory('ModeFactory', ()=> new ModeFactory());
