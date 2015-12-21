@@ -37,6 +37,14 @@ body {
   padding-top: 55px;
 }
 
+.mainbg {
+  background-color: $color-black;
+  background-image: url(https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/dnb_land_ocean_ice.2012.3600x1800.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
