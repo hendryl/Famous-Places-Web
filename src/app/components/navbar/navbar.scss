@@ -2,6 +2,7 @@
   background-color: $color-blue;
   min-height: 30px;
   padding: 8px 0;
+  margin-bottom: 0px;
 }
 
 .btn.btn-nav {
@@ -25,7 +26,8 @@
   color: $color-white;
 }
 
-#title {
-  margin: 8px 0 0 0;
+.nav-title {
+  max-height: 36px;
+  min-height: 30px;
   color: $color-white;
 }

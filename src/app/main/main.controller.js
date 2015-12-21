@@ -1,5 +1,5 @@
-export class MainController {
-  constructor ($scope, $localStorage, $sessionStorage, baseMusic, audioOn, AudioPlayerService) {
+class MainController {
+  constructor ($scope, $state, $localStorage, $sessionStorage, baseMusic, audioOn, AudioPlayerService) {
     'ngInject';
 
     $scope.$storage = $localStorage.$default({
@@ -11,5 +11,11 @@ export class MainController {
     if(AudioPlayerService.shouldPlayMusic()) {
       AudioPlayerService.play();
     }
+
+    $scope.play = function() {
+      $state.go('select');
+    };
   }
 }
+
+export default MainController;
