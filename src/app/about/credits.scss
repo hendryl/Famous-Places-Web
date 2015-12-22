@@ -6,6 +6,11 @@
   padding: 10px;
 }
 
-#aboutbg {
+.aboutbg {
   background-color: $color-white;
+  border: 10px solid $color-red;
+}
+
+#about-pad-top {
+  padding-top:20px;
 }

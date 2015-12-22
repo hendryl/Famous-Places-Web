@@ -45,6 +45,11 @@ body {
   background-attachment: fixed;
 }
 
+.bg {
+  background-repeat: repeat;
+  background-image: url("../assets/images/fleur-de-lis-pattern.png");
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
