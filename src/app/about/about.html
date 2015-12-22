@@ -1,7 +1,9 @@
 <navbar></navbar>
 <div class="fill bg">
-  <div class="container aboutbg navbar-pad">
-    <div class="row" id="about-pad-top">
+  <div class="container navbar-pad">
+    <div id="about-pad-top">
+    </div>
+    <div class="aboutbg row">
       <div class="col-xs-12">
         <h1>About</h1>
         <p>Put Glorious description here.</p>
@@ -18,8 +20,10 @@
           <div ng-repeat="item in about.credits">
             <div class="col-xs-4 col-md-3">
               <a class="credits-box" ng-href="{{item.url}}">
-                <img alt="" class="center-block credits-logo" ng-src="{{item.image}}"/>
-                <div class="text-center">{{item.title}}</div>
+                <img alt="" class="center-block credits-logo img-responsive" ng-src="{{item.image}}"/>
+                <div class="text-center">
+                  {{item.title}}
+                </div>
               </a>
             </div>
           </div>

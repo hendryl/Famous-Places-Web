@@ -8,9 +8,11 @@
 
 .aboutbg {
   background-color: $color-white;
-  border: 10px solid $color-red;
+  border: 12px solid $color-yellow;
+  border-radius: 12px;
+
 }
 
 #about-pad-top {
-  padding-top:20px;
+  height: 20px;
 }
