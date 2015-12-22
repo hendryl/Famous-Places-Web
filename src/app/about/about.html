@@ -1,24 +1,30 @@
 <navbar></navbar>
 <div class="fill bg">
-<div class="container aboutbg navbar-pad">
-  <div class="row" id="about-pad-top">
-    <div class="col-xs-12">
-      <h1>Hello About Page!</h1>
-    </div>
-    <div class="col-xs-12">
-      <h1 class="">Credits</h1>
-      <span>This app uses the following technologies:</span>
-      <div class="row">
-        <div ng-repeat="item in about.credits">
-          <div class="col-xs-4 col-md-3">
-            <a class="credits-box" ng-href="{{item.url}}">
-              <img alt="" class="center-block credits-logo" ng-src="{{item.image}}"/>
-              <div class="text-center">{{item.title}}</div>
-            </a>
+  <div class="container aboutbg navbar-pad">
+    <div class="row" id="about-pad-top">
+      <div class="col-xs-12">
+        <h1>About</h1>
+        <p>Put Glorious description here.</p>
+        <h2>Credits</h2>
+        <p>Thanks to `people here` that helped at this project:</p>
+        <ol>
+          <li>asdf</li>
+          <li>afdsadsf</li>
+          <li>afafds</li>
+        </ol>
+        <h2>Technologies</h2>
+        <p>This app uses the following technologies:</p>
+        <div class="row">
+          <div ng-repeat="item in about.credits">
+            <div class="col-xs-4 col-md-3">
+              <a class="credits-box" ng-href="{{item.url}}">
+                <img alt="" class="center-block credits-logo" ng-src="{{item.image}}"/>
+                <div class="text-center">{{item.title}}</div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
