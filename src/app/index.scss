@@ -42,7 +42,8 @@ body {
   background-image:url("../assets/images/map.png");
   background-position: center;
   background-size: cover;
-  background-attachment: fixed;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 .bg {
