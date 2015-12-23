@@ -49,6 +49,12 @@ body {
 .bg {
   background-repeat: repeat;
   background-image: url("../assets/images/fleur-de-lis-pattern.png");
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.pad-bottom {
+  padding-bottom: 20px;
 }
 
 /**
