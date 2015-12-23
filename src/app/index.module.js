@@ -19,6 +19,9 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
+  .constant('baseURLConfig', {
+    'rootAPI': 'https://famous-places-api.herokuapp.com/api'
+  })
 
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
   .constant('audioOn', 'volume_up')
@@ -35,4 +38,4 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .service('AudioPlayerService', AudioPlayerService)
 
-  .factory('ModeFactory', ()=> new ModeFactory());
+  .factory('ModeFactory', ['$http', 'baseURLConfig', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig)]);
