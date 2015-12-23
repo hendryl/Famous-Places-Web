@@ -20,6 +20,7 @@ class NavbarController {
 
     $scope.fullscreen = enterFull;
     $scope.$storage = $localStorage;
+    $scope.aboutText = $state.is('home') ? "ABOUT" : "HOME";
 
     $scope.toggleFullscreen = function() {
       $scope.fullscreen = $scope.fullscreen === enterFull ? exitFull : enterFull;
