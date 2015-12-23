@@ -52,7 +52,7 @@ class AboutController {
   constructor(_) {
     'ngInject';
 
-    this.credits = _.sortBy(credits, function(n) {
+    this.credits = _.sortBy(credits, (n) => {
       return n.title;
     });
   }
