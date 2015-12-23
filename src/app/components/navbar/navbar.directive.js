@@ -6,40 +6,64 @@ class NavbarDirective {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
       controller: NavbarController,
+      controllerAs: 'nav',
       bindToController: true
     };
   }
 }
 
 class NavbarController {
-  constructor ($scope, $state, $localStorage, AudioPlayerService, audioOn, audioOff) {
+  constructor ($state, $localStorage, AudioPlayerService, audioOn, audioOff) {
     'ngInject';
 
-    var enterFull = "fullscreen";
-    var exitFull = "fullscreen_exit";
+    this.$state = $state;
+    this.$storage = $localStorage;
+    this.AudioPlayerService = AudioPlayerService;
 
-    $scope.fullscreen = enterFull;
-    $scope.$storage = $localStorage;
-
-    $scope.toggleFullscreen = function() {
-      $scope.fullscreen = $scope.fullscreen === enterFull ? exitFull : enterFull;
+    this.props = {
+      enterFull: "fullscreen",
+      exitFull: "fullscreen_exit",
+      audioOn: audioOn,
+      audioOff: audioOff
     };
 
-    $scope.toggleAudio = function() {
-      var current = $scope.$storage.audioStatus;
-      current = current === audioOn ? audioOff : audioOn;
-      $scope.$storage.audioStatus = current;
+    this.fullscreen = this.props.enterFull;
+    this.aboutText = $state.is('home') ? "ABOUT" : "HOME";
+  }
 
-      AudioPlayerService.playPause();
-    };
+  toggleFullscreen() {
+    const enterFull = this.props.enterFull;
+    const exitFull = this.props.exitFull;
 
-    $scope.handleAbout = function() {
-      if($state.is('home')) {
-        $state.go('about');
-      } else {
-        $state.go('home');
-      }
-    };
+    this.fullscreen = this.fullscreen === enterFull ? exitFull : enterFull;
+  }
+
+  toggleAudio() {
+    const $storage = this.$storage;
+    const audioOn = this.props.audioOn;
+    const audioOff = this.props.audioOff;
+
+    $storage.audioStatus = $storage.audioStatus === audioOn ? audioOff : audioOn;
+
+    this.AudioPlayerService.playPause();
+  }
+
+  shouldHideAboutButton() {
+    const $state = this.$state;
+    if($state.is('home') || $state.is('about')) {
+      return false;
+    }
+    return true;
+  }
+
+  handleAbout() {
+    const $state = this.$state;
+
+    if($state.is('home')) {
+      $state.go('about');
+    } else {
+      $state.go('home');
+    }
   }
 }
 

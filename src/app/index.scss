@@ -37,6 +37,26 @@ body {
   padding-top: 55px;
 }
 
+.mainbg {
+  background-color: $color-black;
+  background-image:url("../assets/images/map.png");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.bg {
+  background-repeat: repeat;
+  background-image: url("../assets/images/fleur-de-lis-pattern.png");
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.pad-bottom {
+  padding-bottom: 20px;
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

@@ -1,5 +1,5 @@
 class SelectController {
-  constructor($scope) {
+  constructor() {
     'ngInject';
   }
 }

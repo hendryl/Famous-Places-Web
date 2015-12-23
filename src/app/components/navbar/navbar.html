@@ -2,22 +2,22 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-4">
-        <button class="btn btn-nav" ng-click="handleAbout()">
-          ABOUT
+        <button class="btn btn-nav" ng-hide="nav.shouldHideAboutButton()" ng-click="nav.handleAbout()">
+          {{nav.aboutText}}
         </button>
       </div>
       <div class="col-xs-4 text-center">
         <img class="nav-title" src="assets/images/famous-places-small.png"></img>
       </div>
       <div class="col-xs-4 text-right">
-        <button class="btn btn-nav btn-nav-spacing" ngsf-toggle-fullscreen ng-click="toggleFullscreen()">
+        <button class="btn btn-nav btn-nav-spacing" ngsf-toggle-fullscreen ng-click="nav.toggleFullscreen()">
           <i class="material-icons">
-            {{fullscreen}}
+            {{nav.fullscreen}}
           </i>
         </button>
-        <button class="btn btn-nav" ng-click="toggleAudio()">
+        <button class="btn btn-nav" ng-click="nav.toggleAudio()">
           <i class="material-icons">
-            {{$storage.audioStatus}}
+            {{nav.$storage.audioStatus}}
           </i>
         </button>
       </div>

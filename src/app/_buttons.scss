@@ -1,11 +1,13 @@
 
 .btn {
   border: none;
+  border-radius: 12px;
 }
 
 .btn-big {
-  max-width: 500px;
+  max-width: 250px;
   width: 50%;
+  border-radius: 20px;
 }
 
 .btn:focus,
@@ -22,14 +24,14 @@
 
 .btn-primary,
 .btn-primary:focus {
-  background-color: $color-gold;
+  background-color: $color-brown;
   color:$color-white;
 }
 .btn-primary:hover {
-  background-color: darken($color-gold, 10%);
+  background-color: darken($color-brown, 10%);
 }
 .btn-primary:active:focus {
-  background-color: darken($color-gold, 20%);
+  background-color: darken($color-brown, 20%);
 }
 .btn-primary:disabled,
 .btn-primary:disabled:hover {
