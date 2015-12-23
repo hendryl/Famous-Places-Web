@@ -33,6 +33,14 @@ class NavbarController {
       AudioPlayerService.playPause();
     };
 
+    $scope.shouldHideAboutButton = function() {
+      if($state.is('home') || $state.is('about')) {
+        return false;
+      }
+
+      return true;
+    };
+
     $scope.handleAbout = function() {
       if($state.is('home')) {
         $state.go('about');
