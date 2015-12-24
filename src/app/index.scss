@@ -35,7 +35,7 @@ body {
 
 .contentbg {
   background-color: $color-white;
-  border: 12px solid $color-yellow;
+  border: 12px solid $color-blue;
   border-radius: 12px;
 }
 
@@ -49,9 +49,7 @@ body {
 }
 
 .basebg {
-  background-repeat: repeat;
-  background-image: url("../assets/images/fleur-de-lis-pattern.png");
-  height: 100%;
+  background-color: $color-white;
   overflow-x: hidden;
 }
 

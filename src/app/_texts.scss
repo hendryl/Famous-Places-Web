@@ -11,6 +11,13 @@
   color: $color-gold;
 }
 
+.outlined {
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
 
 //http://snapcode.co/snap/show/49/bootstrap-3-responsive-text-size-with-media-queries-css-font-style-classes-1
 
