@@ -7,7 +7,7 @@ class ModeFactory {
   }
 
   getList() {
-    return this.$http.get(this.baseURLConfig.rootAPI + '/modes/');
+    return this.$http.get(this.baseURLConfig.rootAPI + '/modes/?enabled=true');
   }
 }
 
