@@ -1,34 +1,36 @@
-<navbar></navbar>
-<div class="basebg">
-  <div class="container navbar-pad">
-    <div id="pad-small"></div>
-    <div class="contentbg row">
-      <div class="col-xs-12">
-        <h1>About</h1>
-        <p>Put Glorious description here.</p>
-        <h2>Credits</h2>
-        <p>Thanks to `people here` that helped at this project:</p>
-        <ol>
-          <li>asdf</li>
-          <li>afdsadsf</li>
-          <li>afafds</li>
-        </ol>
-        <h2>Technologies</h2>
-        <p>This app uses the following technologies:</p>
-        <div class="row">
-          <div ng-repeat="item in about.credits">
-            <div class="col-xs-4 col-md-3">
-              <a class="credits-box" ng-href="{{item.url}}">
-                <img alt="" class="center-block credits-logo img-responsive" ng-src="{{item.image}}"/>
-                <div class="text-center">
-                  {{item.title}}
-                </div>
-              </a>
+  <navbar></navbar>
+<div class="fill">
+  <div class="basebg fill">
+    <div class="container navbar-pad">
+      <div class="pad-small"></div>
+      <div class="contentbg row">
+        <div class="col-xs-12">
+          <h1>About</h1>
+          <p>Put Glorious description here.</p>
+          <h2>Credits</h2>
+          <p>Thanks to `people here` that helped at this project:</p>
+          <ol>
+            <li>asdf</li>
+            <li>afdsadsf</li>
+            <li>afafds</li>
+          </ol>
+          <h2>Technologies</h2>
+          <p>This app uses the following technologies:</p>
+          <div class="row">
+            <div ng-repeat="item in about.credits">
+              <div class="col-xs-4 col-md-3">
+                <a class="credits-box" ng-href="{{item.url}}">
+                  <img alt="" class="center-block credits-logo img-responsive" ng-src="{{item.image}}"/>
+                  <div class="text-center">
+                    {{item.title}}
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="pad-small"></div>
     </div>
-    <div class="pad-bottom-small"></div>
   </div>
 </div>
