@@ -38,4 +38,4 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .service('AudioPlayerService', AudioPlayerService)
 
-  .factory('ModeFactory', ['$http', 'baseURLConfig', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig)]);
+  .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig));
