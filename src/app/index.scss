@@ -45,11 +45,13 @@ body {
   background-position: center;
   background-size: cover;
   height: 100%;
-  overflow-x: hidden;
 }
 
 .basebg {
   background-color: $color-lightyellow;
+}
+
+.no-overflow {
   overflow-x: hidden;
 }
 
