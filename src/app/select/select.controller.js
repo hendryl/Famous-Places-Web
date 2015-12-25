@@ -1,5 +1,5 @@
 class SelectController {
-  constructor(ModeFactory) {
+  constructor(ModeFactory, SocketFactory) {
     'ngInject';
 
     this.modes = [];
@@ -7,6 +7,8 @@ class SelectController {
     ModeFactory.getList().success( (result) => {
       this.modes = result;
     });
+
+    console.log(SocketFactory);
   }
 }
 

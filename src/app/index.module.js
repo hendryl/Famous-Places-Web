@@ -13,15 +13,19 @@ import AudioPlayerService from './components/audioplayer/player.service';
 
 import ModeFactory from './select/mode.factory.js';
 
+import baseURLConfig from './api.js';
+
 var lodash = require('lodash');
+var io = require('socket.io-client')(baseURLConfig.localAPI, {
+  'reconnect': true,
+  'reconnection delay': 500
+});
 
 angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngAudio', 'ngStorage', 'btford.socket-io'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
-  .constant('baseURLConfig', {
-    'rootAPI': 'https://famous-places-api.herokuapp.com/api'
-  })
+  .constant('baseURLConfig', baseURLConfig)
 
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
   .constant('audioOn', 'volume_up')
@@ -38,4 +42,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .service('AudioPlayerService', AudioPlayerService)
 
-  .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig));
+  .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
+  .factory('SocketFactory', (socketFactory) => socketFactory({
+    ioSocket: io
+  }));
