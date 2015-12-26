@@ -16,7 +16,7 @@ import ModeFactory from './select/mode.factory.js';
 import baseURLConfig from './api.js';
 
 var lodash = require('lodash');
-var io = require('socket.io-client')(baseURLConfig.localAPI, {
+var io = require('socket.io-client')(baseURLConfig.rootAPI, {
   'reconnect': true,
   'reconnection delay': 500
 });
