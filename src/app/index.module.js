@@ -12,8 +12,8 @@ import NavbarDirective from './components/navbar/navbar.directive';
 import AudioPlayerService from './components/audioplayer/player.service';
 import GameService from './components/game/game.service';
 
-import ModeFactory from './select/mode.factory.js';
-import GameFactory from './select/game.factory.js';
+import ModeFactory from './factories/mode.factory.js';
+import GameFactory from './factories/game.factory.js';
 
 import baseURLConfig from './api.js';
 
