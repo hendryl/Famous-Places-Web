@@ -1,21 +1,25 @@
 <navbar></navbar>
 <div class="modebg fill no-overflow">
-  <div class="container navbar-pad">
+  <div class="container-fluid navbar-pad">
     <div class="pad-small"></div>
     <div class="row">
       <div class="col-xs-12">
-        <h1 class="text-center text-inverted-pale">CHOOSE GAME MODE</h1>
+        <h1 class="text-center mode-title">CHOOSE GAME MODE</h1>
       </div>
     </div>
     <div class="pad-small"></div>
-    <div ng-repeat="mode in select.modes">
-      <div class="row">
-        <div class="col-md-4 col-xs-12 text-center">
-          <button class="btn-unstyled btn-mode">
+    <div class="row">
+      <div ng-repeat="mode in select.modes">
+        <div class="col-md-4 col-xs-12 text-center mode-pad">
+          <button ng-class='{modefloatRight:$first, modefloatLeft:$last}' class="btn-unstyled btn-mode">
             <div class="mode-box">
-              <img ng-src="{{mode.image}}" alt="" class="mode-box-image">
+              <div>
+                <img alt="" class="mode-box-image" ng-src="{{mode.image}}">
+              </div>
               <label class="mode-label h1">{{mode.name}}</label>
-              <p>{{mode.description}}</p>
+              <p class="textxMedium mode-description">
+                {{mode.description}}
+              </p>
             </div>
           </button>
         </div>
