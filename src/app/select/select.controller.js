@@ -5,10 +5,9 @@ class SelectController {
     this.modes = [];
 
     ModeFactory.getList().success( (result) => {
-      this.modes = result;
+      this.modes = _.sortBy(result, (n) => n.mode_id);
     });
 
-    console.log(SocketFactory);
   }
 }
 
