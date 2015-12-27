@@ -9,8 +9,8 @@ import SelectController from './select/select.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
-import AudioPlayerService from './components/audioplayer/player.service';
-import GameService from './components/game/game.service';
+import AudioPlayerService from './services/audio.service';
+import GameService from './services/game.service';
 
 import ModeFactory from './factories/mode.factory.js';
 import GameFactory from './factories/game.factory.js';

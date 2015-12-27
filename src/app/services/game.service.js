@@ -16,7 +16,7 @@ class GameService {
 
   retrieveImages() {
     this.$log.log(this.questions);
-    //TODO: get image urls from backend
+    
   }
 }
 
