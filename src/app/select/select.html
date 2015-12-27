@@ -4,24 +4,18 @@
     <div class="pad-small"></div>
     <div class="row">
       <div class="col-xs-12">
-        <h1 class="text-center">Choose Game Mode</h1>
+        <h1 class="text-center text-inverted-pale">CHOOSE GAME MODE</h1>
       </div>
     </div>
     <div class="pad-small"></div>
     <div ng-repeat="mode in select.modes">
       <div class="row">
-        <div class="col-xs-12 text-center">
+        <div class="col-md-4 col-xs-12 text-center">
           <button class="btn-unstyled btn-mode">
             <div class="mode-box">
-              <div class="row">
-                <div class="col-xs-4">
-                  <img class="mode-box-image" ng-src="{{mode.image}}"></img>
-                </div>
-                <div class="col-xs-8">
-                  <label class="mode-label h3">{{mode.name}}</label>
-                  <p>{{mode.description}}</p>
-                </div>
-              </div>
+              <img ng-src="{{mode.image}}" alt="" class="mode-box-image">
+              <label class="mode-label h1">{{mode.name}}</label>
+              <p>{{mode.description}}</p>
             </div>
           </button>
         </div>

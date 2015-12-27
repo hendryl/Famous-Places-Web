@@ -3,21 +3,31 @@
 }
 
 .modebg {
-  background-color: $color-lightyellow;
+  background-color: $color-gold;
 }
 
 .mode-box {
-  background-color: $color-white;
-  border: 12px solid $color-blue;
+  color:$color-brown;
+  background-color: $color-gold;
+  border: 4px solid $color-brown;
+  padding: 12px;
   border-radius: 12px;
   margin-bottom: 15px;
+}
+
+
+.mode-box:hover {
+  color: $color-white;
+  background-color: $color-brown;
 }
 
 .mode-box-image {
   max-width: 100%;
   min-width: 100%;
+  margin-bottom: 8px;
 }
 
 .mode-label {
-
+  font-weight:400;
+  font-style: italic;
 }
