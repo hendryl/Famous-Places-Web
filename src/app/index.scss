@@ -33,8 +33,10 @@ body {
   background-color: $color-black;
 }
 
-.navbar-pad {
-  padding-top: 55px;
+.contentbg {
+  background-color: $color-white;
+  border: 12px solid $color-blue;
+  border-radius: 12px;
 }
 
 .mainbg {
@@ -43,18 +45,22 @@ body {
   background-position: center;
   background-size: cover;
   height: 100%;
+}
+
+.basebg {
+  background-color: $color-lightyellow;
+}
+
+.no-overflow {
   overflow-x: hidden;
 }
 
-.bg {
-  background-repeat: repeat;
-  background-image: url("../assets/images/fleur-de-lis-pattern.png");
-  height: 100%;
-  overflow-x: hidden;
+.navbar-pad {
+  padding-top: 55px;
 }
 
-.pad-bottom {
-  padding-bottom: 20px;
+.pad-small {
+  height: 20px;
 }
 
 /**
