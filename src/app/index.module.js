@@ -12,6 +12,7 @@ import NavbarDirective from './components/navbar/navbar.directive';
 import AudioPlayerService from './components/audioplayer/player.service';
 
 import ModeFactory from './select/mode.factory.js';
+import GameFactory from './select/game.factory.js';
 
 import baseURLConfig from './api.js';
 
@@ -43,6 +44,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .service('AudioPlayerService', AudioPlayerService)
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
+  .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
   .factory('SocketFactory', (socketFactory) => socketFactory({
     ioSocket: io
   }));
