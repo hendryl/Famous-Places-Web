@@ -1,4 +1,4 @@
 export default {
-    'localAPI': 'localhost:8080/',
+    'localAPI': 'http://localhost:8080/api',
     'rootAPI': 'https://famous-places-api.herokuapp.com/api'
 };
