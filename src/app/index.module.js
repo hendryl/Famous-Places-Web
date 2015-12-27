@@ -10,6 +10,7 @@ import SelectController from './select/select.controller';
 import NavbarDirective from './components/navbar/navbar.directive';
 
 import AudioPlayerService from './components/audioplayer/player.service';
+import GameService from './components/game/game.service';
 
 import ModeFactory from './select/mode.factory.js';
 import GameFactory from './select/game.factory.js';
@@ -42,6 +43,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .directive('navbar', () => new NavbarDirective())
 
   .service('AudioPlayerService', AudioPlayerService)
+  .service('GameService', GameService)
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
   .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
