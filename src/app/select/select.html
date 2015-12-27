@@ -11,7 +11,7 @@
     <div class="row">
       <div ng-repeat="mode in select.modes">
         <div class="col-md-4 col-xs-12 text-center mode-pad">
-          <button ng-class='{modefloatRight:$first, modefloatLeft:$last}' class="btn-unstyled btn-mode">
+          <button class="btn-unstyled btn-mode" ng-class='{modefloatRight:$first, modefloatLeft:$last}' ng-click="select.selectGameMode(mode.mode_id)" ng-disabled="select.buttonDisabled">
             <div class="mode-box">
               <div>
                 <img alt="" class="mode-box-image" ng-src="{{mode.image}}">

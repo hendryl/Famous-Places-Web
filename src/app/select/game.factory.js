@@ -4,10 +4,11 @@ class GameFactory {
 
     this.$http = $http;
     this.baseURLConfig = baseURLConfig;
+    console.log(baseURLConfig);
   }
 
   createGame(mode_id) {
-    return this.$http.post(this.baseURLConfig.rootApi + '/games', {mode_id: mode_id});
+    return this.$http.post(this.baseURLConfig.rootAPI + '/games/', {mode_id: mode_id});
   }
 }
 
