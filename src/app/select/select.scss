@@ -30,6 +30,11 @@
   border: solid 2px $color-brown;
 }
 
+.mode-box:active, {
+  color: $color-white;
+  background-color: $color-red;
+}
+
 .mode-label {
   font-weight:400;
   font-style: italic;
