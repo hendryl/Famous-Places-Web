@@ -14,6 +14,7 @@ import GameService from './services/game.service';
 
 import ModeFactory from './factories/mode.factory.js';
 import GameFactory from './factories/game.factory.js';
+import ImageFactory from './factories/image.factory.js';
 
 import baseURLConfig from './api.js';
 
@@ -47,6 +48,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
   .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
+  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig))
   .factory('SocketFactory', (socketFactory) => socketFactory({
     ioSocket: io
   }));
