@@ -21,6 +21,8 @@ class SelectController {
       this.$log.log(result);
       this.GameService.storeGameData(result.data);
       this.GameService.retrieveImages();
+
+      //TODO: change state to next page
     }, (error) => {
       this.$log.log(error);
     });
