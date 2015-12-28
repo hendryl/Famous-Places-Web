@@ -20,7 +20,7 @@ class SelectController {
     this.GameFactory.createGame(mode_id).then((result) => {
       this.$log.log(result);
       this.GameService.storeGameData(result.data);
-      this.GameService.retrieveImages();
+      this.GameService.retrieveAssets();
 
       //TODO: change state to next page
     }, (error) => {
