@@ -45,7 +45,7 @@ class NavbarController {
 
     $storage.audioStatus = $storage.audioStatus === audioOn ? audioOff : audioOn;
 
-    this.AudioPlayerService.playPause();
+    this.AudioPlayerService.playPauseMusic();
   }
 
   shouldHideAboutButton() {

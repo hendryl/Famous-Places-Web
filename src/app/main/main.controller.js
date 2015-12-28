@@ -10,7 +10,7 @@ class MainController {
     $sessionStorage.currentMusic = baseMusic;
 
     if(AudioPlayerService.shouldPlayMusic()) {
-      AudioPlayerService.play();
+      AudioPlayerService.playMusic();
     }
   }
 

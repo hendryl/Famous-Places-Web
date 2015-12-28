@@ -1,4 +1,4 @@
-/* global malarkey:false, moment:false */
+/* global malarkey:false, moment:false, Howl, Howler:false*/
 
 import { config } from './index.config';
 import { routerConfig } from './index.route';
@@ -24,10 +24,12 @@ var io = require('socket.io-client')(baseURLConfig.rootAPI, {
   'reconnection delay': 500
 });
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngAudio', 'ngStorage', 'btford.socket-io'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'btford.socket-io'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
+  .constant('Howl', Howl)
+  .constant('Howler', Howler)
   .constant('baseURLConfig', baseURLConfig)
 
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")

@@ -1,46 +1,50 @@
 class AudioPlayerService {
-  constructor(ngAudio, $localStorage, $sessionStorage, audioOn) {
+  constructor(Howl, Howler, $localStorage, $sessionStorage, audioOn) {
     'ngInject';
 
-    this.ngAudio = ngAudio;
+    this.Howl = Howl;
+    this.Howler = Howler;
     this.local = $localStorage;
     this.session = $sessionStorage;
     this.audioOn = audioOn;
   }
 
-  play(loop = true) {
-    if (this.audio) {
-      this.stop();
+  playMusic(loop = true, autoplay = true) {
+    if (this.music) {
+      this.stopMusic();
     }
 
-    this.audio = this.ngAudio.load(this.session.currentMusic);
-    this.audio.loop = loop;
-    this.audio.play();
+    this.music = new this.Howl({
+      src: [this.session.currentMusic],
+      loop: loop,
+      autoplay: autoplay,
+      html5: true,
+    });
   }
 
-  playPause() {
-    if (this.audio != null) {
-      if(this.audio.paused) {
-        this.audio.play();
+  playPauseMusic() {
+    if (this.music != null) {
+      if(this.music.playing(this.music)) {
+        this.music.pause();
       } else {
-        this.audio.pause();
+        this.music.play();
       }
     } else {
-      this.play();
+      this.playMusic();
     }
   }
 
-  stop() {
-    if (this.audio != null) {
-      this.audio.stop();
+  stopMusic() {
+    if (this.music != null) {
+      this.music.pause();
     }
   }
 
   shouldPlayMusic() {
     if (this.local.audioStatus === this.audioOn) {
-      if (this.audio == null) {
+      if (this.music == null) {
         return true;
-      } else if (this.audio.id !== this.session.currentMusic) {
+      } else if (this.music._src !== this.session.currentMusic) {
         return true;
       }
     }
