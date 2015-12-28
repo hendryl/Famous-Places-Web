@@ -1,4 +1,4 @@
-class AudioPlayerService {
+class AudioService {
   constructor(Howl, Howler, $localStorage, $sessionStorage, audioOn) {
     'ngInject';
 

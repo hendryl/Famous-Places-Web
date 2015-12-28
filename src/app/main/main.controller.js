@@ -1,5 +1,5 @@
 class MainController {
-  constructor ($state, $localStorage, $sessionStorage, baseMusic, audioOn, AudioPlayerService) {
+  constructor ($state, $localStorage, baseMusic, audioOn, AudioService) {
     'ngInject';
 
     this.$state = $state;
@@ -7,10 +7,8 @@ class MainController {
       audioStatus: audioOn
     });
 
-    $sessionStorage.currentMusic = baseMusic;
-
-    if(AudioPlayerService.shouldPlayMusic()) {
-      AudioPlayerService.playMusic();
+    if(AudioService.shouldPlayMusic(baseMusic)) {
+      AudioService.playMusic();
     }
   }
 
