@@ -1,28 +1,32 @@
 class AudioService {
-  constructor(Howl, Howler, $localStorage, $sessionStorage, audioOn) {
+  constructor(Howl, Howler, $localStorage, audioOn) {
     'ngInject';
 
     this.Howl = Howl;
     this.Howler = Howler;
     this.local = $localStorage;
-    this.session = $sessionStorage;
     this.audioOn = audioOn;
   }
 
-  playMusic(loop = true, autoplay = true) {
+  prepareMusic(url, loop = true) {
+    return new this.Howl({
+      src: [url],
+      loop: loop,
+      preload: true,
+      html5: true
+    });
+  }
+
+  playMusic(music, loop = true, autoplay = true) {
     if (this.music) {
       this.stopMusic();
     }
 
-    this.music = new this.Howl({
-      src: [this.session.currentMusic],
-      loop: loop,
-      autoplay: autoplay,
-      html5: true,
-    });
+    this.music = music;
+    this.music.play();
   }
 
-  playPauseMusic() {
+  tooglePauseMusic() {
     if (this.music != null) {
       if(this.music.playing(this.music)) {
         this.music.pause();
@@ -36,15 +40,15 @@ class AudioService {
 
   stopMusic() {
     if (this.music != null) {
-      this.music.pause();
+      this.music.stop();
     }
   }
 
-  shouldPlayMusic() {
+  shouldPlayMusic(music) {
     if (this.local.audioStatus === this.audioOn) {
       if (this.music == null) {
         return true;
-      } else if (this.music._src !== this.session.currentMusic) {
+      } else if (this.music._src !== music) {
         return true;
       }
     }
@@ -53,4 +57,4 @@ class AudioService {
   }
 }
 
-export default AudioPlayerService;
+export default AudioService;

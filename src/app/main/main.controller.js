@@ -8,7 +8,8 @@ class MainController {
     });
 
     if(AudioService.shouldPlayMusic(baseMusic)) {
-      AudioService.playMusic();
+      var music = AudioService.prepareMusic(baseMusic);
+      AudioService.playMusic(music);
     }
   }
 
