@@ -29,8 +29,8 @@ body {
   height: 100%;
 }
 
-.base {
-  background-color: $color-black;
+.basebg {
+  background-color: $color-yellowgray;
 }
 
 .contentbg {
@@ -45,10 +45,6 @@ body {
   background-position: center;
   background-size: cover;
   height: 100%;
-}
-
-.basebg {
-  background-color: $color-lightyellow;
 }
 
 .no-overflow {
