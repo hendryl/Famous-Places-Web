@@ -1,8 +1,10 @@
 class SelectController {
-  constructor($log, _, SocketFactory, ModeFactory, GameFactory, GameService) {
+  constructor($log, _, $state, SocketFactory, ModeFactory, GameFactory, GameService) {
     'ngInject';
 
+    this._ = _;
     this.$log = $log;
+    this.$state = $state;
     this.GameFactory = GameFactory;
     this.GameService = GameService;
 
@@ -22,7 +24,7 @@ class SelectController {
       this.GameService.storeGameData(result.data);
       this.GameService.retrieveAssets();
 
-      //TODO: change state to next page
+      this.$state.go('lobby');
     }, (error) => {
       this.$log.log(error);
     });

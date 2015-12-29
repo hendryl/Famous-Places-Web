@@ -6,6 +6,7 @@ import { runBlock } from './index.run';
 import MainController from './main/main.controller';
 import AboutController from './about/about.controller';
 import SelectController from './select/select.controller';
+import LobbyController from './lobby/lobby.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -17,6 +18,7 @@ import GameFactory from './factories/game.factory.js';
 import ImageFactory from './factories/image.factory.js';
 
 import baseURLConfig from './api.js';
+import Player from './models/player.js';
 
 var lodash = require('lodash');
 var io = require('socket.io-client')(baseURLConfig.rootAPI, {
@@ -30,8 +32,12 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('_', lodash)
   .constant('Howl', Howl)
   .constant('Howler', Howler)
-  .constant('baseURLConfig', baseURLConfig)
 
+  //models
+  .constant('Player', Player)
+
+  //global strings
+  .constant('baseURLConfig', baseURLConfig)
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
   .constant('audioOn', 'volume_up')
   .constant('audioOff', 'volume_off')
@@ -42,6 +48,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('MainController', MainController)
   .controller('AboutController', AboutController)
   .controller('SelectController', SelectController)
+  .controller('LobbyController', LobbyController)
 
   .directive('navbar', () => new NavbarDirective())
 
