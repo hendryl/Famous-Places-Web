@@ -21,6 +21,12 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/lobby/lobby.html',
       controller: 'LobbyController',
       controllerAs: 'lobby'
+    })
+    .state('mobile-home', {
+      url: '/m',
+      templateUrl: 'app/mobile-home/home.html',
+      controller: 'HomeController',
+      controllerAs: 'Home'
     });
 
   $urlRouterProvider.otherwise('/');
