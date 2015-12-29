@@ -4,7 +4,6 @@ class GameFactory {
 
     this.$http = $http;
     this.baseURLConfig = baseURLConfig;
-    console.log(baseURLConfig);
   }
 
   createGame(mode_id) {

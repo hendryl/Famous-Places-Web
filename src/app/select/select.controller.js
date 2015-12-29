@@ -1,10 +1,13 @@
 class SelectController {
-  constructor(ModeFactory, SocketFactory, GameFactory, _) {
+  constructor($log, _, SocketFactory, ModeFactory, GameFactory, GameService) {
     'ngInject';
+
+    this.$log = $log;
+    this.GameFactory = GameFactory;
+    this.GameService = GameService;
 
     this.modes = [];
     this.buttonDisabled = false;
-    this.GameFactory = GameFactory;
 
     ModeFactory.getList().success( (result) => {
       this.modes = _.sortBy(result, (n) => n.mode_id);
@@ -14,12 +17,15 @@ class SelectController {
   selectGameMode(mode_id) {
     this.buttonDisabled = true;
 
-    this.GameFactory.createGame(mode_id).then(function(result) {
-      console.log(result);
-    }, function(error) {
-      console.log(error);
-    });
+    this.GameFactory.createGame(mode_id).then((result) => {
+      this.$log.log(result);
+      this.GameService.storeGameData(result.data);
+      this.GameService.retrieveAssets();
 
+      //TODO: change state to next page
+    }, (error) => {
+      this.$log.log(error);
+    });
   }
 }
 

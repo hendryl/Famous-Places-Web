@@ -1,4 +1,4 @@
-/* global malarkey:false, moment:false */
+/* global malarkey:false, moment:false, Howl, Howler:false*/
 
 import { config } from './index.config';
 import { routerConfig } from './index.route';
@@ -9,10 +9,12 @@ import SelectController from './select/select.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
-import AudioPlayerService from './components/audioplayer/player.service';
+import AudioService from './services/audio.service';
+import GameService from './services/game.service';
 
-import ModeFactory from './select/mode.factory.js';
-import GameFactory from './select/game.factory.js';
+import ModeFactory from './factories/mode.factory.js';
+import GameFactory from './factories/game.factory.js';
+import ImageFactory from './factories/image.factory.js';
 
 import baseURLConfig from './api.js';
 
@@ -22,10 +24,12 @@ var io = require('socket.io-client')(baseURLConfig.rootAPI, {
   'reconnection delay': 500
 });
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngAudio', 'ngStorage', 'btford.socket-io'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'btford.socket-io'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
+  .constant('Howl', Howl)
+  .constant('Howler', Howler)
   .constant('baseURLConfig', baseURLConfig)
 
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
@@ -41,10 +45,12 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .directive('navbar', () => new NavbarDirective())
 
-  .service('AudioPlayerService', AudioPlayerService)
+  .service('AudioService', AudioService)
+  .service('GameService', GameService)
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
   .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
+  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig))
   .factory('SocketFactory', (socketFactory) => socketFactory({
     ioSocket: io
   }));

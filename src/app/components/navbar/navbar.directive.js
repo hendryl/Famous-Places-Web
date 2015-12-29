@@ -13,12 +13,12 @@ class NavbarDirective {
 }
 
 class NavbarController {
-  constructor ($state, $localStorage, AudioPlayerService, audioOn, audioOff) {
+  constructor ($state, $localStorage, AudioService, audioOn, audioOff) {
     'ngInject';
 
     this.$state = $state;
     this.$storage = $localStorage;
-    this.AudioPlayerService = AudioPlayerService;
+    this.AudioService = AudioService;
 
     this.props = {
       enterFull: "fullscreen",
@@ -45,7 +45,7 @@ class NavbarController {
 
     $storage.audioStatus = $storage.audioStatus === audioOn ? audioOff : audioOn;
 
-    this.AudioPlayerService.playPause();
+    this.AudioService.tooglePauseMusic();
   }
 
   shouldHideAboutButton() {
