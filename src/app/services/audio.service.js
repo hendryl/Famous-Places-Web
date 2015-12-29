@@ -1,11 +1,32 @@
+const soundFiles = [];
+
 class AudioService {
-  constructor(Howl, Howler, $localStorage, audioOn) {
+  constructor($q, Howl, Howler, $localStorage, audioOn) {
     'ngInject';
 
+    this.$q = $q;
     this.Howl = Howl;
     this.Howler = Howler;
     this.local = $localStorage;
     this.audioOn = audioOn;
+
+    this.sounds = [];
+
+    this.prepareSound();
+  }
+
+  prepareSound() {
+    this.sounds = _.each(soundFiles, (soundFile) => {
+      var sound = new this.Howl({
+        src: [url],
+        loop: false,
+        preload: true,
+        html5: true
+      });
+
+      sound.name = soundFile.name;
+      return sound;
+    });
   }
 
   prepareMusic(url, loop = true) {
@@ -28,7 +49,7 @@ class AudioService {
 
   tooglePauseMusic() {
     if (this.music != null) {
-      if(this.music.playing(this.music)) {
+      if (this.music.playing(this.music)) {
         this.music.pause();
       } else {
         this.music.play();
