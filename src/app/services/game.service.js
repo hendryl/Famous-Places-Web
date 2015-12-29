@@ -14,16 +14,18 @@ class GameService {
     this.socketRoom = '';
 
     this.ready = {
-      questions: false,
+      images: false,
       music: false,
       sound: false
     }
   }
 
   storeGameData(data) {
+    const _ = this._;
+
     this.game_id = data.game_id;
     this.socketRoom = data.password;
-    this.questions = data.questions;
+    this.questions = _.shuffle(data.questions);
     this.musicURL = '';
   }
 
@@ -45,8 +47,32 @@ class GameService {
         question.photo = results.shift().data;
       });
 
-      //TODO: preload images!
+      this.preloadImages();
     });
+  }
+
+  preloadImages() {
+    const _ = this._;
+
+    var promises = [];
+
+    var createPromises = (array) => {
+      _.each(array, (value) => {
+        return this.$q( (resolve, reject) => {
+          var image = new Image();
+          image.onload = () => resolve(true);
+          image.src = value;
+        });
+      });
+    };
+
+    var imageArray = _.map(this.questions, (question) => question.photo.url);
+    var flagArray = _.map(this.questions, (question) => question.flag);
+
+    promises.push(createPromises(imageArray));
+    promises.push(createPromises(flagArray));
+
+    this.$q.all(promises).then( results => this.ready.images = true);
   }
 
   retrieveSounds() {
