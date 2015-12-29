@@ -13,7 +13,6 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controllerAs: 'about'
     })
     .state('select', {
-      url:'/select',
       templateUrl: 'app/select/select.html',
       controller: 'SelectController',
       controllerAs: 'select'
