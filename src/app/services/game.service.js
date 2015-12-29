@@ -1,10 +1,9 @@
 class GameService {
-  constructor(_, $log, $q, ImageFactory, AudioService, Howl) {
+  constructor(_, $log, $q, ImageFactory, AudioService) {
     'ngInject';
     this._ = _;
     this.$q = $q;
     this.$log = $log;
-    this.Howl = Howl;
     this.ImageFactory = ImageFactory;
     this.AudioService = AudioService;
 
@@ -15,8 +14,7 @@ class GameService {
 
     this.ready = {
       images: false,
-      music: false,
-      sound: false
+      music: false
     }
   }
 
@@ -31,7 +29,7 @@ class GameService {
 
   retrieveAssets() {
     this.retrieveImages();
-    this.retrieveSounds();
+    this.retrieveMusic();
   }
 
   retrieveImages() {
@@ -68,14 +66,13 @@ class GameService {
 
     var imageArray = _.map(this.questions, (question) => question.photo.url);
     var flagArray = _.map(this.questions, (question) => question.flag);
-
     promises.push(createPromises(imageArray));
     promises.push(createPromises(flagArray));
 
     this.$q.all(promises).then( results => this.ready.images = true);
   }
 
-  retrieveSounds() {
+  retrieveMusic() {
     this.music = this.AudioService.prepareMusic(this.musicURL);
 
     this.music.on('load', () => {
