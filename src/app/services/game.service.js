@@ -10,19 +10,20 @@ class GameService {
     this.game_id = 0;
     this.questions = [];
     this.musicURL = '';
-    this.socketRoom = '';
+    this.roomName = '';
+    this.players = [];
 
     this.ready = {
       images: false,
       music: false
-    }
+    };
   }
 
   storeGameData(data) {
     const _ = this._;
 
     this.game_id = data.game_id;
-    this.socketRoom = data.password;
+    this.roomName = data.password;
     this.questions = _.shuffle(data.questions);
     this.musicURL = '';
   }
