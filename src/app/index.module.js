@@ -6,6 +6,7 @@ import { runBlock } from './index.run';
 import MainController from './main/main.controller';
 import AboutController from './about/about.controller';
 import SelectController from './select/select.controller';
+import LobbyController from './lobby/lobby.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -42,6 +43,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('MainController', MainController)
   .controller('AboutController', AboutController)
   .controller('SelectController', SelectController)
+  .controller('LobbyController', LobbyController)
 
   .directive('navbar', () => new NavbarDirective())
 
