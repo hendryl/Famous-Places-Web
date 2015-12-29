@@ -18,6 +18,7 @@ import GameFactory from './factories/game.factory.js';
 import ImageFactory from './factories/image.factory.js';
 
 import baseURLConfig from './api.js';
+import Player from './models/player.js';
 
 var lodash = require('lodash');
 var io = require('socket.io-client')(baseURLConfig.rootAPI, {
@@ -31,8 +32,12 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('_', lodash)
   .constant('Howl', Howl)
   .constant('Howler', Howler)
-  .constant('baseURLConfig', baseURLConfig)
 
+  //models
+  .constant('Player', Player)
+
+  //global strings
+  .constant('baseURLConfig', baseURLConfig)
   .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
   .constant('audioOn', 'volume_up')
   .constant('audioOff', 'volume_off')
