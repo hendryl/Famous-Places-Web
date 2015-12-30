@@ -26,7 +26,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       url: '/m',
       templateUrl: 'app/mobile-home/home.html',
       controller: 'HomeController',
-      controllerAs: 'Home'
+      controllerAs: 'home'
     });
 
   $urlRouterProvider.otherwise('/');
