@@ -23,12 +23,8 @@ import baseURLConfig from './api.js';
 import Player from './models/player.js';
 
 var lodash = require('lodash');
-var io = require('socket.io-client')(baseURLConfig.rootAPI, {
-  'reconnect': true,
-  'reconnection delay': 500
-});
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'btford.socket-io'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
@@ -60,7 +56,4 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
   .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
-  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig))
-  .factory('SocketFactory', (socketFactory) => socketFactory({
-    ioSocket: io
-  }));
+  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig));

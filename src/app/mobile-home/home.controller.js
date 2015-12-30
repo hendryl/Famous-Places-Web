@@ -1,8 +1,10 @@
 class HomeController {
-  constructor() {
+  constructor($log) {
     'ngInject';
+
+  }
+
   play() {
-    });
   }
 }
 
