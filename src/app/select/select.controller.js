@@ -1,5 +1,5 @@
 class SelectController {
-  constructor($log, _, $state, SocketFactory, ModeFactory, GameFactory, GameService) {
+  constructor($log, _, $state, ModeFactory, GameFactory, GameService) {
     'ngInject';
 
     this._ = _;

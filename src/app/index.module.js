@@ -1,4 +1,4 @@
-/* global malarkey:false, moment:false, Howl, Howler:false*/
+/* global malarkey:false, moment:false, Howl, Howler:false, SockJS:false*/
 
 import { config } from './index.config';
 import { routerConfig } from './index.route';
@@ -12,6 +12,7 @@ import NavbarDirective from './components/navbar/navbar.directive';
 
 import AudioService from './services/audio.service';
 import GameService from './services/game.service';
+import SocketService from './services/socket.service';
 
 import ModeFactory from './factories/mode.factory.js';
 import GameFactory from './factories/game.factory.js';
@@ -21,17 +22,14 @@ import baseURLConfig from './api.js';
 import Player from './models/player.js';
 
 var lodash = require('lodash');
-var io = require('socket.io-client')(baseURLConfig.rootAPI, {
-  'reconnect': true,
-  'reconnection delay': 500
-});
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'btford.socket-io'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
   .constant('Howl', Howl)
   .constant('Howler', Howler)
+  .constant('SockJS', SockJS)
 
   //models
   .constant('Player', Player)
@@ -54,10 +52,8 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .service('AudioService', AudioService)
   .service('GameService', GameService)
+  .service('SocketService', SocketService)
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
   .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
-  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig))
-  .factory('SocketFactory', (socketFactory) => socketFactory({
-    ioSocket: io
-  }));
+  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig));
