@@ -1,4 +1,4 @@
-/* global malarkey:false, moment:false, Howl, Howler:false*/
+/* global malarkey:false, moment:false, Howl, Howler:false, SockJS:false*/
 
 import { config } from './index.config';
 import { routerConfig } from './index.route';
@@ -24,7 +24,7 @@ import Player from './models/player.js';
 
 var lodash = require('lodash');
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'bd.sockjs'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
@@ -56,4 +56,10 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   .factory('ModeFactory', ($http, baseURLConfig) => new ModeFactory($http, baseURLConfig))
   .factory('GameFactory', ($http, baseURLConfig) => new GameFactory($http, baseURLConfig))
-  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig));
+  .factory('ImageFactory', ($http, baseURLConfig) => new ImageFactory($http, baseURLConfig))
+  .factory('socket', (socketFactory, baseURLConfig) => {
+    var sockjs = new SockJS(baseURLConfig.localAPI + '/sockets');
+    return socketFactory({
+      socket: sockjs
+    });
+  });

@@ -1,10 +1,14 @@
 class HomeController {
-  constructor($log) {
+  constructor($log, socket) {
     'ngInject';
 
+    socket.onopen = () => {
+      socket.opened = true;
+    }
   }
 
   play() {
+    
   }
 }
 
