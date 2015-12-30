@@ -8,8 +8,6 @@ import AboutController from './about/about.controller';
 import SelectController from './select/select.controller';
 import LobbyController from './lobby/lobby.controller';
 
-import HomeController from './mobile-home/home.controller';
-
 import NavbarDirective from './components/navbar/navbar.directive';
 
 import AudioService from './services/audio.service';
@@ -49,7 +47,6 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('AboutController', AboutController)
   .controller('SelectController', SelectController)
   .controller('LobbyController', LobbyController)
-  .controller('HomeController', HomeController)
 
   .directive('navbar', () => new NavbarDirective())
 
