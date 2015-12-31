@@ -23,7 +23,48 @@ class SocketService {
         this.connected = false;
         this.$log.log('connection closed');
       };
+
+      this.socket.onmessage = ((message) => {
+        this.handleMessage(message);
+      });
     });
+  }
+
+  handleMessage(message) {
+    this.$log.log('message received');
+
+    message = angular.fromJson(message.data);
+
+    if(message.type === 'error') {
+      this.$log.error(message.reason);
+    }
+
+    if(message.type === 'create_room') {
+      this.$log.log('create room success');
+    }
+  }
+
+  createRoom(name) {
+    this.$log.log('creating room');
+    this.send({
+      type: 'create_room',
+      name: name,
+      role: 'owner'
+    });
+  }
+
+  deleteRoom(name) {
+    this.$log.log('deleting room');
+    this.send({
+      type: 'delete_room',
+      name: name,
+      role: 'owner'
+    });
+  }
+
+  send(obj) {
+    var json = angular.toJson(obj, true);
+    this.socket.send(json);
   }
 
   close() {
