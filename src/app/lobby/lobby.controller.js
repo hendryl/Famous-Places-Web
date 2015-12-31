@@ -1,15 +1,16 @@
 class LobbyController {
-  constructor($location, GameService, SocketService) {
+  constructor($log, $location, GameService, SocketService) {
     'ngInject';
 
+    this.$log = $log;
     this.game_id = GameService.game_id;
     this.password = GameService.roomName;
     this.GameService = GameService;
 
     this.mobileAddress = $location.host() +'/m';
 
-    SocketService.connect().then(function(result) {
-      $log.log('success');
+    SocketService.connect().then((result) => {
+      this.$log.log('success');
       SocketService.createRoom(this.password);
     });
   }
