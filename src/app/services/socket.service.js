@@ -8,6 +8,7 @@ class SocketService {
 
     this.socket = null;
     this.connected = false;
+    this.extendedHandler = null;
   }
 
   connect() {
@@ -34,13 +35,21 @@ class SocketService {
     this.$log.log('message received');
 
     message = angular.fromJson(message.data);
-
+    
     if(message.type === 'error') {
       this.$log.error(message.reason);
     }
 
     if(message.type === 'create_room') {
       this.$log.log('create room success');
+    }
+
+    if(message.type === 'join_room') {
+      this.$log.log('player joined');
+    }
+
+    if(this.extendedHandler != null) {
+      this.extendedHandler(message);
     }
   }
 
