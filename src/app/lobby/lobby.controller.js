@@ -11,7 +11,7 @@ class LobbyController {
     this.password = GameService.roomName;
     this.players = GameService.players;
 
-    this.mobileAddress = $location.host() +'/m';
+    this.mobileAddress = 'fpmobile.bitballoon.com';
 
     SocketService.connect().then((result) => {
       this.$log.log('success');
