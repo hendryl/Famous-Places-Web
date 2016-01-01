@@ -31,9 +31,9 @@ const credits = [{
   "title": "ExpressJS",
   "url": "http://expressjs.com/en/index.html"
 }, {
-  "image": "assets/images/socketio.png",
-  "title": "Socket.io",
-  "url": "http://socket.io/"
+  "image": "assets/images/sockjs.png",
+  "title": "SockJS",
+  "url": "https://github.com/sockjs"
 }, {
   "image": "assets/images/PostgreSQL.png",
   "title": "PostgreSQL",
