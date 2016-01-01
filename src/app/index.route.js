@@ -21,6 +21,11 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/lobby/lobby.html',
       controller: 'LobbyController',
       controllerAs: 'lobby'
+    })
+    .state('loading', {
+      templateUrl: 'app/loading/loading.html',
+      controller: 'LoadingController',
+      controllerAs: 'loading'
     });
 
   $urlRouterProvider.otherwise('/');
