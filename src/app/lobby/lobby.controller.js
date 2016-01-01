@@ -1,9 +1,10 @@
 class LobbyController {
-  constructor(_, $scope, toastr, $log, $location, GameService, SocketService) {
+  constructor(_, $state, $scope, toastr, $log, $location, GameService, SocketService) {
     'ngInject';
 
     this._ = _;
     this.$log = $log;
+    this.$state = $state;
     this.$scope = $scope;
     this.toastr = toastr;
     this.GameService = GameService;
@@ -21,6 +22,10 @@ class LobbyController {
       this.SocketService.extendedHandler = (message) => {
         if (message.type === 'join_room') {
           this.handleJoinRoomMessage(message);
+        }
+
+        if(message.type === 'players_ready') {
+          this.handlePlayersReady();
         }
 
         if (message.type === 'player_disconnect') {
@@ -43,6 +48,10 @@ class LobbyController {
     this.$scope.$apply(() => {
       this.$scope.players = this.players;
     });
+  }
+
+  handlePlayersReady() {
+    this.$state.go('loading');
   }
 
   handlePlayerDisconnect(message) {
