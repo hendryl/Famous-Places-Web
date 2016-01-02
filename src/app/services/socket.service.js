@@ -1,13 +1,15 @@
 class SocketService {
-  constructor($log, SockJS, baseURLConfig) {
+  constructor($log, SockJS, baseURLConfig, BroadcastService) {
     'ngInject';
 
     this.$log = $log;
     this.SockJS = SockJS;
     this.baseURLConfig = baseURLConfig;
+    this.BroadcastService = BroadcastService;
 
     this.socket = null;
     this.connected = false;
+    this.extendedHandler = null;
   }
 
   connect() {
@@ -22,6 +24,7 @@ class SocketService {
       this.socket.onclose = () => {
         this.connected = false;
         this.$log.log('connection closed');
+        this.BroadcastService.send('server_disconnect', null);
       };
 
       this.socket.onmessage = ((message) => {
@@ -37,10 +40,16 @@ class SocketService {
 
     if(message.type === 'error') {
       this.$log.error(message.reason);
+
+    } else if(message.type === 'create_room') {
+      this.$log.log('create room success');
+
+    } else if(message.type === 'join_room') {
+      this.$log.log('player joined');
     }
 
-    if(message.type === 'create_room') {
-      this.$log.log('create room success');
+    if(this.extendedHandler != null) {
+      this.extendedHandler(message);
     }
   }
 
