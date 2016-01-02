@@ -35,16 +35,14 @@ class SocketService {
     this.$log.log('message received');
 
     message = angular.fromJson(message.data);
-    
+
     if(message.type === 'error') {
       this.$log.error(message.reason);
-    }
 
-    if(message.type === 'create_room') {
+    } else if(message.type === 'create_room') {
       this.$log.log('create room success');
-    }
 
-    if(message.type === 'join_room') {
+    } else if(message.type === 'join_room') {
       this.$log.log('player joined');
     }
 
