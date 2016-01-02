@@ -48,6 +48,10 @@ class NavbarController {
     this.AudioService.tooglePauseMusic();
   }
 
+  shouldHideLogo() {
+    return this.$state.is('home');
+  }
+
   shouldHideAboutButton() {
     const $state = this.$state;
     if($state.is('home') || $state.is('about')) {
