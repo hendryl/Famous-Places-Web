@@ -16,6 +16,11 @@ class LobbyController {
 
     this.mobileAddress = 'fpmobile.bitballoon.com';
 
+    $scope.$on('server_disconnect', function(event, args) {
+      alert('Server disconnected. Game ended.');
+      $state.go('home');
+    });
+
     SocketService.connect().then((result) => {
       this.$log.log('success');
 
