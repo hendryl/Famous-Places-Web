@@ -53,11 +53,7 @@ class NavbarController {
   }
 
   shouldHideAboutButton() {
-    const $state = this.$state;
-    if($state.is('home') || $state.is('about')) {
-      return false;
-    }
-    return true;
+    return !(this.$state.is('home') || this.$state.is('about'));
   }
 
   handleAbout() {

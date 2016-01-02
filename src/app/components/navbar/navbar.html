@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-4">
-        <button class="btn btn-nav" ng-hide="nav.shouldHideAboutButton()" ng-click="nav.handleAbout()">
+        <button class="btn btn-nav" ng-click="nav.handleAbout()" ng-hide="nav.shouldHideAboutButton()">
           {{nav.aboutText}}
         </button>
       </div>
@@ -10,7 +10,7 @@
         <img class="nav-title" ng-hide="nav.shouldHideLogo()" src="assets/images/famous-places-small.png"></img>
       </div>
       <div class="col-xs-4 text-right">
-        <button class="btn btn-nav btn-nav-spacing" ngsf-toggle-fullscreen ng-click="nav.toggleFullscreen()">
+        <button class="btn btn-nav btn-nav-spacing" ng-click="nav.toggleFullscreen()" ngsf-toggle-fullscreen>
           <i class="material-icons">
             {{nav.fullscreen}}
           </i>
