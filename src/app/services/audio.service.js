@@ -1,11 +1,12 @@
 const soundFiles = [];
 
 class AudioService {
-  constructor(_, $q, Howl, Howler, $localStorage, audioOn) {
+  constructor($log, _, $q, Howl, Howler, $localStorage, audioOn, baseMusic) {
     'ngInject';
 
     this._ = _;
     this.$q = $q;
+    this.$log = $log;
     this.Howl = Howl;
     this.Howler = Howler;
     this.local = $localStorage;
@@ -13,10 +14,10 @@ class AudioService {
 
     this.sounds = [];
 
-    this.prepareSound();
+    //this.prepareSound();
   }
 
-  prepareSound() {
+  prepareSound(soundFiles) {
     this.sounds = this._.each(soundFiles, (soundFile) => {
       var sound = new this.Howl({
         src: [soundFile.url],
@@ -31,12 +32,20 @@ class AudioService {
   }
 
   prepareMusic(url, loop = true) {
-    return new this.Howl({
+
+    if (this.music) {
+      this.stopMusic();
+      this.music = null;
+    }
+
+    this.music = new this.Howl({
       src: [url],
       loop: loop,
       preload: true,
       html5: true
     });
+
+    this.music.isPlaying = false;
   }
 
   playSound(name) {
@@ -49,43 +58,25 @@ class AudioService {
     sound.play();
   }
 
-  playMusic(music, loop = true, autoplay = true) {
-    if (this.music) {
-      this.stopMusic();
+  playMusic() {
+    if (this.music != null) {
+      this.music.play();
+      this.music.isPlaying = true;
     }
-
-    this.music = music;
-    this.music.play();
   }
 
-  tooglePauseMusic() {
+  pauseMusic() {
     if (this.music != null) {
-      if (this.music.playing(this.music)) {
-        this.music.pause();
-      } else {
-        this.music.play();
-      }
-    } else {
-      this.playMusic();
+      this.music.pause();
+      this.music.isPlaying = false;
     }
   }
 
   stopMusic() {
     if (this.music != null) {
       this.music.stop();
+      this.music.isPlaying = false;
     }
-  }
-
-  shouldPlayMusic(music) {
-    if (this.local.audioStatus === this.audioOn) {
-      if (this.music == null) {
-        return true;
-      } else if (this.music._src !== music) {
-        return true;
-      }
-    }
-
-    return false;
   }
 }
 

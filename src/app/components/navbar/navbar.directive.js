@@ -1,5 +1,5 @@
 class NavbarDirective {
-  constructor () {
+  constructor() {
     'ngInject';
 
     return {
@@ -13,7 +13,7 @@ class NavbarDirective {
 }
 
 class NavbarController {
-  constructor ($state, $localStorage, AudioService, audioOn, audioOff) {
+  constructor($state, $localStorage, AudioService, audioOn, audioOff) {
     'ngInject';
 
     this.$state = $state;
@@ -45,7 +45,11 @@ class NavbarController {
 
     $storage.audioStatus = $storage.audioStatus === audioOn ? audioOff : audioOn;
 
-    this.AudioService.tooglePauseMusic();
+    if ($storage.audioStatus === audioOn) {
+      this.AudioService.playMusic();
+    } else {
+      this.AudioService.pauseMusic();
+    }
   }
 
   shouldHideLogo() {
@@ -59,7 +63,7 @@ class NavbarController {
   handleAbout() {
     const $state = this.$state;
 
-    if($state.is('home')) {
+    if ($state.is('home')) {
       $state.go('about');
     } else {
       $state.go('home');
