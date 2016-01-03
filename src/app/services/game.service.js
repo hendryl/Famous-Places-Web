@@ -19,6 +19,10 @@ class GameService {
     };
   }
 
+  isGameReady() {
+    return this.ready.images && this.ready.music;
+  }
+
   storeGameData(data) {
     const _ = this._;
 

@@ -3,6 +3,7 @@ class LoadingController {
     'ngInject';
 
     this.$log = $log;
+    this.$state = $state;
     this.$interval = $interval;
     this.GameService = GameService;
     this.SocketService = SocketService;
@@ -33,6 +34,16 @@ class LoadingController {
 
     if (this.ellipsis.length > 3) {
       this.ellipsis = '.';
+    }
+  }
+
+  checkAssets() {
+    if(this.GameService.isGameReady()) {
+      this.$log.log('Game ready');
+      this.$state.go('game');
+    } else {
+      this.$log.log('Game not ready yet');
+      this.setGameAssetChecker(1000);
     }
   }
 }
