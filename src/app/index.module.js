@@ -39,7 +39,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   //global strings
   .constant('baseURLConfig', baseURLConfig)
-  .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
+  .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/Fingerpoppin%27%27.mp3")
   .constant('audioOn', 'volume_up')
   .constant('audioOff', 'volume_off')
 
