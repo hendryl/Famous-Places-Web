@@ -38,9 +38,10 @@ class LoadingController {
   }
 
   checkAssets() {
-    if(this.GameService.isGameReady()) {
+    if (this.GameService.isGameReady()) {
       this.$log.log('Game ready');
       this.$state.go('game');
+      //TODO: send the info to devices
     } else {
       this.$log.log('Game not ready yet');
       this.setGameAssetChecker(1000);
