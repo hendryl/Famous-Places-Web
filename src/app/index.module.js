@@ -22,7 +22,6 @@ import GameFactory from './factories/game.factory.js';
 import ImageFactory from './factories/image.factory.js';
 
 import baseURLConfig from './api.js';
-import Player from './models/player.js';
 
 var lodash = require('lodash');
 
@@ -33,9 +32,6 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('Howl', Howl)
   .constant('Howler', Howler)
   .constant('SockJS', SockJS)
-
-  //models
-  .constant('Player', Player)
 
   //global strings
   .constant('baseURLConfig', baseURLConfig)
