@@ -11,6 +11,7 @@ class LoadingController {
     this.waitTime = 5000;
     this.animTime = 850;
     this.ellipsis = '.';
+    this.text = 'Game is loading assets'
 
     $scope.$on('server_disconnect', function(event, args) {
       alert('Server disconnected. Game ended.');
@@ -48,6 +49,13 @@ class LoadingController {
       });
     } else {
       this.$log.log('Game not ready yet');
+
+      if(!this.GameService.ready.images) {
+        this.text = 'Game is loading images';
+      } else if (!this.GameService.ready.music) {
+        this.text = 'Game is loading music';
+      }
+
       this.setGameAssetChecker(1000);
     }
   }
