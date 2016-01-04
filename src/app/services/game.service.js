@@ -7,6 +7,8 @@ class GameService {
     this.ImageFactory = ImageFactory;
     this.AudioService = AudioService;
 
+    this.currentQuestion = 0;
+
     this.game_id = 0;
     this.questions = [];
     this.musicURL = '';

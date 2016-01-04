@@ -3,8 +3,13 @@
   <div class="container navbar-pad">
     <div class="pad-small"></div>
     <div class="row">
+      <div class="col-xs-12 text-center">
+        <label class="textLarge">Question {{game.currentQuestion + 1}}</label>
+      </div>
+    </div>
+    <div class="row" ng-hide="game.questionHidden">
       <div class="col-xs-12">
-        Game page. Still empty.
+        <!-- TODO: Put question here! -->
       </div>
     </div>
   </div>

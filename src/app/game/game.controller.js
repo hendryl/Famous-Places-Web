@@ -9,6 +9,9 @@ class GameController {
     this.GameService = GameService;
     this.SocketService = SocketService;
 
+    this.questionHidden = false;
+    this.currentQuestion = GameService.currentQuestion;
+
     $scope.$on('server_disconnect', function(event, args) {
       alert('Server disconnected. Game ended.');
       $state.go('home');
