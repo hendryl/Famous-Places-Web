@@ -23,6 +23,22 @@ class GameService {
     return this.ready.images && this.ready.music;
   }
 
+  handlePlayerDisconnect(message) {
+    const _ = this._;
+    const index = _.chain(this.players)
+      .map((n) => n.id)
+      .indexOf(message.id)
+      .value();
+
+    if (index != -1) {
+      const player = _.remove(this.players, (n) => n.id === message.id);
+      return player[0].name + ' has disconnected.';
+
+    } else {
+      this.$log.error('Player with id ' + message.id + ' not found!');
+    }
+  }
+
   storeGameData(data) {
     const _ = this._;
 
@@ -61,7 +77,7 @@ class GameService {
 
     var createPromises = (array) => {
       _.each(array, (value) => {
-        return this.$q( (resolve, reject) => {
+        return this.$q((resolve, reject) => {
           var image = new Image();
           image.onload = () => resolve(true);
           image.src = value;
@@ -74,7 +90,7 @@ class GameService {
     promises.push(createPromises(imageArray));
     promises.push(createPromises(flagArray));
 
-    this.$q.all(promises).then( results => this.ready.images = true);
+    this.$q.all(promises).then(results => this.ready.images = true);
   }
 
   retrieveMusic() {

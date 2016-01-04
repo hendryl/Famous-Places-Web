@@ -62,11 +62,10 @@ class SocketService {
     });
   }
 
-  deleteRoom(name) {
+  deleteRoom() {
     this.$log.log('deleting room');
     this.send({
       type: 'delete_room',
-      name: name,
       role: 'owner'
     });
   }

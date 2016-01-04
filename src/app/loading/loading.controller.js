@@ -1,9 +1,10 @@
 class LoadingController {
-  constructor($log, $scope, $state, $interval, SocketService, GameService, AudioService) {
+  constructor($log, $scope, $state, $interval, SocketService, GameService, AudioService, toastr) {
     'ngInject';
 
     this.$log = $log;
     this.$state = $state;
+    this.toastr = toastr;
     this.$interval = $interval;
     this.GameService = GameService;
     this.SocketService = SocketService;
@@ -21,6 +22,12 @@ class LoadingController {
     AudioService.fadeToStop();
     this.setAnimation();
     this.setGameAssetChecker(this.waitTime);
+
+    this.SocketService.extendedHandler = (message) => {
+      if (message.type === 'player_disconnect') {
+        this.handlePlayerDisconnect(message);
+      }
+    };
   }
 
   setAnimation() {
@@ -44,8 +51,7 @@ class LoadingController {
       this.$log.log('Game ready');
       this.$state.go('game');
       this.SocketService.send({
-        type: 'game_ready',
-        role: 'owner'
+        type: 'game_ready'
       });
     } else {
       this.$log.log('Game not ready yet');
@@ -57,6 +63,19 @@ class LoadingController {
       }
 
       this.setGameAssetChecker(1000);
+    }
+  }
+
+  handlePlayerDisconnect(message) {
+    const toastrMessage = this.GameService.handlePlayerDisconnect(message);
+
+    //no more players!
+    if(this.GameService.players.length === 0) {
+      alert('Last player has disconnected. Ending game.');
+      this.$state.go('home');
+      this.SocketService.deleteRoom();
+    } else {
+      this.toastr.warning(toastrMessage);
     }
   }
 }
