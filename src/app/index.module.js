@@ -25,7 +25,7 @@ import baseURLConfig from './api.js';
 
 var lodash = require('lodash');
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'ngMap'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
