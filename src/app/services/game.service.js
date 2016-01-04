@@ -19,13 +19,17 @@ class GameService {
     };
   }
 
+  isGameReady() {
+    return this.ready.images && this.ready.music;
+  }
+
   storeGameData(data) {
     const _ = this._;
 
     this.game_id = data.game_id;
     this.roomName = data.password;
     this.questions = _.shuffle(data.questions);
-    this.musicURL = '';
+    this.musicURL = data.music;
   }
 
   retrieveAssets() {
@@ -75,14 +79,14 @@ class GameService {
 
   retrieveMusic() {
     this.music = this.AudioService.prepareMusic(this.musicURL);
-
     this.music.on('load', () => {
       this.ready.music = true;
     });
   }
 
   playMusic() {
-    this.AudioService.play(this.music, true)
+    this.AudioService.setMusic(this.music);
+    this.AudioService.play();
   }
 }
 

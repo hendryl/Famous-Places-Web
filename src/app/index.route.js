@@ -26,6 +26,11 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/loading/loading.html',
       controller: 'LoadingController',
       controllerAs: 'loading'
+    })
+    .state('game', {
+      templateUrl: 'app/game/game.html',
+      controller: 'GameController',
+      controllerAs: 'game'
     });
 
   $urlRouterProvider.otherwise('/');

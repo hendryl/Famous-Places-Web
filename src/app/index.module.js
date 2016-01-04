@@ -8,6 +8,7 @@ import AboutController from './about/about.controller';
 import SelectController from './select/select.controller';
 import LobbyController from './lobby/lobby.controller';
 import LoadingController from './loading/loading.controller';
+import GameController from './game/game.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -38,7 +39,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 
   //global strings
   .constant('baseURLConfig', baseURLConfig)
-  .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/bensound-thejazzpiano.mp3")
+  .constant('baseMusic', "https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Music/Fingerpoppin%27%27.mp3")
   .constant('audioOn', 'volume_up')
   .constant('audioOff', 'volume_off')
 
@@ -50,6 +51,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('SelectController', SelectController)
   .controller('LobbyController', LobbyController)
   .controller('LoadingController', LoadingController)
+  .controller('GameController', GameController)
 
   .directive('navbar', () => new NavbarDirective())
 

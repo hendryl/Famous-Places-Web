@@ -1,23 +1,22 @@
-const soundFiles = [];
-
 class AudioService {
-  constructor(_, $q, Howl, Howler, $localStorage, audioOn) {
+  constructor($log, _, $q, Howl, Howler, $localStorage, audioOn, baseMusic) {
     'ngInject';
 
     this._ = _;
     this.$q = $q;
+    this.$log = $log;
     this.Howl = Howl;
     this.Howler = Howler;
     this.local = $localStorage;
     this.audioOn = audioOn;
 
     this.sounds = [];
-
-    this.prepareSound();
+    this.soundFiles = [];
+    //this.prepareSound();
   }
 
   prepareSound() {
-    this.sounds = this._.each(soundFiles, (soundFile) => {
+    this.sounds = this._.each(this.soundFiles, (soundFile) => {
       var sound = new this.Howl({
         src: [soundFile.url],
         loop: false,
@@ -31,12 +30,25 @@ class AudioService {
   }
 
   prepareMusic(url, loop = true) {
-    return new this.Howl({
+    var music = new this.Howl({
       src: [url],
       loop: loop,
       preload: true,
       html5: true
     });
+
+    music.isPlaying = false;
+
+    return music;
+  }
+
+  setMusic(music) {
+    if (this.music) {
+      this.stopMusic();
+      this.music = null;
+    }
+
+    this.music = music;
   }
 
   playSound(name) {
@@ -49,43 +61,34 @@ class AudioService {
     sound.play();
   }
 
-  playMusic(music, loop = true, autoplay = true) {
-    if (this.music) {
-      this.stopMusic();
+  playMusic() {
+    if (this.music != null) {
+      this.music.play();
+      this.music.isPlaying = true;
     }
-
-    this.music = music;
-    this.music.play();
   }
 
-  tooglePauseMusic() {
+  pauseMusic() {
     if (this.music != null) {
-      if (this.music.playing(this.music)) {
-        this.music.pause();
-      } else {
-        this.music.play();
+      this.music.pause();
+      this.music.isPlaying = false;
+    }
+  }
+
+  fadeToStop() {
+    if (this.music != null) {
+      this.music.fade(1, 0, 2000);
+      this.music.onfaded = () => {
+        this.stopMusic();
       }
-    } else {
-      this.playMusic();
     }
   }
 
   stopMusic() {
     if (this.music != null) {
       this.music.stop();
+      this.music.isPlaying = false;
     }
-  }
-
-  shouldPlayMusic(music) {
-    if (this.local.audioStatus === this.audioOn) {
-      if (this.music == null) {
-        return true;
-      } else if (this.music._src !== music) {
-        return true;
-      }
-    }
-
-    return false;
   }
 }
 
