@@ -46,6 +46,7 @@ class LobbyController {
     this.players.push({
       name: message.name,
       id: message.id,
+      score: 0,
       lastAnswer: null
     });
 

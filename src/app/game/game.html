@@ -1,15 +1,22 @@
 <navbar></navbar>
-<div class="basebg fill no-overflow">
-  <div class="container navbar-pad">
-    <div class="pad-small"></div>
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <label class="textLarge">Question {{game.currentQuestion + 1}}</label>
+<div class="basebg fill no-overflow" ng-class="{flex: game.questionHidden}">
+  <div class="container navbar-pad" ng-class="{flex: game.questionHidden}">
+    <div class="row" ng-class="{flex: game.questionHidden}">
+      <div class="col-xs-12 text-center" ng-class="{flex: game.questionHidden}">
+        <label class="textLarge">Question
+          {{game.currentQuestion + 1}}</label>
       </div>
     </div>
     <div class="row" ng-hide="game.questionHidden">
       <div class="col-xs-12">
         <!-- TODO: Put question here! -->
+      </div>
+    </div>
+    <div class="row" ng-hide="game.questionHidden">
+      <div ng-repeat="player in game.players">
+        <div class="col-xs-3">
+          <!-- TODO: show players info, name, score, answered -->
+        </div>
       </div>
     </div>
   </div>
