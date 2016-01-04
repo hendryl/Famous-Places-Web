@@ -8,7 +8,8 @@ class MainController {
     });
 
     if (AudioService.music == null) {
-      AudioService.prepareMusic(baseMusic);
+      var music = AudioService.prepareMusic(baseMusic);
+      AudioService.setMusic(music);
     }
 
     if (!AudioService.music.isPlaying && this.$storage.audioStatus === audioOn) {

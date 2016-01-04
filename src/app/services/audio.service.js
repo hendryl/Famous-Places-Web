@@ -1,5 +1,3 @@
-const soundFiles = [];
-
 class AudioService {
   constructor($log, _, $q, Howl, Howler, $localStorage, audioOn, baseMusic) {
     'ngInject';
@@ -13,12 +11,12 @@ class AudioService {
     this.audioOn = audioOn;
 
     this.sounds = [];
-
+    this.soundFiles = [];
     //this.prepareSound();
   }
 
-  prepareSound(soundFiles) {
-    this.sounds = this._.each(soundFiles, (soundFile) => {
+  prepareSound() {
+    this.sounds = this._.each(this.soundFiles, (soundFile) => {
       var sound = new this.Howl({
         src: [soundFile.url],
         loop: false,
@@ -32,20 +30,25 @@ class AudioService {
   }
 
   prepareMusic(url, loop = true) {
-
-    if (this.music) {
-      this.stopMusic();
-      this.music = null;
-    }
-
-    this.music = new this.Howl({
+    var music = new this.Howl({
       src: [url],
       loop: loop,
       preload: true,
       html5: true
     });
 
-    this.music.isPlaying = false;
+    music.isPlaying = false;
+
+    return music;
+  }
+
+  setMusic(music) {
+    if (this.music) {
+      this.stopMusic();
+      this.music = null;
+    }
+
+    this.music = music;
   }
 
   playSound(name) {
