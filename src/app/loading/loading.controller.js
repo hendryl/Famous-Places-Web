@@ -1,5 +1,5 @@
 class LoadingController {
-  constructor($log, $scope, $state, $interval, SocketService, GameService) {
+  constructor($log, $scope, $state, $interval, SocketService, GameService, AudioService) {
     'ngInject';
 
     this.$log = $log;
@@ -17,6 +17,7 @@ class LoadingController {
       $state.go('home');
     });
 
+    AudioService.fadeToStop();
     this.setAnimation();
     this.setGameAssetChecker(this.waitTime);
   }
