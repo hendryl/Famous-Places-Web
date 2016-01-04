@@ -41,7 +41,10 @@ class LoadingController {
     if (this.GameService.isGameReady()) {
       this.$log.log('Game ready');
       this.$state.go('game');
-      //TODO: send the info to devices
+      this.SocketService.send({
+        type: 'game_ready',
+        role: 'owner'
+      });
     } else {
       this.$log.log('Game not ready yet');
       this.setGameAssetChecker(1000);
