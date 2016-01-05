@@ -1,10 +1,11 @@
 class GameController {
-  constructor($log, $scope, $state, $interval, GameService, SocketService, toastr) {
+  constructor($window, $log, $scope, $state, $interval, GameService, SocketService, toastr) {
     'ngInject';
 
     this.$log = $log;
     this.$state = $state;
     this.toastr = toastr;
+    this.$window = $window;
     this.$interval = $interval;
     this.GameService = GameService;
     this.SocketService = SocketService;
@@ -19,19 +20,19 @@ class GameController {
 
     this.players = [
       {
-        name: 'asdf',
+        name: 'alalalalalalalal',
         score: 0
       },
       {
-        name: 'weqeqrwerqw',
+        name: 'nama gua panjang',
         score: 0
       },
       {
-        name: 'adsfdfsasdfasdf',
+        name: 'nama panjang 123',
         score: 0
       },
       {
-        name: '12345678901234567890',
+        name: '1234567890123456',
         score: 0
       }
     ];
@@ -50,6 +51,10 @@ class GameController {
     //TODO: create timer
 
     this.setAnimation();
+  }
+
+  isWindowSmall() {
+    return this.$window.innerWidth < 800;
   }
 
   setAnimation() {

@@ -16,5 +16,47 @@
   max-width: 100%;
   max-height: 600px;
   border: $color-lightgray solid 20px;
-  outline: #a9a9a solid 1px;
+  outline: #A9A9A9 solid 1px;
+}
+
+.container-fluid.game {
+  margin: 0;
+  padding: 0;
+}
+
+.score-box {
+  padding: 5px 10px;
+  max-width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  border-top: 4px solid $color-black;
+  border-left: 10px solid $color-black;
+  border-right: 10px solid $color-black;
+}
+
+.col-xs-3.noPad {
+  padding: 0;
+}
+
+.score-line {
+  padding: 5px 10px;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  border: 4px solid $color-black;
+}
+
+@media screen and(max-height: 922px) {
+  .question-image {
+    max-height: 400px;
+  }
+}
+
+.score-row {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
 }

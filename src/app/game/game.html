@@ -1,10 +1,11 @@
 <navbar></navbar>
 <div class="basebg fill no-overflow">
-  <div class="container navbar-pad">
+  <div class="container-fluid navbar-pad">
     <div class="row">
       <div class="col-xs-12 text-center">
         <label class="textxLarge">
-          Question {{game.currentQuestion + 1}}
+          Question
+          {{game.currentQuestion + 1}}
         </label>
       </div>
     </div>
@@ -16,10 +17,47 @@
         <img class="question-image" ng-src="http://placehold.it/720x600"/>
       </div>
     </div>
-    <div class="row" ng-hide="game.questionHidden">
-      <div ng-repeat="player in game.players">
-        <div class="col-xs-3">
-          <!-- TODO: show players info, name, score, answered -->
+  </div>
+  <div class="score-row">
+    <div class="row">
+      <div class="score-boxes" ng-hide="game.isWindowSmall()" ng-repeat="player in game.players">
+        <div class="col-xs-3 noPad">
+          <div class="score-box text-right" ng-class="{
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
+              'box-player3': $index === 2,
+              'box-player4': $index === 3
+            }">
+            <em class="textxxMedium monospaced">{{player.name}}</em>
+            <div class="pad-small"></div>
+            <div>
+              <span class="textLarge monospaced">{{game.padWithZeroes(player.score)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-hide="!game.isWindowSmall()">
+        <div ng-repeat="player in game.players">
+          <div class="col-xs-12">
+            <div class="score-line" ng-class="{
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
+              'box-player3': $index === 2,
+              'box-player4': $index === 3}">
+              <div class="row">
+                <div class="col-xs-8">
+                  <em class="textxxMedium monospaced">
+                    {{player.name}}
+                  </em>
+                </div>
+                <div class="col-xs-4 text-right">
+                  <span class="textxxMedium monospaced">
+                    {{game.padWithZeroes(player.score)}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
