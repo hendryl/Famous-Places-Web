@@ -1,7 +1,8 @@
 class GameController {
-  constructor($window, $log, $scope, $state, $interval, GameService, SocketService, toastr) {
+  constructor(_, $window, $log, $scope, $state, $interval, GameService, SocketService, toastr) {
     'ngInject';
 
+    this._ = _;
     this.$log = $log;
     this.$state = $state;
     this.toastr = toastr;
@@ -24,6 +25,11 @@ class GameController {
     this.SocketService.extendedHandler = (message) => {
       if (message.type === 'player_disconnect') {
         this.handlePlayerDisconnect(message);
+
+      } else if (message.type === 'answer') {
+        const player = _.find(this.players, (p) => p.id === message.player);
+        player.lastAnswer = message.answer;
+        //TODO: animate player done
       }
     };
 
