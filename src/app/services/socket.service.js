@@ -57,20 +57,19 @@ class SocketService {
     this.$log.log('creating room');
     this.send({
       type: 'create_room',
-      name: name,
-      role: 'owner'
+      name: name
     });
   }
 
   deleteRoom() {
     this.$log.log('deleting room');
     this.send({
-      type: 'delete_room',
-      role: 'owner'
+      type: 'delete_room'
     });
   }
 
   send(obj) {
+    obj.role = 'owner';
     var json = angular.toJson(obj, true);
     this.socket.send(json);
   }
