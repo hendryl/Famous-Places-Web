@@ -25,6 +25,10 @@ class GameService {
     return this.ready.images && this.ready.music;
   }
 
+  getQuestion() {
+    return this.questions[this.currentQuestion];
+  }
+
   handlePlayerDisconnect(message) {
     const _ = this._;
     const index = _.chain(this.players)

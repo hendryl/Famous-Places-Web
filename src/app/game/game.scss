@@ -1,6 +1,6 @@
 .gameAnimLabel {
   transition-property: all;
-  transition-duration: 1.5s;
+  transition-duration: 1s;
 }
 
 .gameQuestion {
@@ -9,6 +9,12 @@
 
 .gameAnimQuestion {
   opacity: 1;
-  transition: all 0.5s;
-  transition-delay: 3s;
+  transition: all 0.3s;
+}
+
+.question-image {
+  max-width: 100%;
+  max-height: 600px;
+  border: $color-lightgray solid 20px;
+  outline: #a9a9a solid 1px;
 }

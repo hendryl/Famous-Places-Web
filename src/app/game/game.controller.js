@@ -9,7 +9,7 @@ class GameController {
     this.GameService = GameService;
     this.SocketService = SocketService;
 
-    this.animTime = 2500;
+    this.animTime = 1000;
     this.questionHidden = true;
     this.question = GameService.getQuestion();
 
