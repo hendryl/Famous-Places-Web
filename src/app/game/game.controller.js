@@ -20,7 +20,7 @@ class GameController {
 
     this.players = [
       {
-        name: 'alalalalalalalal',
+        name: 'panjang nama max',
         score: 0
       },
       {
@@ -28,7 +28,7 @@ class GameController {
         score: 0
       },
       {
-        name: 'nama panjang 123',
+        name: 'm',
         score: 0
       },
       {

@@ -22,16 +22,23 @@
     <div class="row">
       <div class="score-boxes" ng-hide="game.isWindowSmall()" ng-repeat="player in game.players">
         <div class="col-xs-3 noPad">
-          <div class="score-box text-right" ng-class="{
+          <div class="score-box" ng-class="{
               'box-player1': $index === 0,
               'box-player2': $index === 1,
               'box-player3': $index === 2,
               'box-player4': $index === 3
             }">
-            <em class="textxxMedium monospaced">{{player.name}}</em>
+            <div class="text-center">
+              <em class="textxxMedium monospaced">{{player.name}}</em>
+            </div>
             <div class="pad-small"></div>
-            <div>
-              <span class="textLarge monospaced">{{game.padWithZeroes(player.score)}}</span>
+            <div class="row">
+              <div class="col-xs-6">
+                <span class="textLarge monospaced">SCORE</span>
+              </div>
+              <div class="col-xs-6 text-right">
+                <span class="textLarge monospaced">{{game.padWithZeroes(player.score)}}</span>
+              </div>
             </div>
           </div>
         </div>
