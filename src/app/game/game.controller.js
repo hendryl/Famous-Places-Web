@@ -47,7 +47,7 @@ class GameController {
   setAnimation() {
     this.$interval(() => {
       this.questionHidden = false;
-      $(".gameQuestion").one('transitionend', (event) => {
+      angular.element(".gameQuestion").one('transitionend', (event) => {
         //TODO: this.playSound('timerStart');
         this.SocketService.send({
           type: 'start_round'
@@ -88,7 +88,7 @@ class GameController {
   }
 
   padWithZeroes(value) {
-    return _.padLeft(value.toString(), 6, '0');
+    return this._.padLeft(value.toString(), 6, '0');
   }
 }
 
