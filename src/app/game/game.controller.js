@@ -44,9 +44,21 @@ class GameController {
     return this.timer < 10;
   }
 
+  setAnimation() {
+    this.$interval(() => {
+      this.questionHidden = false;
+      $(".gameQuestion").one('transitionend', (event) => {
+        //TODO: this.playSound('timerStart');
+        this.SocketService.send({
+          type: 'start_round'
+        });
+        this.startTimer();
+      });
+    }, this.waitTime, 0, true);
+  }
+
   startTimer() {
     this.$interval(() => this.tickTimer(), 1000, this.timer, true);
-    //TODO: this.send start timer
   }
 
   tickTimer() {
@@ -60,16 +72,6 @@ class GameController {
   endTimer() {
     this.$log.log("Timer ended");
     //TODO: this.send end timer
-  }
-
-  setAnimation() {
-    this.$interval(() => {
-      this.questionHidden = false;
-      $(".gameQuestion").one('transitionend', (event) => {
-        //TODO: this.playSound('timerStart');
-        this.startTimer();
-      });
-    }, this.animTime, 0, true);
   }
 
   handlePlayerDisconnect(message) {
