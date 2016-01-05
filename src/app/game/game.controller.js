@@ -9,8 +9,11 @@ class GameController {
     this.GameService = GameService;
     this.SocketService = SocketService;
 
-    this.questionHidden = false;
-    this.currentQuestion = GameService.currentQuestion;
+    this.animTime = 2500;
+    this.questionHidden = true;
+    this.question = GameService.getQuestion();
+
+    this.$log.log(this.question);
 
     $scope.$on('server_disconnect', function(event, args) {
       alert('Server disconnected. Game ended.');
@@ -22,6 +25,14 @@ class GameController {
         this.handlePlayerDisconnect(message);
       }
     };
+
+    this.setAnimation();
+  }
+
+  setAnimation() {
+    this.$interval(() => {
+      this.questionHidden = false;
+    }, this.animTime, 0, true);
   }
 
   handlePlayerDisconnect(message) {

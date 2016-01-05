@@ -1,0 +1,14 @@
+.gameAnimLabel {
+  transition-property: all;
+  transition-duration: 1.5s;
+}
+
+.gameQuestion {
+  opacity: 0;
+}
+
+.gameAnimQuestion {
+  opacity: 1;
+  transition: all 0.5s;
+  transition-delay: 3s;
+}

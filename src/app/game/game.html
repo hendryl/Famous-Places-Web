@@ -1,10 +1,11 @@
 <navbar></navbar>
-<div class="basebg fill no-overflow" ng-class="{flex: game.questionHidden}">
-  <div class="container navbar-pad" ng-class="{flex: game.questionHidden}">
-    <div class="row" ng-class="{flex: game.questionHidden}">
-      <div class="col-xs-12 text-center" ng-class="{flex: game.questionHidden}">
-        <label class="textLarge">Question
-          {{game.currentQuestion + 1}}</label>
+<div class="basebg fill no-overflow">
+  <div class="container navbar-pad">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <label ng-class="{textHuge: game.questionHidden, textxxLarge: !game.questionHidden, gameAnimLabel: !game.questionHidden}">Question
+          {{game.currentQuestion + 1}}
+        </label>
       </div>
     </div>
     <div class="row" ng-hide="game.questionHidden">
