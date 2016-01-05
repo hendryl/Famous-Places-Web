@@ -1,4 +1,7 @@
 <navbar></navbar>
+<div class="gameTimer">
+  <span class="textLarge" ng-class="{'text-player1': game.isWarningTime()}">{{game.timer}}</span>
+</div>
 <div class="basebg fill no-overflow">
   <div class="container-fluid navbar-pad">
     <div class="row">

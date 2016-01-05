@@ -14,28 +14,7 @@ class GameController {
     this.questionHidden = true;
     this.question = GameService.getQuestion();
     this.players = GameService.players;
-
-    this.$log.log(this.question);
-    this.$log.log(this.players);
-
-    this.players = [
-      {
-        name: 'panjang nama max',
-        score: 0
-      },
-      {
-        name: 'nama gua panjang',
-        score: 0
-      },
-      {
-        name: 'm',
-        score: 0
-      },
-      {
-        name: '1234567890123456',
-        score: 0
-      }
-    ];
+    this.timer = 30;
 
     $scope.$on('server_disconnect', function(event, args) {
       alert('Server disconnected. Game ended.');
@@ -48,8 +27,6 @@ class GameController {
       }
     };
 
-    //TODO: create timer
-
     this.setAnimation();
   }
 
@@ -57,9 +34,35 @@ class GameController {
     return this.$window.innerWidth < 800;
   }
 
+  isWarningTime() {
+    return this.timer < 10;
+  }
+
+  startTimer() {
+    this.$interval(() => this.tickTimer(), 1000, this.timer, true);
+    //TODO: this.send start timer
+  }
+
+  tickTimer() {
+    this.timer -= 1;
+
+    if(this.timer === 0) {
+      this.endTimer();
+    }
+  }
+
+  endTimer() {
+    this.$log.log("Timer ended");
+    //TODO: this.send end timer
+  }
+
   setAnimation() {
     this.$interval(() => {
       this.questionHidden = false;
+      $(".gameQuestion").one('transitionend', (event) => {
+        //TODO: this.playSound('timerStart');
+        this.startTimer();
+      });
     }, this.animTime, 0, true);
   }
 
