@@ -1,5 +1,5 @@
 class GameController {
-  constructor(_, $window, $log, $scope, $state, $interval, GameService, SocketService, toastr) {
+  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, GameService, SocketService, toastr, audioOn) {
     'ngInject';
 
     this._ = _;
@@ -7,10 +7,12 @@ class GameController {
     this.$state = $state;
     this.toastr = toastr;
     this.$window = $window;
+    this.$storage = $localStorage;
     this.$interval = $interval;
     this.GameService = GameService;
     this.SocketService = SocketService;
 
+    this.audioOn = audioOn;
     this.waitTime = 2000;
     this.questionHidden = true;
     this.round = GameService.getRound();
@@ -42,13 +44,14 @@ class GameController {
             type: 'end_round',
             round: this.round
           });
-
+          this.$log.log('end');
           //TODO: this.$state.go('');
         }
       }
     };
 
     this.setAnimation();
+    this.playMusic();
   }
 
   isWindowSmall() {
@@ -64,8 +67,16 @@ class GameController {
           type: 'start_round',
           round: this.round
         });
+
+        this.$log.log('sent start_round message');
       });
     }, this.waitTime, 0, true);
+  }
+
+  playMusic() {
+    if (this.$storage.audioStatus === this.audioOn) {
+      this.GameService.playMusic();
+    }
   }
 
   handlePlayerDisconnect(message) {

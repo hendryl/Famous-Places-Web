@@ -124,7 +124,7 @@ class GameService {
 
   playMusic() {
     this.AudioService.setMusic(this.music);
-    this.AudioService.play();
+    this.AudioService.playMusic();
   }
 }
 
