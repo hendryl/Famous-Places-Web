@@ -71,7 +71,10 @@ class GameController {
 
   endTimer() {
     this.$log.log("Timer ended");
-    //TODO: this.send end timer
+
+    this.SocketService.send({
+      type: 'end_round'
+    });
   }
 
   handlePlayerDisconnect(message) {
