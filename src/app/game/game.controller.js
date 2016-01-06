@@ -30,6 +30,8 @@ class GameController {
         const player = _.find(this.players, (p) => p.id === message.player);
         player.lastAnswer = message.answer;
         //TODO: animate player done
+
+        //TODO: check and wait for all players' answer
       }
     };
 
@@ -52,6 +54,7 @@ class GameController {
         this.SocketService.send({
           type: 'start_round'
         });
+
         this.startTimer();
       });
     }, this.waitTime, 0, true);
