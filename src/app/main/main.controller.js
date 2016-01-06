@@ -7,7 +7,7 @@ class MainController {
       audioStatus: audioOn
     });
 
-    if (AudioService.music == null) {
+    if (AudioService.music == null || AudioService.music._src !== baseMusic) {
       var music = AudioService.prepareMusic(baseMusic);
       AudioService.setMusic(music);
     }

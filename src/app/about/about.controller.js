@@ -43,18 +43,24 @@ const credits = [{
   "title": "Heroku",
   "url": "https://www.heroku.com"
 }, {
-  "image": "http://placehold.it/100/100",
+  "image": "assets/images/bitballoon.png",
   "title": "BitBalloon",
   "url": "https://www.bitballoon.com"
 }];
 
 class AboutController {
-  constructor(_) {
+  constructor(_, $localStorage, AudioService, audioOn, lobbyMusic) {
     'ngInject';
 
     this.credits = _.sortBy(credits, (n) => {
       return n.title;
     });
+
+    if ($localStorage.audioStatus === audioOn) {
+      const music = AudioService.prepareMusic(lobbyMusic);
+      AudioService.setMusic(music);
+      AudioService.playMusic();
+    }
   }
 }
 
