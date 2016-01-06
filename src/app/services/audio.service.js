@@ -63,6 +63,7 @@ class AudioService {
 
   playMusic() {
     if (this.music != null) {
+      this.music.fade(0, 1, 1000);
       this.music.play();
       this.music.isPlaying = true;
     }
