@@ -43,7 +43,7 @@ const credits = [{
   "title": "Heroku",
   "url": "https://www.heroku.com"
 }, {
-  "image": "http://placehold.it/100/100",
+  "image": "assets/images/bitballoon.png",
   "title": "BitBalloon",
   "url": "https://www.bitballoon.com"
 }];
