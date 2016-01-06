@@ -16,7 +16,6 @@ class GameController {
     this.round = GameService.getRound();
     this.question = GameService.getQuestion(this.round);
     this.players = GameService.players;
-    this.timer = 30;
 
     $scope.$on('server_disconnect', function(event, args) {
       alert('Server disconnected. Game ended.');
@@ -33,6 +32,10 @@ class GameController {
         //TODO: animate player done
 
         //TODO: check and wait for all players' answer
+        // this.SocketService.send({
+        //   type: 'end_round',
+        //   round: this.round
+        // });
       }
     };
 
@@ -41,10 +44,6 @@ class GameController {
 
   isWindowSmall() {
     return this.$window.innerWidth < 800;
-  }
-
-  isWarningTime() {
-    return this.timer < 10;
   }
 
   setAnimation() {
@@ -56,33 +55,8 @@ class GameController {
           type: 'start_round',
           round: this.round
         });
-
-        this.startTimer();
       });
     }, this.waitTime, 0, true);
-  }
-
-  startTimer() {
-    this.$interval(() => this.tickTimer(), 1000, this.timer, true);
-  }
-
-  tickTimer() {
-    this.timer -= 1;
-
-    if(this.timer === 0) {
-      this.endTimer();
-    }
-  }
-
-  endTimer() {
-    this.$log.log("Timer ended");
-
-    this.SocketService.send({
-      type: 'end_round',
-      round: this.round
-    });
-
-    //TODO: SHOW TIME UP MESSAGE
   }
 
   handlePlayerDisconnect(message) {
