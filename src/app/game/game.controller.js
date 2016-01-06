@@ -13,7 +13,8 @@ class GameController {
 
     this.waitTime = 2000;
     this.questionHidden = true;
-    this.question = GameService.getQuestion();
+    this.round = GameService.getRound();
+    this.question = GameService.getQuestion(this.round);
     this.players = GameService.players;
     this.timer = 30;
 
@@ -53,6 +54,7 @@ class GameController {
         //TODO: this.playSound('timerStart');
         this.SocketService.send({
           type: 'start_round'
+          round: this.round
         });
 
         this.startTimer();
@@ -77,7 +79,10 @@ class GameController {
 
     this.SocketService.send({
       type: 'end_round'
+      round: this.round
     });
+
+    //TODO: SHOW TIME UP MESSAGE
   }
 
   handlePlayerDisconnect(message) {

@@ -25,8 +25,24 @@ class GameService {
     return this.ready.images && this.ready.music;
   }
 
-  getQuestion() {
-    return this.questions[this.currentQuestion];
+  getRound() {
+    return this.currentQuestion;
+  }
+
+  getQuestion(number) {
+    return this.questions[number];
+  }
+
+  canMoveToNextQuestion() {
+    if(this.currentQuestion + 1 >= this.questions.length) {
+      return false;
+    }
+
+    return true;
+  }
+
+  moveToNextQuestion() {
+    this.currentQuestion += 1;
   }
 
   handlePlayerDisconnect(message) {
