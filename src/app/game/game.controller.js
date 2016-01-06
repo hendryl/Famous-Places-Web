@@ -34,8 +34,11 @@ class GameController {
           return;
         }
 
-        const player = _.find(this.players, (p) => p.id === message.player);
-        player.lastAnswer = message.answer;
+        const player = _.find(this.players, (p) => p.id === message.id);
+        player.lastAnswer = {
+          lat: message.lat,
+          long: message.long
+        }
         this.answered.push(message.player);
         //TODO: animate player done
 
