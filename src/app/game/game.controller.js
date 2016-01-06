@@ -16,6 +16,7 @@ class GameController {
     this.round = GameService.getRound();
     this.question = GameService.getQuestion(this.round);
     this.players = GameService.players;
+    this.answered = [];
 
     $scope.$on('server_disconnect', function(event, args) {
       alert('Server disconnected. Game ended.');
@@ -27,15 +28,23 @@ class GameController {
         this.handlePlayerDisconnect(message);
 
       } else if (message.type === 'answer') {
+        if (_.contains(this.answered, message.player)) {
+          return;
+        }
+
         const player = _.find(this.players, (p) => p.id === message.player);
         player.lastAnswer = message.answer;
+        this.answered.push(message.player);
         //TODO: animate player done
 
-        //TODO: check and wait for all players' answer
-        // this.SocketService.send({
-        //   type: 'end_round',
-        //   round: this.round
-        // });
+        if (this.answered >= this.players.length) {
+          this.SocketService.send({
+            type: 'end_round',
+            round: this.round
+          });
+
+          //TODO: this.$state.go('');
+        }
       }
     };
 
@@ -63,7 +72,7 @@ class GameController {
     const toastrMessage = this.GameService.handlePlayerDisconnect(message);
 
     //no more players!
-    if(this.GameService.players.length === 0) {
+    if (this.GameService.players.length === 0) {
       alert('Last player has disconnected. Ending game.');
       this.$state.go('home');
       this.SocketService.deleteRoom();
