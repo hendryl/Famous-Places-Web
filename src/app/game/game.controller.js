@@ -53,7 +53,7 @@ class GameController {
       angular.element(".gameQuestion").one('transitionend', (event) => {
         //TODO: this.playSound('timerStart');
         this.SocketService.send({
-          type: 'start_round'
+          type: 'start_round',
           round: this.round
         });
 
@@ -78,7 +78,7 @@ class GameController {
     this.$log.log("Timer ended");
 
     this.SocketService.send({
-      type: 'end_round'
+      type: 'end_round',
       round: this.round
     });
 
