@@ -1,12 +1,13 @@
 /* global google:false*/
 class ScoreController {
-  constructor(_, NgMap, toastr, $interval, $state, $scope, $log, AudioService, SocketService, GameService, ScoreService, mapsKey) {
+  constructor(_, NgMap, toastr, $interval, $state, $window, $scope, $log, AudioService, SocketService, GameService, ScoreService, mapsKey) {
     'ngInject';
 
     this._ = _;
     this.$log = $log;
     this.toastr = toastr;
     this.$state = $state;
+    this.$window = $window;
     this.GameService = GameService;
     this.AudioService = AudioService;
     this.ScoreService = ScoreService;
@@ -82,6 +83,10 @@ class ScoreController {
     this.question.long = 90;
   }
 
+  isWindowSmall() {
+    return this.$window.innerWidth < 800;
+  }
+
   prepareMap(map) {
     this.map = map;
 
@@ -143,8 +148,6 @@ class ScoreController {
   }
 
   prepareLines() {
-
-    this.$log.log('preparing lines');
     const colors = [
       '#BF1E2E',
       '#4BB0EE',
