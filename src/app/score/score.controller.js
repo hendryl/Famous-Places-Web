@@ -106,7 +106,30 @@ class ScoreController {
       }
     }, 800, this.players.length, true);
   }
+
   addScores() {
+    let isAllEqual = (arr) => {
+      // remove all duplicates in array
+      // if only one left then all elements are equal
+      return this._.uniq(arr).length === 1;
+    }
+
+    for(let i = 0; i < this.players.length; i++) {
+      let interval = this.$interval(() => {
+        this.players[i].score += 1;
+        this.receivedPoints[i] -= 1;
+
+        if(this.receivedPoints[i] <= 0) {
+          this.$interval.cancel(interval);
+          this.pointsRevealed[i] = false;
+        }
+
+        if(isAllEqual(this.receivedPoints)) {
+          //TODO: send info that score update is done
+        }
+
+      }, 7, 0, true);
+    }
   }
 
   prepareMap(map) {
