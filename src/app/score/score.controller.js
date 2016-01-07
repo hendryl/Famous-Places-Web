@@ -21,6 +21,8 @@ class ScoreController {
     this.answerMarker = null;
     this.markers = [];
     this.lines = [];
+    this.distances = [];
+    this.scores = [];
     this.text = "RESULTS";
 
     this.mapCenter = {
@@ -28,11 +30,10 @@ class ScoreController {
       long: 0
     };
 
-    this.googleMapsURL = "https://maps.google.com/maps/api/js?libraries=places&callback=prepareMap&key=" + mapsKey;
+    this.googleMapsURL = "https://maps.google.com/maps/api/js?libraries=places,geometry&callback=prepareMap&key=" + mapsKey;
 
     $interval(() => {
       this.showMap = true;
-      this.$log.log('ahahahahha');
     }, 2000, 1, true);
     //flow:
     //tunjukkin jawabannya
@@ -43,8 +44,8 @@ class ScoreController {
       id: '123123213',
       score: 0,
       lastAnswer: {
-        lat: 0,
-        long: 0
+        lat: 51.5072,
+        long: 0.1275
       }
     });
 
@@ -53,8 +54,8 @@ class ScoreController {
       id: '6545131345',
       score: 0,
       lastAnswer: {
-        lat: -6,
-        long: 100
+        lat: 52.5167,
+        long: 13.3833
       }
     });
 
@@ -63,8 +64,8 @@ class ScoreController {
       id: '77777777',
       score: 0,
       lastAnswer: {
-        lat: 20,
-        long: -90
+        lat: 35.6833,
+        long: 139.6833
       }
     });
 
@@ -73,14 +74,14 @@ class ScoreController {
       id: '44444566666',
       score: 0,
       lastAnswer: {
-        lat: 30,
-        long: 72
+        lat: 15.7833,
+        long: 47.8667
       }
     });
 
     this.question = {};
-    this.question.lat = 20;
-    this.question.long = 90;
+    this.question.lat = 48.8567;
+    this.question.long = 2.3508;
   }
 
   isWindowSmall() {
@@ -100,6 +101,9 @@ class ScoreController {
     this.preparePlayerMarkers();
     this.prepareAnswerMarker();
     this.prepareLines();
+    this.fitBounds();
+    this.calculateGeodesicDistance();
+    this.calculateScore();
   }
 
   prepareAnswerMarker() {
@@ -139,12 +143,13 @@ class ScoreController {
       '#FFA336'
     ];
 
-    for (let i = 0; i < this.players.length; i++) {
-      let latLngA = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
-      let latLngB = new google.maps.LatLng(this.question.lat, this.question.long);
+    const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
 
-      let line = new google.maps.Polyline({
-        path: [latLngA, latLngB],
+    for (let i = 0; i < this.players.length; i++) {
+      const latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
+
+      const line = new google.maps.Polyline({
+        path: [latLng, answerLatLng],
         strokeColor: colors[i],
         strokeOpacity: 1.0,
         strokeWeight: 4,
@@ -153,8 +158,34 @@ class ScoreController {
 
       this.lines.push(line);
     }
+  }
 
-    google.maps.event.trigger(this.map,'resize');
+  fitBounds() {
+    const markers = this.markers;
+    var bounds = new google.maps.LatLngBounds();
+
+    for(let i = 0; i < markers.length; i++) {
+      bounds.extend(markers[i].getPosition());
+    }
+
+    this.map.fitBounds(bounds);
+  }
+
+  calculateGeodesicDistance() {
+    const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
+
+    this.distances = this._.map(this.players, (p) => {
+      const latLng = new google.maps.LatLng(p.lastAnswer.lat, p.lastAnswer.long);
+      return google.maps.geometry.spherical.computeDistanceBetween(latLng, answerLatLng);
+    });
+  }
+
+  calculateScore() {
+    this.scores = this._.map(this.distances, (dist) => {
+      return this.ScoreService.calculateScore(dist);
+    })
+  }
+
   }
 
   padWithZeroes(value) {
