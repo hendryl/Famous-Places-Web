@@ -34,6 +34,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('Howl', Howl)
   .constant('Howler', Howler)
   .constant('SockJS', SockJS)
+  .constant('mapsKey', 'AIzaSyBKm4xvXU4kg3MOvyghsWeNO1BtcHzvBQA')
 
   //global strings
   .constant('baseURLConfig', baseURLConfig)

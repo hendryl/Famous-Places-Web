@@ -1,0 +1,14 @@
+.score-question {
+  transition: all 1s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.score-map {
+  opacity: 0;
+}
+
+.score-anim-map {
+  opacity: 1;
+  transition: all 1s;
+}

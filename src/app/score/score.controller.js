@@ -1,5 +1,5 @@
 class ScoreController {
-  constructor(_, NgMap, toastr, $state, $scope, $log, AudioService, SocketService, GameService, ScoreService) {
+  constructor(_, NgMap, toastr, $interval, $state, $scope, $log, AudioService, SocketService, GameService, ScoreService, mapsKey) {
     'ngInject';
 
     this._ = _;
@@ -14,7 +14,21 @@ class ScoreController {
     this.round = GameService.getRound();
     this.question = GameService.getQuestion(this.round);
     this.players = GameService.players;
+    this.showMap = false;
+    this.map = null;
+    this.text = "RESULTS";
+    
+    this.mapCenter = {
+      lat: 0,
+      long: 0
+    };
 
+    this.googleMapsURL = "https://maps.google.com/maps/api/js?libraries=places&callback=prepareMap&key=" + mapsKey;
+
+    $interval(() => {
+      this.showMap = true;
+      this.$log.log('ahahahahha');
+    }, 2000, 1, true);
     //flow:
     //tunjukkin jawabannya
     //tunjukkin jarak masing2 pemain, sekaligus skor
@@ -58,6 +72,19 @@ class ScoreController {
         long: 72
       }
     });
+  }
+
+  prepareMap(map) {
+    this.$log.log(this);
+    this.map = map;
+
+    const options = {
+      streetViewControl: false,
+      mapTypeControl: false,
+      zoomTypeControl: false
+    };
+
+    map.setOptions(options);
   }
 
   padWithZeroes(value) {
