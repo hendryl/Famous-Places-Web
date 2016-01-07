@@ -33,6 +33,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controllerAs: 'game'
     })
     .state('score', {
+      url: '/score',
       templateUrl: 'app/score/score.html',
       controller: 'ScoreController',
       controllerAs: 'score'

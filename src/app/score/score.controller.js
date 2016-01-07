@@ -19,6 +19,7 @@ class ScoreController {
     this.map = null;
     this.answerMarker = null;
     this.markers = [];
+    this.lines = [];
     this.text = "RESULTS";
 
     this.mapCenter = {
@@ -93,12 +94,14 @@ class ScoreController {
     map.setOptions(options);
     this.preparePlayerMarkers();
     this.prepareAnswerMarker();
+    this.prepareLines();
   }
 
   prepareAnswerMarker() {
     const answerIcon = 'http://maps.google.com/mapfiles/kml/pal2/icon13.png';
-    this.answerMarker = new google.maps.Marker();
     const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
+
+    this.answerMarker = new google.maps.Marker();
     this.answerMarker.setPosition(answerLatLng);
     this.answerMarker.setIcon(answerIcon);
     this.answerMarker.setMap(this.map);
@@ -137,6 +140,26 @@ class ScoreController {
       marker.setMap(this.map);
       this.markers.push(marker);
     }
+  }
+
+  prepareLines() {
+
+    for (let i = 0; i < this.players.length; i++) {
+      let latLngA = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
+      let latLngB = new google.maps.LatLng(this.question.lat, this.question.lng);
+
+      let line = new google.maps.Polyline({
+        path: [latLngA, latLngB],
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 4,
+        map: this.map
+      });
+
+      this.lines.push(line);
+    }
+
+    google.maps.event.trigger(this.map,'resize');
   }
 
   padWithZeroes(value) {
