@@ -9,6 +9,7 @@ import SelectController from './select/select.controller';
 import LobbyController from './lobby/lobby.controller';
 import LoadingController from './loading/loading.controller';
 import GameController from './game/game.controller';
+import ScoreController from './score/score.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -49,6 +50,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('LobbyController', LobbyController)
   .controller('LoadingController', LoadingController)
   .controller('GameController', GameController)
+  .controller('ScoreController', ScoreController)
 
   .directive('navbar', () => new NavbarDirective())
 
