@@ -15,9 +15,11 @@
         <span class="textLarge">{{score.text}}</span>
         <div class="pad-small"></div>
         <img class="question-image" ng-hide="score.showMap" ng-src="{{game.question.photo.url}}"/>
+
         <div class="container-map fill question-image" map-lazy-load-params="{{score.googleMapsURL}}" map-lazy-load="https://maps.google.com/maps/api/js" ng-class="{'score-anim-map': score.showMap === true, 'transparent': score.showMap === false}">
-          <ng-map center="{{score.mapCenter.lat}}, {{score.mapCenter.long}}" class="fill map" map-initialized="score.prepareMap(map)" zoom="4" default-style="false">
-          </ng-map>
+
+          <ng-map center="{{score.mapCenter.lat}}, {{score.mapCenter.long}}" class="fill map" default-style="false" draggable="false" map-initialized="score.prepareMap(map)" scrollwheel="false" zoom="4"></ng-map>
+
         </div>
       </div>
     </div>
