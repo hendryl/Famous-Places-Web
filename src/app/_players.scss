@@ -29,3 +29,23 @@
 .box-player4 {
   background-color: $color-gold;
 }
+
+.box-dark.box-player1 {
+  background-color: darken($color-red, 30%);
+  color: $color-lightyellow;
+}
+
+.box-dark.box-player2 {
+  background-color: darken($color-lightblue, 30%);
+  color: $color-lightyellow;
+}
+
+.box-dark.box-player3 {
+  background-color: darken($color-green, 20%);
+  color: $color-lightyellow;
+}
+
+.box-dark.box-player4 {
+  background-color: darken($color-gold, 30%);
+  color: $color-lightyellow;
+}
