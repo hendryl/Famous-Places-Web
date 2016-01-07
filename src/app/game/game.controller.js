@@ -62,7 +62,7 @@ class GameController {
 
   isPlayerDone(index) {
     const id = this.players[index].id;
-    return _.contains(this.answered, id);
+    return this._.contains(this.answered, id);
   }
 
   isWindowSmall() {
