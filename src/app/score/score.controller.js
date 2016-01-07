@@ -63,7 +63,7 @@ class ScoreController {
       score: 0,
       lastAnswer: {
         lat: 20,
-        long: -100
+        long: -90
       }
     });
 
@@ -78,8 +78,8 @@ class ScoreController {
     });
 
     this.question = {};
-    this.question.lat = 70;
-    this.question.long = 120;
+    this.question.lat = 20;
+    this.question.long = 90;
   }
 
   prepareMap(map) {
@@ -144,13 +144,21 @@ class ScoreController {
 
   prepareLines() {
 
+    this.$log.log('preparing lines');
+    const colors = [
+      '#BF1E2E',
+      '#4BB0EE',
+      '#008369',
+      '#FFA336'
+    ];
+
     for (let i = 0; i < this.players.length; i++) {
       let latLngA = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
-      let latLngB = new google.maps.LatLng(this.question.lat, this.question.lng);
+      let latLngB = new google.maps.LatLng(this.question.lat, this.question.long);
 
       let line = new google.maps.Polyline({
         path: [latLngA, latLngB],
-        strokeColor: '#FF0000',
+        strokeColor: colors[i],
         strokeOpacity: 1.0,
         strokeWeight: 4,
         map: this.map
