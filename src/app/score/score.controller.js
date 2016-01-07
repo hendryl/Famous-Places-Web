@@ -129,7 +129,7 @@ class ScoreController {
       let interval = this.$interval(() => {
         this.players[i].score += 1;
         this.receivedPoints[i] -= 1;
-
+        // TODO: play sound
         if(this.receivedPoints[i] <= 0) {
           this.$interval.cancel(interval);
         }
