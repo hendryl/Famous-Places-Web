@@ -132,10 +132,11 @@ class ScoreController {
 
         if(this.receivedPoints[i] <= 0) {
           this.$interval.cancel(interval);
-          this.pointsRevealed[i] = false;
         }
 
         if(isAllEqual(this.receivedPoints)) {
+
+          this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
           //TODO: send info that score update is done
         }
 
