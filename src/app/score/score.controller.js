@@ -104,6 +104,7 @@ class ScoreController {
     this.fitBounds();
     this.calculateGeodesicDistance();
     this.calculateScore();
+    this.subscribeToMapEvents();
   }
 
   prepareAnswerMarker() {
@@ -186,6 +187,11 @@ class ScoreController {
     })
   }
 
+  subscribeToMapEvents() {
+    google.maps.event.addListener(this.map, 'bounds_changed', () => {
+      this.fitBounds();
+      this.$log.log('asdasdasdasd');
+    })
   }
 
   padWithZeroes(value) {
