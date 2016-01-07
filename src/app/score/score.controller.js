@@ -113,35 +113,19 @@ class ScoreController {
   }
 
   preparePlayerMarkers() {
-    const redIcon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-    const blueIcon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-    const greenIcon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-    const yellowIcon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+    const icons = [
+      'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+      'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+      'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+      'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+    ];
 
     for (let i = 0; i < this.players.length; i++) {
       var marker = new google.maps.Marker();
       var latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
+
       marker.setPosition(latLng);
-
-      var icon = redIcon;
-      switch (i) {
-        case 0:
-          icon = redIcon;
-          break;
-        case 1:
-          icon = blueIcon;
-          break;
-        case 2:
-          icon = greenIcon;
-          break;
-        case 3:
-          icon = yellowIcon;
-          break;
-        default:
-          icon = redIcon;
-      }
-
-      marker.setIcon(icon);
+      marker.setIcon(icons[i]);
       marker.setMap(this.map);
       this.markers.push(marker);
     }
