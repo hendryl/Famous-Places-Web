@@ -7,6 +7,8 @@ class GameService {
     this.ImageFactory = ImageFactory;
     this.AudioService = AudioService;
 
+    this.currentQuestion = 0;
+
     this.game_id = 0;
     this.questions = [];
     this.musicURL = '';
@@ -21,6 +23,42 @@ class GameService {
 
   isGameReady() {
     return this.ready.images && this.ready.music;
+  }
+
+  getRound() {
+    return this.currentQuestion;
+  }
+
+  getQuestion(number) {
+    return this.questions[number];
+  }
+
+  canMoveToNextQuestion() {
+    if(this.currentQuestion + 1 >= this.questions.length) {
+      return false;
+    }
+
+    return true;
+  }
+
+  moveToNextQuestion() {
+    this.currentQuestion += 1;
+  }
+
+  handlePlayerDisconnect(message) {
+    const _ = this._;
+    const index = _.chain(this.players)
+      .map((n) => n.id)
+      .indexOf(message.id)
+      .value();
+
+    if (index != -1) {
+      const player = _.remove(this.players, (n) => n.id === message.id);
+      return player[0].name + ' has disconnected.';
+
+    } else {
+      this.$log.error('Player with id ' + message.id + ' not found!');
+    }
   }
 
   storeGameData(data) {
@@ -61,7 +99,7 @@ class GameService {
 
     var createPromises = (array) => {
       _.each(array, (value) => {
-        return this.$q( (resolve, reject) => {
+        return this.$q((resolve, reject) => {
           var image = new Image();
           image.onload = () => resolve(true);
           image.src = value;
@@ -74,7 +112,7 @@ class GameService {
     promises.push(createPromises(imageArray));
     promises.push(createPromises(flagArray));
 
-    this.$q.all(promises).then( results => this.ready.images = true);
+    this.$q.all(promises).then(results => this.ready.images = true);
   }
 
   retrieveMusic() {
@@ -86,7 +124,7 @@ class GameService {
 
   playMusic() {
     this.AudioService.setMusic(this.music);
-    this.AudioService.play();
+    this.AudioService.playMusic();
   }
 }
 

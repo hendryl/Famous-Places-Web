@@ -45,7 +45,9 @@ class LobbyController {
   handleJoinRoomMessage(message) {
     this.players.push({
       name: message.name,
-      id: message.id
+      id: message.id,
+      score: 0,
+      lastAnswer: null
     });
 
     this.toastr.success(message.name + ' has connected.');
@@ -60,22 +62,12 @@ class LobbyController {
   }
 
   handlePlayerDisconnect(message) {
-    const _ = this._;
-    const index = _.chain(this.players)
-      .map((n) => n.id)
-      .indexOf(message.id)
-      .value();
+    const toastrMessage = this.GameService.handlePlayerDisconnect(message);
 
-    if (index != -1) {
-      this.toastr.warning(this.players[index].name + ' has disconnected.');
-      _.remove(this.players, (n) => n.id === message.id);
-
-      this.$scope.$apply(() => {
+    this.toastr.warning(toastrMessage);
+    this.$scope.$apply(() => {
         this.$scope.players = this.players;
-      });
-    } else {
-      this.$log.error('Player with id ' + message.id + ' not found!');
-    }
+    });
   }
 
   isPlayerConnected(number) {

@@ -9,6 +9,7 @@ import SelectController from './select/select.controller';
 import LobbyController from './lobby/lobby.controller';
 import LoadingController from './loading/loading.controller';
 import GameController from './game/game.controller';
+import ScoreController from './score/score.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -22,20 +23,16 @@ import GameFactory from './factories/game.factory.js';
 import ImageFactory from './factories/image.factory.js';
 
 import baseURLConfig from './api.js';
-import Player from './models/player.js';
 
 var lodash = require('lodash');
 
-angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage'])
+angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'angularScreenfull', 'ui.router', 'ui.bootstrap', 'toastr', 'ngStorage', 'ngMap'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .constant('_', lodash)
   .constant('Howl', Howl)
   .constant('Howler', Howler)
   .constant('SockJS', SockJS)
-
-  //models
-  .constant('Player', Player)
 
   //global strings
   .constant('baseURLConfig', baseURLConfig)
@@ -53,6 +50,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('LobbyController', LobbyController)
   .controller('LoadingController', LoadingController)
   .controller('GameController', GameController)
+  .controller('ScoreController', ScoreController)
 
   .directive('navbar', () => new NavbarDirective())
 
