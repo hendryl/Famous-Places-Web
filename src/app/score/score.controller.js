@@ -35,6 +35,17 @@ class ScoreController {
 
     this.googleMapsURL = "https://maps.google.com/maps/api/js?libraries=places,geometry&callback=prepareMap&key=" + mapsKey;
 
+    $scope.$on('server_disconnect', function(event, args) {
+      alert('Server disconnected. Game ended.');
+      $state.go('home');
+    });
+
+    this.SocketService.extendedHandler = (message) => {
+      if (message.type === 'player_disconnect') {
+        this.handlePlayerDisconnect(message);
+      }
+    };
+
     $interval(() => {
       this.showMap = true;
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
