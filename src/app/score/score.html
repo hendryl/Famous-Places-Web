@@ -47,6 +47,13 @@
               <span class="textLarge monospaced">{{score.padWithZeroes(player.score)}}</span>
             </div>
           </div>
+          <span class="score-points textLarge" ng-class="{
+            'text-player1': $index === 0,
+            'text-player2': $index === 1,
+            'text-player3': $index === 2,
+            'text-player4': $index === 3,
+            'points-anim': score.pointsRevealed[$index] === true
+          }">+{{score.receivedPoints[$index]}}</i>
         </div>
       </div>
     </div>
@@ -65,6 +72,9 @@
                 </em>
               </div>
               <div class="col-xs-4 text-right">
+                <span class="textxxMedium monospaced" ng-hide="!score.pointsRevealed[$index]">
+                  +{{score.receivedPoints[$index]}}
+                </span>
                 <span class="textxxMedium monospaced">
                   {{score.padWithZeroes(player.score)}}
                 </span>

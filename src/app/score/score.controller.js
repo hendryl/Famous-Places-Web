@@ -22,7 +22,7 @@ class ScoreController {
     this.markers = [];
     this.lines = [];
     this.distances = [];
-    this.scores = [];
+    this.receivedPoints = [];
     this.text = "RESULTS";
 
     this.mapCenter = {
