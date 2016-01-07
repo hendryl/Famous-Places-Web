@@ -48,7 +48,9 @@ class GameController {
             round: this.round
           });
           this.$log.log('end');
-          //TODO: this.$state.go('');
+          $interval(() => {
+            this.$state.go('score');
+          }, 2000, 0, true);
         }
       }
     };
