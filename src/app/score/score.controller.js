@@ -34,6 +34,7 @@ class ScoreController {
 
     $interval(() => {
       this.showMap = true;
+      this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
     }, 2000, 1, true);
     //flow:
     //tunjukkin jawabannya
