@@ -90,8 +90,8 @@ class ScoreController {
       id: '44444566666',
       score: 0,
       lastAnswer: {
-        lat: 15.7833,
-        long: 47.8667
+        lat: 48.8550,
+        long: 2.3497
       }
     });
 

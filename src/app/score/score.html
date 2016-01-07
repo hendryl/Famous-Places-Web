@@ -29,7 +29,7 @@
   <div class="row">
     <div class="score-boxes" ng-hide="score.isWindowSmall()" ng-repeat="player in score.players">
       <div class="col-xs-3 noPad">
-        <div class="score-box" ng-class="{
+        <div class="score-box text-center" ng-class="{
           'box-player1': $index === 0,
           'box-player2': $index === 1,
           'box-player3': $index === 2,
@@ -47,13 +47,18 @@
               <span class="textLarge monospaced">{{score.padWithZeroes(player.score)}}</span>
             </div>
           </div>
-          <span class="score-points textLarge" ng-class="{
+          <span class="score-points textxxMedium" ng-class="{
             'text-player1': $index === 0,
             'text-player2': $index === 1,
             'text-player3': $index === 2,
             'text-player4': $index === 3,
             'points-anim': score.pointsRevealed[$index] === true
-          }">+{{score.receivedPoints[$index]}}</i>
+          }">
+          <span ng-hide="score.distances[$index] < 1000">{{score.distances[$index] / 1000 | number: 3}} km</span>
+          <span ng-hide="score.distances[$index] >= 1000">{{score.distances[$index] | number: 0}} m</span>
+
+          <br>
+          +{{score.receivedPoints[$index]}}</span>
         </div>
       </div>
     </div>
