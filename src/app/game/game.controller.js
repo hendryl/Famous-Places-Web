@@ -40,7 +40,7 @@ class GameController {
           long: message.long
         }
         this.answered.push(message.player);
-        //TODO: animate player done
+        //TODO: play sound
 
         if (this.answered >= this.players.length) {
           this.SocketService.send({
@@ -55,6 +55,11 @@ class GameController {
 
     this.setAnimation();
     this.playMusic();
+  }
+
+  isPlayerDone(index) {
+    const id = this.players[index].id;
+    return _.contains(this.answered, id);
   }
 
   isWindowSmall() {

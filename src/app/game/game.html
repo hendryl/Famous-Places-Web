@@ -45,6 +45,13 @@
               </div>
             </div>
           </div>
+          <i class="material-icons game-check" ng-class="{
+            'text-player1': $index === 0,
+            'text-player2': $index === 1,
+            'text-player3': $index === 2,
+            'text-player4': $index === 3,
+            'check-anim': game.isPlayerDone($index)
+          }">check</i>
         </div>
       </div>
       <div ng-hide="!game.isWindowSmall()">
