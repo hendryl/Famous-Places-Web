@@ -27,8 +27,8 @@
       <div class="score-boxes" ng-hide="game.isWindowSmall()" ng-repeat="player in game.players">
         <div class="col-xs-3 noPad">
           <div class="score-box" ng-class="{
-              'box-player2': $index === 0,
-              'box-player1': $index === 1,
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
               'box-player3': $index === 2,
               'box-player4': $index === 3,
               'box-dark': game.isPlayerDone($index)
@@ -62,7 +62,8 @@
               'box-player1': $index === 0,
               'box-player2': $index === 1,
               'box-player3': $index === 2,
-              'box-player4': $index === 3}">
+              'box-player4': $index === 3,
+              'box-dark': game.isPlayerDone($index)}">
               <div class="row">
                 <div class="col-xs-8">
                   <em class="textxxMedium monospaced">
