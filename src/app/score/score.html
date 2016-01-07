@@ -10,4 +10,65 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="pad-small"></div>
+    <div class="col-xs-12 text-center">
+      <span class="textLarge">RESULT</span>
+      <div class="pad-small"></div>
+      <img class="question-image" ng-src="{{game.question.photo.url}}"/>
+    </div>
+    <!-- TODO: FLIP TO MAP -->
+  </div>
+  <div class="score-row">
+    <div class="row">
+      <div class="score-boxes" ng-hide="score.isWindowSmall()" ng-repeat="player in score.players">
+        <div class="col-xs-3 noPad">
+          <div class="score-box" ng-class="{
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
+              'box-player3': $index === 2,
+              'box-player4': $index === 3,
+              'box-dark': game.isPlayerDone($index)
+            }">
+            <div class="text-center">
+              <em class="textxxMedium monospaced">{{player.name}}</em>
+            </div>
+            <div class="pad-small"></div>
+            <div class="row">
+              <div class="col-xs-6">
+                <span class="textLarge monospaced">SCORE</span>
+              </div>
+              <div class="col-xs-6 text-right">
+                <span class="textLarge monospaced">{{score.padWithZeroes(player.score)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-hide="!game.isWindowSmall()">
+        <div ng-repeat="player in game.players">
+          <div class="col-xs-12">
+            <div class="score-line" ng-class="{
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
+              'box-player3': $index === 2,
+              'box-player4': $index === 3}">
+              <div class="row">
+                <div class="col-xs-8">
+                  <em class="textxxMedium monospaced">
+                    {{player.name}}
+                  </em>
+                </div>
+                <div class="col-xs-4 text-right">
+                  <span class="textxxMedium monospaced">
+                    {{score.padWithZeroes(player.score)}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
