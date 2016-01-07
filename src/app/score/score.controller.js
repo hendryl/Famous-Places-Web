@@ -76,7 +76,7 @@ class ScoreController {
     });
 
     this.players.push({
-      name: 'were',
+      name: 'xvcxzcvzxcvasdfg',
       id: '77777777',
       score: 0,
       lastAnswer: {
