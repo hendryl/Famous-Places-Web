@@ -4,11 +4,39 @@
   visibility: hidden;
 }
 
-.score-map {
-  opacity: 0;
+.transparent {
+  opacity: 0.01;
+}
+
+.container-map {
+  position: relative;
+  min-height: 540px;
+  max-height: 540px;
+}
+
+@media screen and(max-height: 900px) {
+  .container-map {
+    min-height: 400px;
+    max-height: 400px;
+  }
+}
+
+@media screen and(max-height: 720px) {
+  .container-map {
+    min-height: 340px;
+    max-height: 340px;
+  }
 }
 
 .score-anim-map {
   opacity: 1;
   transition: all 1s;
+}
+
+.map {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }

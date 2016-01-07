@@ -81,7 +81,7 @@ class ScoreController {
     const options = {
       streetViewControl: false,
       mapTypeControl: false,
-      zoomTypeControl: false
+      zoomControl: false
     };
 
     map.setOptions(options);
