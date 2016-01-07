@@ -10,17 +10,17 @@ describe('service ScoreService', () => {
       expect(ScoreService.padWithZeroes).not.toBeNull();
     }));
 
-    describe('with 6 characters or less', () => {
-      it('should return string with 6 characters', inject(ScoreService => {
+    describe('with 4 characters or less', () => {
+      it('should return string with 4 characters', inject(ScoreService => {
         const result = ScoreService.padWithZeroes('');
 
         expect(result).toEqual(jasmine.any(String));
-        expect(result.length === 6).toBeTruthy();
-        expect(result).toBe('000000');
+        expect(result.length === 4).toBeTruthy();
+        expect(result).toBe('0000');
       }));
     });
 
-    describe('with more than 6 characters', () => {
+    describe('with more than 4 characters', () => {
       it('should return string with no changes', inject(ScoreService => {
         const result = ScoreService.padWithZeroes('I am a string');
 

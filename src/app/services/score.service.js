@@ -4,6 +4,7 @@ class ScoreService {
 
     this._ = _;
     this.maxScore = 1000;
+    this.scoreDigits = 4;
   }
 
   calculateScore(distance) {
@@ -42,7 +43,7 @@ class ScoreService {
   }
 
   padWithZeroes(value) {
-    return this._.padLeft(value.toString(), 6, '0');
+    return this._.padLeft(value.toString(), this.scoreDigits, '0');
   }
 }
 
