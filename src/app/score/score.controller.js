@@ -1,5 +1,5 @@
 class ScoreController {
-  constructor(_, NgMap, toastr, $state, $scope, $log, AudioService, SocketService, GameService) {
+  constructor(_, NgMap, toastr, $state, $scope, $log, AudioService, SocketService, GameService, ScoreService) {
     'ngInject';
 
     this._ = _;
@@ -8,14 +8,60 @@ class ScoreController {
     this.$state = $state;
     this.GameService = GameService;
     this.AudioService = AudioService;
+    this.ScoreService = ScoreService;
     this.SocketService = SocketService;
 
     this.round = GameService.getRound();
     this.question = GameService.getQuestion(this.round);
     this.players = GameService.players;
 
+    //flow:
+    //tunjukkin jawabannya
+    //tunjukkin jarak masing2 pemain, sekaligus skor
+    //di device para pemain, tunjukkin button continue, disable sebelum semua selesai
+    this.players.push({
+      name: 'asdf',
+      id: '123123213',
+      score: 0,
+      lastAnswer: {
+        lat: 0,
+        long: 0
+      }
+    });
+
+    this.players.push({
+      name: 'xvcxzcvzxcv',
+      id: '6545131345',
+      score: 0,
+      lastAnswer: {
+        lat: -6,
+        long: 100
+      }
+    });
+
+    this.players.push({
+      name: 'were',
+      id: '77777777',
+      score: 0,
+      lastAnswer: {
+        lat: 20,
+        long: -100
+      }
+    });
+
+    this.players.push({
+      name: 'po',
+      id: '44444566666',
+      score: 0,
+      lastAnswer: {
+        lat: 30,
+        long: 72
+      }
+    });
+  }
+
   padWithZeroes(value) {
-    return this._.padLeft(value.toString(), 6, '0');
+    return this.ScoreService.padWithZeroes(value);
   }
 }
 

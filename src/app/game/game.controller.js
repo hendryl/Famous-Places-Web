@@ -1,5 +1,5 @@
 class GameController {
-  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, GameService, SocketService, toastr, audioOn) {
+  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, GameService, SocketService, ScoreService, toastr, audioOn) {
     'ngInject';
 
     this._ = _;
@@ -10,6 +10,7 @@ class GameController {
     this.$storage = $localStorage;
     this.$interval = $interval;
     this.GameService = GameService;
+    this.ScoreService = ScoreService;
     this.SocketService = SocketService;
 
     this.audioOn = audioOn;
@@ -103,7 +104,7 @@ class GameController {
   }
 
   padWithZeroes(value) {
-    return this._.padLeft(value.toString(), 6, '0');
+    return this.ScoreService.padWithZeroes(value);
   }
 }
 
