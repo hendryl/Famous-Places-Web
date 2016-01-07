@@ -1,3 +1,4 @@
+/* global google:false*/
 class ScoreController {
   constructor(_, NgMap, toastr, $interval, $state, $scope, $log, AudioService, SocketService, GameService, ScoreService, mapsKey) {
     'ngInject';
@@ -16,8 +17,10 @@ class ScoreController {
     this.players = GameService.players;
     this.showMap = false;
     this.map = null;
+    this.answerMarker = null;
+    this.markers = [];
     this.text = "RESULTS";
-    
+
     this.mapCenter = {
       lat: 0,
       long: 0
@@ -72,10 +75,13 @@ class ScoreController {
         long: 72
       }
     });
+
+    this.question = {};
+    this.question.lat = 70;
+    this.question.long = 120;
   }
 
   prepareMap(map) {
-    this.$log.log(this);
     this.map = map;
 
     const options = {
@@ -85,6 +91,52 @@ class ScoreController {
     };
 
     map.setOptions(options);
+    this.preparePlayerMarkers();
+    this.prepareAnswerMarker();
+  }
+
+  prepareAnswerMarker() {
+    const answerIcon = 'http://maps.google.com/mapfiles/kml/pal2/icon13.png';
+    this.answerMarker = new google.maps.Marker();
+    const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
+    this.answerMarker.setPosition(answerLatLng);
+    this.answerMarker.setIcon(answerIcon);
+    this.answerMarker.setMap(this.map);
+  }
+
+  preparePlayerMarkers() {
+    const redIcon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+    const blueIcon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+    const greenIcon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+    const yellowIcon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+
+    for (let i = 0; i < this.players.length; i++) {
+      var marker = new google.maps.Marker();
+      var latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
+      marker.setPosition(latLng);
+
+      var icon = redIcon;
+      switch (i) {
+        case 0:
+          icon = redIcon;
+          break;
+        case 1:
+          icon = blueIcon;
+          break;
+        case 2:
+          icon = greenIcon;
+          break;
+        case 3:
+          icon = yellowIcon;
+          break;
+        default:
+          icon = redIcon;
+      }
+
+      marker.setIcon(icon);
+      marker.setMap(this.map);
+      this.markers.push(marker);
+    }
   }
 
   padWithZeroes(value) {
