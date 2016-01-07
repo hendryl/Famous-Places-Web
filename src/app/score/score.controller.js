@@ -1,5 +1,5 @@
 class ScoreController {
-  constructor(SocketService, GameService,) {
+  constructor(SocketService, GameService) {
     'ngInject';
   }
 }
