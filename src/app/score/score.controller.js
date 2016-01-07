@@ -1,6 +1,6 @@
 /* global google:false*/
 class ScoreController {
-  constructor(_, NgMap, toastr, $interval, $state, $window, $scope, $log, AudioService, SocketService, GameService, ScoreService, mapsKey) {
+  constructor(_, NgMap, toastr, $interval, $state, $window, $timeout, $scope, $log, AudioService, SocketService, GameService, ScoreService, mapsKey) {
     'ngInject';
 
     this._ = _;
@@ -8,6 +8,8 @@ class ScoreController {
     this.toastr = toastr;
     this.$state = $state;
     this.$window = $window;
+    this.$timeout = $timeout;
+    this.$interval = $interval;
     this.GameService = GameService;
     this.AudioService = AudioService;
     this.ScoreService = ScoreService;
@@ -23,6 +25,7 @@ class ScoreController {
     this.lines = [];
     this.distances = [];
     this.receivedPoints = [];
+    this.pointsRevealed = [false, false, false, false];
     this.text = "RESULTS";
 
     this.mapCenter = {
@@ -35,6 +38,7 @@ class ScoreController {
     $interval(() => {
       this.showMap = true;
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
+      this.revealScores();
     }, 2000, 1, true);
     //flow:
     //tunjukkin jawabannya
@@ -87,6 +91,22 @@ class ScoreController {
 
   isWindowSmall() {
     return this.$window.innerWidth < 800;
+  }
+
+  revealScores() {
+    let index = 0;
+    this.$interval(() => {
+      this.pointsRevealed[index] = true;
+      index += 1;
+
+      if(index >= this.players.length) {
+        this.$timeout(() => {
+          this.addScores();
+        }, 800);
+      }
+    }, 800, this.players.length, true);
+  }
+  addScores() {
   }
 
   prepareMap(map) {
@@ -183,7 +203,7 @@ class ScoreController {
   }
 
   calculateScore() {
-    this.scores = this._.map(this.distances, (dist) => {
+    this.receivedPoints = this._.map(this.distances, (dist) => {
       return this.ScoreService.calculateScore(dist);
     })
   }
@@ -191,7 +211,6 @@ class ScoreController {
   subscribeToMapEvents() {
     google.maps.event.addListener(this.map, 'bounds_changed', () => {
       this.fitBounds();
-      this.$log.log('asdasdasdasd');
     })
   }
 
