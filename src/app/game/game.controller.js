@@ -81,7 +81,7 @@ class GameController {
 
         this.$log.log('sent start_round message');
       });
-    }, this.waitTime, 0, true);
+    }, this.waitTime, 1, true);
   }
 
   playMusic() {
