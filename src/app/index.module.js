@@ -10,6 +10,7 @@ import LobbyController from './lobby/lobby.controller';
 import LoadingController from './loading/loading.controller';
 import GameController from './game/game.controller';
 import ScoreController from './score/score.controller';
+import ResultController from './result/result.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -53,6 +54,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('LoadingController', LoadingController)
   .controller('GameController', GameController)
   .controller('ScoreController', ScoreController)
+  .controller('ResultController', ResultController)
 
   .directive('navbar', () => new NavbarDirective())
 
