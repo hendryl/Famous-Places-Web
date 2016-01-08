@@ -43,6 +43,16 @@ class ScoreController {
     this.SocketService.extendedHandler = (message) => {
       if (message.type === 'player_disconnect') {
         this.handlePlayerDisconnect(message);
+
+      } else if (message.type === 'continue') {
+        if(this.GameService.canMoveToNextQuestion) {
+          this.GameService.moveToNextQuestion();
+          this.$state.go('game');
+
+        } else {
+          //TODO: prepare for both solo and multiplayer play
+          this.$state.go('result');
+        }
       }
     };
 
@@ -55,49 +65,6 @@ class ScoreController {
     //tunjukkin jawabannya
     //tunjukkin jarak masing2 pemain, sekaligus skor
     //di device para pemain, tunjukkin button continue, disable sebelum semua selesai
-    this.players.push({
-      name: 'asdf',
-      id: '123123213',
-      score: 0,
-      lastAnswer: {
-        lat: 51.5072,
-        long: 0.1275
-      }
-    });
-
-    this.players.push({
-      name: 'xvcxzcvzxcv',
-      id: '6545131345',
-      score: 0,
-      lastAnswer: {
-        lat: 52.5167,
-        long: 13.3833
-      }
-    });
-
-    this.players.push({
-      name: 'xvcxzcvzxcvasdfg',
-      id: '77777777',
-      score: 0,
-      lastAnswer: {
-        lat: 35.6833,
-        long: 139.6833
-      }
-    });
-
-    this.players.push({
-      name: 'po',
-      id: '44444566666',
-      score: 0,
-      lastAnswer: {
-        lat: 48.8550,
-        long: 2.3497
-      }
-    });
-
-    this.question = {};
-    this.question.lat = 48.8567;
-    this.question.long = 2.3508;
   }
 
   isWindowSmall() {
@@ -135,11 +102,15 @@ class ScoreController {
         }
 
         if(isAllEqual(this.receivedPoints)) {
-
           this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
-          //TODO: send info that score update is done
-        }
 
+          const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
+
+          this.SocketService.send({
+            type: 'score_finished',
+            nextRound: stillHaveQuestion
+          });
+        }
       }, 7, 0, true);
     }
   }
