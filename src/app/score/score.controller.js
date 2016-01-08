@@ -107,8 +107,8 @@ class ScoreController {
           const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
 
           this.SocketService.send({
-            type: 'score_finished',
-            nextRound: stillHaveQuestion
+            type: 'score_end',
+            haveNextRound: stillHaveQuestion
           });
         }
       }, 7, 0, true);
