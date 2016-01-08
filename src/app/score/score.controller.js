@@ -56,11 +56,11 @@ class ScoreController {
       }
     };
 
-    $interval(() => {
+    $timeout(() => {
       this.showMap = true;
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
       this.revealScores();
-    }, 2000, 1, true);
+    }, 2000);
 
     this.$log.log(this.question);
   }

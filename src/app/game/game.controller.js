@@ -74,7 +74,7 @@ class GameController {
   }
 
   setAnimation() {
-    this.$interval(() => {
+    this.$timeout(() => {
       this.questionHidden = false;
       angular.element(".gameQuestion").one('transitionend', (event) => {
         //TODO: this.playSound('timerStart');
@@ -85,7 +85,7 @@ class GameController {
 
         this.$log.log('sent start_round message');
       });
-    }, this.waitTime, 1, true);
+    }, this.waitTime);
   }
 
   playMusic() {
