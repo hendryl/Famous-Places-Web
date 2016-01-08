@@ -1,11 +1,12 @@
 class LoadingController {
-  constructor($log, $scope, $state, $interval, SocketService, GameService, AudioService, toastr) {
+  constructor($log, $scope, $state, $interval, $timeout, SocketService, GameService, AudioService, toastr) {
     'ngInject';
 
     this.$log = $log;
     this.$state = $state;
     this.toastr = toastr;
     this.$interval = $interval;
+    this.$timeout = $timeout;
     this.GameService = GameService;
     this.SocketService = SocketService;
 
@@ -35,7 +36,7 @@ class LoadingController {
   }
 
   setGameAssetChecker(waitTime) {
-    this.$interval(() => this.checkAssets(), waitTime, 1, true);
+    this.$timeout(() => this.checkAssets(), waitTime);
   }
 
   changeEllipsis() {
