@@ -11,13 +11,15 @@ class SelectController {
     this.modes = [];
     this.buttonDisabled = false;
 
-    ModeFactory.getList().success( (result) => {
+    ModeFactory.getList().success((result) => {
       this.modes = _.sortBy(result, (n) => n.mode_id);
     });
 
+
+    const music = AudioService.prepareMusic(lobbyMusic);
+    AudioService.setMusic(music);
+
     if ($localStorage.audioStatus === audioOn) {
-      const music = AudioService.prepareMusic(lobbyMusic);
-      AudioService.setMusic(music);
       AudioService.playMusic();
     }
   }
