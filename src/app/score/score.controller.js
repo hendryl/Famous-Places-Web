@@ -61,10 +61,8 @@ class ScoreController {
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
       this.revealScores();
     }, 2000, 1, true);
-    //flow:
-    //tunjukkin jawabannya
-    //tunjukkin jarak masing2 pemain, sekaligus skor
-    //di device para pemain, tunjukkin button continue, disable sebelum semua selesai
+
+    this.$log.log(this.question);
   }
 
   isWindowSmall() {
@@ -136,7 +134,7 @@ class ScoreController {
 
   prepareAnswerMarker() {
     const answerIcon = 'http://maps.google.com/mapfiles/kml/pal2/icon13.png';
-    const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
+    const answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
 
     this.answerMarker = new google.maps.Marker();
     this.answerMarker.setPosition(answerLatLng);
@@ -171,7 +169,7 @@ class ScoreController {
       '#FFA336'
     ];
 
-    const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
+    const answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
 
     for (let i = 0; i < this.players.length; i++) {
       const latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
@@ -200,7 +198,7 @@ class ScoreController {
   }
 
   calculateGeodesicDistance() {
-    const answerLatLng = new google.maps.LatLng(this.question.lat, this.question.long);
+    const answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
 
     this.distances = this._.map(this.players, (p) => {
       const latLng = new google.maps.LatLng(p.lastAnswer.lat, p.lastAnswer.long);
