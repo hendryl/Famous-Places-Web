@@ -1,5 +1,5 @@
 class GameController {
-  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, GameService, SocketService, ScoreService, toastr, audioOn) {
+  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, $timeout, GameService, SocketService, ScoreService, toastr, audioOn) {
     'ngInject';
 
     this._ = _;
@@ -31,7 +31,11 @@ class GameController {
         this.handlePlayerDisconnect(message);
 
       } else if (message.type === 'answer') {
+
+        this.$log.log('answer received');
+
         if (_.contains(this.answered, message.player)) {
+          this.$log.log('player already answered before');
           return;
         }
 
@@ -43,15 +47,15 @@ class GameController {
         this.answered.push(message.player);
         //TODO: play sound
 
-        if (this.answered >= this.players.length) {
+        if (this.answered.length >= this.players.length) {
           this.SocketService.send({
             type: 'end_round',
             round: this.round
           });
           this.$log.log('end');
-          $interval(() => {
+          $timeout(() => {
             this.$state.go('score');
-          }, 2000, 0, true);
+          }, 2000);
         }
       }
     };
