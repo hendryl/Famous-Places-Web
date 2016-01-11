@@ -43,6 +43,7 @@ class ScoreController {
     this.SocketService.extendedHandler = (message) => this.handleSocketMessage(message);
 
     this.$log.log(this.question);
+    this.$log.log('finish constructor');
   }
 
   handleSocketMessage(message) {
@@ -73,17 +74,24 @@ class ScoreController {
     };
 
     map.setOptions(options);
+    this.$log.log(map);
     this.drawMapObjects();
     this.subscribeToMapEvents();
     this.startScoring();
   }
 
   drawMapObjects() {
+    this.$log.log('drawing map objects');
     this.preparePlayerMarkers();
     this.prepareAnswerMarker();
+
+    this.$log.log('markers created');
+    this.$log.log(this.markers);
+
     this.prepareLines();
     this.setCenterToAnswer();
     this.fitBounds();
+    this.$log.log('finished drawing map objects');
   }
 
   prepareAnswerMarker() {
@@ -154,9 +162,14 @@ class ScoreController {
     }
 
     this.map.fitBounds(bounds);
+    this.$log.log('fitted bounds');
   }
 
   subscribeToMapEvents() {
+    this.$log.log('subscribing to map events');
+
+    this.$log.log(google.maps.event);
+
     google.maps.event.addListener(this.map, 'bounds_changed', () => {
       this.fitBounds();
     });
@@ -174,17 +187,24 @@ class ScoreController {
   }
 
   startScoring() {
+
+    this.$log.log('start scoring');
+
     this.$timeout(() => {
       this.showMap = true;
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
 
+      this.$log.log('set the text into answer location');
+
       this.calculateGeodesicDistance();
       this.calculateScore();
+      this.$log.log(this.receivedPoints);
       this.revealScores();
     }, 2000);
   }
 
   calculateGeodesicDistance() {
+    this.$log.log('calculating distance');
 
     this.distances = this._.map(this.players, (p) => {
       const latLng = new google.maps.LatLng(p.lastAnswer.lat, p.lastAnswer.long);
@@ -193,15 +213,19 @@ class ScoreController {
   }
 
   calculateScore() {
+    this.$log.log('calculating score');
     this.receivedPoints = this._.map(this.distances, (dist) => {
       return this.ScoreService.calculateScore(dist);
     });
   }
 
   revealScores() {
+    this.$log.log('revealing score');
+
     let index = 0;
     this.$interval(() => {
       this.pointsRevealed[index] = true;
+      this.$log.log('revealed point for player ' + index + 1);
       index += 1;
 
       if (index >= this.players.length) {
