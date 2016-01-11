@@ -10,6 +10,7 @@ import LobbyController from './lobby/lobby.controller';
 import LoadingController from './loading/loading.controller';
 import GameController from './game/game.controller';
 import ScoreController from './score/score.controller';
+import ResultController from './result/result.controller';
 
 import NavbarDirective from './components/navbar/navbar.directive';
 
@@ -17,6 +18,7 @@ import AudioService from './services/audio.service';
 import GameService from './services/game.service';
 import SocketService from './services/socket.service';
 import BroadcastService from './services/broadcast.service';
+import ScoreService from './services/score.service';
 
 import ModeFactory from './factories/mode.factory.js';
 import GameFactory from './factories/game.factory.js';
@@ -33,6 +35,7 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .constant('Howl', Howl)
   .constant('Howler', Howler)
   .constant('SockJS', SockJS)
+  .constant('mapsKey', 'AIzaSyBKm4xvXU4kg3MOvyghsWeNO1BtcHzvBQA')
 
   //global strings
   .constant('baseURLConfig', baseURLConfig)
@@ -51,11 +54,13 @@ angular.module('famousPlacesWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   .controller('LoadingController', LoadingController)
   .controller('GameController', GameController)
   .controller('ScoreController', ScoreController)
+  .controller('ResultController', ResultController)
 
   .directive('navbar', () => new NavbarDirective())
 
   .service('AudioService', AudioService)
   .service('GameService', GameService)
+  .service('ScoreService', ScoreService)
   .service('SocketService', SocketService)
   .service('BroadcastService', BroadcastService)
 

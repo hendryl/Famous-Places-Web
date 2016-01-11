@@ -1,5 +1,5 @@
 class GameController {
-  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, GameService, SocketService, toastr, audioOn) {
+  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, $timeout, GameService, SocketService, ScoreService, toastr, audioOn) {
     'ngInject';
 
     this._ = _;
@@ -8,8 +8,10 @@ class GameController {
     this.toastr = toastr;
     this.$window = $window;
     this.$storage = $localStorage;
+    this.$timeout = $timeout;
     this.$interval = $interval;
     this.GameService = GameService;
+    this.ScoreService = ScoreService;
     this.SocketService = SocketService;
 
     this.audioOn = audioOn;
@@ -30,7 +32,11 @@ class GameController {
         this.handlePlayerDisconnect(message);
 
       } else if (message.type === 'answer') {
+
+        this.$log.log('answer received');
+
         if (_.contains(this.answered, message.player)) {
+          this.$log.log('player already answered before');
           return;
         }
 
@@ -42,15 +48,15 @@ class GameController {
         this.answered.push(message.player);
         //TODO: play sound
 
-        if (this.answered >= this.players.length) {
+        if (this.answered.length >= this.players.length) {
           this.SocketService.send({
             type: 'end_round',
             round: this.round
           });
           this.$log.log('end');
-          $interval(() => {
+          $timeout(() => {
             this.$state.go('score');
-          }, 2000, 0, true);
+          }, 2000);
         }
       }
     };
@@ -61,7 +67,7 @@ class GameController {
 
   isPlayerDone(index) {
     const id = this.players[index].id;
-    return _.contains(this.answered, id);
+    return this._.contains(this.answered, id);
   }
 
   isWindowSmall() {
@@ -69,7 +75,7 @@ class GameController {
   }
 
   setAnimation() {
-    this.$interval(() => {
+    this.$timeout(() => {
       this.questionHidden = false;
       angular.element(".gameQuestion").one('transitionend', (event) => {
         //TODO: this.playSound('timerStart');
@@ -80,13 +86,11 @@ class GameController {
 
         this.$log.log('sent start_round message');
       });
-    }, this.waitTime, 0, true);
+    }, this.waitTime);
   }
 
   playMusic() {
-    if (this.$storage.audioStatus === this.audioOn) {
-      this.GameService.playMusic();
-    }
+    this.GameService.playMusic();
   }
 
   handlePlayerDisconnect(message) {
@@ -103,7 +107,7 @@ class GameController {
   }
 
   padWithZeroes(value) {
-    return this._.padLeft(value.toString(), 6, '0');
+    return this.ScoreService.padWithZeroes(value);
   }
 }
 

@@ -1,11 +1,13 @@
 class GameService {
-  constructor(_, $log, $q, ImageFactory, AudioService) {
+  constructor(_, $log, $q, $localStorage, ImageFactory, AudioService, audioOn) {
     'ngInject';
     this._ = _;
     this.$q = $q;
     this.$log = $log;
+    this.$storage = $localStorage;
     this.ImageFactory = ImageFactory;
     this.AudioService = AudioService;
+    this.audioOn = audioOn;
 
     this.currentQuestion = 0;
 
@@ -34,7 +36,7 @@ class GameService {
   }
 
   canMoveToNextQuestion() {
-    if(this.currentQuestion + 1 >= this.questions.length) {
+    if (this.currentQuestion + 1 >= this.questions.length) {
       return false;
     }
 
@@ -123,8 +125,17 @@ class GameService {
   }
 
   playMusic() {
-    this.AudioService.setMusic(this.music);
-    this.AudioService.playMusic();
+    let canPlayMusic = () => {
+      if (this.$storage.audioStatus === this.audioOn) {
+        this.AudioService.playMusic();
+      }
+    };
+
+    if (this.AudioService.music._src !== this.music._src) {
+      this.AudioService.setMusic(this.music);
+
+      canPlayMusic();
+    } else canPlayMusic();
   }
 }
 

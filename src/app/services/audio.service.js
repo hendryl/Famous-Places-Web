@@ -44,7 +44,7 @@ class AudioService {
 
   setMusic(music) {
     if (this.music) {
-      this.fadeToStop();
+      this.stopMusic();
       this.music = null;
     }
 
