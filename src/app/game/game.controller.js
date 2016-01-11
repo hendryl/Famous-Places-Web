@@ -90,9 +90,7 @@ class GameController {
   }
 
   playMusic() {
-    if (this.$storage.audioStatus === this.audioOn) {
-      this.GameService.playMusic();
-    }
+    this.GameService.playMusic();
   }
 
   handlePlayerDisconnect(message) {

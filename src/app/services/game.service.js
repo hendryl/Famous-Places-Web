@@ -34,7 +34,7 @@ class GameService {
   }
 
   canMoveToNextQuestion() {
-    if(this.currentQuestion + 1 >= this.questions.length) {
+    if (this.currentQuestion + 1 >= this.questions.length) {
       return false;
     }
 
@@ -123,8 +123,18 @@ class GameService {
   }
 
   playMusic() {
-    this.AudioService.setMusic(this.music);
-    this.AudioService.playMusic();
+    let canPlayMusic = () => {
+      if (this.$storage.audioStatus === this.audioOn) {
+        this.AudioService.playMusic();
+      }
+    };
+
+    AudioService.music._src !== baseMusic
+    if (this.AudioService.music._src !== this.music._src) {
+      this.AudioService.setMusic(this.music);
+
+      canPlayMusic();
+    } else canPlayMusic();
   }
 }
 
