@@ -1,5 +1,5 @@
 class GameService {
-  constructor(_, $log, $q, $localStorage, ImageFactory, AudioService) {
+  constructor(_, $log, $q, $localStorage, ImageFactory, AudioService, audioOn) {
     'ngInject';
     this._ = _;
     this.$q = $q;
@@ -7,6 +7,7 @@ class GameService {
     this.$storage = $localStorage;
     this.ImageFactory = ImageFactory;
     this.AudioService = AudioService;
+    this.audioOn = audioOn;
 
     this.currentQuestion = 0;
 
