@@ -48,6 +48,7 @@ class ScoreController {
         if(this.GameService.canMoveToNextQuestion) {
           this.GameService.moveToNextQuestion();
           this.$state.go('game');
+          this.clearMap();
 
         } else {
           //TODO: prepare for both solo and multiplayer play
@@ -187,6 +188,17 @@ class ScoreController {
 
       this.lines.push(line);
     }
+  }
+
+  clearMap() {
+    _.each(this.markers, (m) => m.setMap(null));
+    this.answerMarker.setMap(null);
+
+    _.each(this.lines, (l) => l.setMap(null));
+
+    this.markers = [];
+    this.answerMarker = null;
+    this.lines = [];
   }
 
   fitBounds() {
