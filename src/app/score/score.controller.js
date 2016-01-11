@@ -158,8 +158,11 @@ class ScoreController {
     this._.each(this.markers, (m) => m.setMap(null));
     this._.each(this.lines, (l) => l.setMap(null));
 
+    google.maps.event.clearInstanceListeners(this.map);
+
     this.markers = [];
     this.lines = [];
+    this.map = null;
   }
 
   startScoring() {
@@ -202,19 +205,18 @@ class ScoreController {
   }
 
   addScores() {
+    this.$log.log('adding score');
     let isAllZero = (arr) => {
       const notZeroArray = arr.filter((value) => value !== 0);
       return notZeroArray.length === 0;
     }
 
+    this.$log.log('starting ticker');
     for (let i = 0; i < this.players.length; i++) {
-      let interval = this.$interval(() => {
+      var interval = this.$interval(() => {
         this.players[i].score += 1;
         this.receivedPoints[i] -= 1;
         // TODO: play sound
-        if (this.receivedPoints[i] <= 0) {
-          this.$interval.cancel(interval);
-        }
 
         if (isAllZero(this.receivedPoints)) {
           this.$log.log('all points are equal');
@@ -222,13 +224,13 @@ class ScoreController {
           this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
 
           const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
-
+          this.$log.log('finished adding score');
           this.SocketService.send({
             type: 'end_score',
             haveNextRound: stillHaveQuestion
           });
         }
-      }, 7, 0, true);
+      }, 3, this.receivedPoints[i], true);
     }
   }
 
