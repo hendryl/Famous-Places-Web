@@ -209,7 +209,9 @@ class ScoreController {
       bounds.extend(markers[i].getPosition());
     }
 
-    bounds.extend(this.answerMarker.getPosition());
+    if(this.answerMarker != null) {
+      bounds.extend(this.answerMarker.getPosition());
+    }
 
     this.map.fitBounds(bounds);
   }
@@ -226,13 +228,13 @@ class ScoreController {
   calculateScore() {
     this.receivedPoints = this._.map(this.distances, (dist) => {
       return this.ScoreService.calculateScore(dist);
-    })
+    });
   }
 
   subscribeToMapEvents() {
     google.maps.event.addListener(this.map, 'bounds_changed', () => {
       this.fitBounds();
-    })
+    });
   }
 
   handlePlayerDisconnect(message) {
