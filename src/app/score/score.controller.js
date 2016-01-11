@@ -50,10 +50,11 @@ class ScoreController {
       this.handlePlayerDisconnect(message);
 
     } else if (message.type === 'continue') {
-      if (this.GameService.canMoveToNextQuestion) {
+      this.clearMap();
+
+      if (this.GameService.canMoveToNextQuestion()) {
         this.GameService.moveToNextQuestion();
         this.$state.go('game');
-        this.clearMap();
 
       } else {
         //TODO: prepare for both solo and multiplayer play
