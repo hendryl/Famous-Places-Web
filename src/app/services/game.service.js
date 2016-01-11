@@ -1,9 +1,10 @@
 class GameService {
-  constructor(_, $log, $q, ImageFactory, AudioService) {
+  constructor(_, $log, $q, $localStorage, ImageFactory, AudioService) {
     'ngInject';
     this._ = _;
     this.$q = $q;
     this.$log = $log;
+    this.$storage = $localStorage;
     this.ImageFactory = ImageFactory;
     this.AudioService = AudioService;
 
@@ -129,7 +130,6 @@ class GameService {
       }
     };
 
-    AudioService.music._src !== baseMusic
     if (this.AudioService.music._src !== this.music._src) {
       this.AudioService.setMusic(this.music);
 
