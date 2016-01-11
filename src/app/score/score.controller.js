@@ -81,6 +81,7 @@ class ScoreController {
     this.preparePlayerMarkers();
     this.prepareAnswerMarker();
     this.prepareLines();
+    this.setCenterToAnswer();
     this.fitBounds();
   }
 
@@ -137,7 +138,13 @@ class ScoreController {
     }
   }
 
+  setCenterToAnswer() {
+    this.map.panTo(this.markers[0].position);
+    this.map.setZoom(17);
+  }
+
   fitBounds() {
+    google.maps.event.trigger(this.map, 'resize');
     const markers = this.markers;
     let bounds = new google.maps.LatLngBounds();
 
