@@ -20,7 +20,6 @@ class LoadingController {
       $state.go('home');
     });
 
-    AudioService.fadeToStop();
     this.setAnimation();
     this.setGameAssetChecker(this.waitTime);
 
