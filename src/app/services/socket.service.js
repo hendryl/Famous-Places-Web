@@ -12,6 +12,10 @@ class SocketService {
     this.extendedHandler = null;
   }
 
+  isConnected() {
+    return this.connected;
+  }
+
   connect() {
     return new Promise( (resolve, reject) => {
       this.$log.log('connecting to sockjs');
@@ -74,7 +78,7 @@ class SocketService {
     this.socket.send(json);
   }
 
-  close() {
+  disconnect() {
     this.socket.close();
     this.socket = null;
   }

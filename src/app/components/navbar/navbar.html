@@ -5,6 +5,9 @@
         <button class="btn btn-nav" ng-click="nav.handleAbout()" ng-hide="nav.shouldHideAboutButton()">
           {{nav.aboutText}}
         </button>
+        <button class="btn btn-nav" ng-click="nav.handleQuit()" ng-hide="nav.shouldHideQuitButton()">
+            QUIT
+          </button>
       </div>
       <div class="col-xs-4 text-center">
         <img class="nav-title" ng-hide="nav.shouldHideLogo()" src="assets/images/famous-places-small.png"></img>
