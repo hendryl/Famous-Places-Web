@@ -54,11 +54,13 @@
             'text-player4': $index === 3,
             'points-anim': score.pointsRevealed[$index] === true
           }">
-          <span ng-hide="score.distances[$index] < 1000">{{score.distances[$index] / 1000 | number: 2}} km</span>
-          <span ng-hide="score.distances[$index] >= 1000">{{score.distances[$index] | number: 0}} m</span>
+            <span ng-hide="score.distances[$index] < 1000">{{score.distances[$index] / 1000 | number: 2}}
+              km</span>
+            <span ng-hide="score.distances[$index] >= 1000">{{score.distances[$index] | number: 0}}
+              m</span>
 
-          <br>
-          +{{score.receivedPoints[$index]}}</span>
+            <br>
+            +{{score.receivedPoints[$index]}}</span>
         </div>
       </div>
     </div>
@@ -75,8 +77,10 @@
                 <em class="textxxMedium monospaced">
                   {{player.name}}
                 </em>
-                <span ng-hide="score.distances[$index] < 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] / 1000 | number: 0}} km</span>
-                <span ng-hide="score.distances[$index] >= 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] | number: 0}} m</span>
+                <span ng-hide="score.distances[$index] < 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] / 1000 | number: 0}}
+                  km</span>
+                <span ng-hide="score.distances[$index] >= 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] | number: 0}}
+                  m</span>
               </div>
               <div class="col-xs-5 text-right">
                 <span class="textxxMedium monospaced" ng-hide="!score.pointsRevealed[$index]">
