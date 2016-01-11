@@ -8,6 +8,7 @@ class GameController {
     this.toastr = toastr;
     this.$window = $window;
     this.$storage = $localStorage;
+    this.$timeout = $timeout;
     this.$interval = $interval;
     this.GameService = GameService;
     this.ScoreService = ScoreService;
