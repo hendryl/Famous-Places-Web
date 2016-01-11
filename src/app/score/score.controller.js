@@ -84,10 +84,11 @@ class ScoreController {
   }
 
   addScores() {
-    let isAllEqual = (arr) => {
+    let isAllZero = (arr) => {
       // remove all duplicates in array
       // if only one left then all elements are equal
-      return this._.uniq(arr).length === 1;
+      const notZeroArray = arr.filter((value) => value !== 0);
+      return notZeroArray.length === 0;
     }
 
     for(let i = 0; i < this.players.length; i++) {
@@ -99,7 +100,9 @@ class ScoreController {
           this.$interval.cancel(interval);
         }
 
-        if(isAllEqual(this.receivedPoints)) {
+        if(isAllZero(this.receivedPoints)) {
+          this.$log.log('all points are equal');
+          this.$log.log(this.receivedPoints);
           this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
 
           const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
