@@ -17,10 +17,10 @@ class ScoreController {
 
     this.round = GameService.getRound();
     this.question = GameService.getQuestion(this.round);
+    this.answerLatLng = null;
     this.players = GameService.players;
     this.showMap = false;
     this.map = null;
-    this.answerMarker = null;
     this.markers = [];
     this.lines = [];
     this.distances = [];
@@ -40,80 +40,25 @@ class ScoreController {
       $state.go('home');
     });
 
-    this.SocketService.extendedHandler = (message) => {
-      if (message.type === 'player_disconnect') {
-        this.handlePlayerDisconnect(message);
-
-      } else if (message.type === 'continue') {
-        if(this.GameService.canMoveToNextQuestion) {
-          this.GameService.moveToNextQuestion();
-          this.$state.go('game');
-          this.clearMap();
-
-        } else {
-          //TODO: prepare for both solo and multiplayer play
-          this.$state.go('result');
-        }
-      }
-    };
-
-    $timeout(() => {
-      this.showMap = true;
-      this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
-      this.revealScores();
-    }, 2000);
+    this.SocketService.extendedHandler = (message) => this.handleSocketMessage(message);
 
     this.$log.log(this.question);
   }
 
-  isWindowSmall() {
-    return this.$window.innerWidth < 800;
-  }
+  handleSocketMessage(message) {
+    if (message.type === 'player_disconnect') {
+      this.handlePlayerDisconnect(message);
 
-  revealScores() {
-    let index = 0;
-    this.$interval(() => {
-      this.pointsRevealed[index] = true;
-      index += 1;
+    } else if (message.type === 'continue') {
+      if (this.GameService.canMoveToNextQuestion) {
+        this.GameService.moveToNextQuestion();
+        this.$state.go('game');
+        this.clearMap();
 
-      if(index >= this.players.length) {
-        this.$timeout(() => {
-          this.addScores();
-        }, 800);
+      } else {
+        //TODO: prepare for both solo and multiplayer play
+        this.$state.go('result');
       }
-    }, 800, this.players.length, true);
-  }
-
-  addScores() {
-    let isAllZero = (arr) => {
-      // remove all duplicates in array
-      // if only one left then all elements are equal
-      const notZeroArray = arr.filter((value) => value !== 0);
-      return notZeroArray.length === 0;
-    }
-
-    for(let i = 0; i < this.players.length; i++) {
-      let interval = this.$interval(() => {
-        this.players[i].score += 1;
-        this.receivedPoints[i] -= 1;
-        // TODO: play sound
-        if(this.receivedPoints[i] <= 0) {
-          this.$interval.cancel(interval);
-        }
-
-        if(isAllZero(this.receivedPoints)) {
-          this.$log.log('all points are equal');
-          this.$log.log(this.receivedPoints);
-          this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
-
-          const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
-
-          this.SocketService.send({
-            type: 'end_score',
-            haveNextRound: stillHaveQuestion
-          });
-        }
-      }, 7, 0, true);
     }
   }
 
@@ -127,23 +72,27 @@ class ScoreController {
     };
 
     map.setOptions(options);
+    this.drawMapObjects();
+    this.subscribeToMapEvents();
+    this.startScoring();
+  }
+
+  drawMapObjects() {
     this.preparePlayerMarkers();
     this.prepareAnswerMarker();
     this.prepareLines();
     this.fitBounds();
-    this.calculateGeodesicDistance();
-    this.calculateScore();
-    this.subscribeToMapEvents();
   }
 
   prepareAnswerMarker() {
     const answerIcon = 'http://maps.google.com/mapfiles/kml/pal2/icon13.png';
-    const answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
+    this.answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
 
-    this.answerMarker = new google.maps.Marker();
-    this.answerMarker.setPosition(answerLatLng);
-    this.answerMarker.setIcon(answerIcon);
-    this.answerMarker.setMap(this.map);
+    const marker = new google.maps.Marker();
+    marker.setPosition(this.answerLatLng);
+    marker.setIcon(answerIcon);
+    marker.setMap(this.map);
+    this.markers.push(marker);
   }
 
   preparePlayerMarkers() {
@@ -155,8 +104,8 @@ class ScoreController {
     ];
 
     for (let i = 0; i < this.players.length; i++) {
-      var marker = new google.maps.Marker();
-      var latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
+      const marker = new google.maps.Marker();
+      const latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
 
       marker.setPosition(latLng);
       marker.setIcon(icons[i]);
@@ -173,13 +122,11 @@ class ScoreController {
       '#FFA336'
     ];
 
-    const answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
-
     for (let i = 0; i < this.players.length; i++) {
       const latLng = new google.maps.LatLng(this.players[i].lastAnswer.lat, this.players[i].lastAnswer.long);
 
       const line = new google.maps.Polyline({
-        path: [latLng, answerLatLng],
+        path: [latLng, this.answerLatLng],
         strokeColor: colors[i],
         strokeOpacity: 1.0,
         strokeWeight: 4,
@@ -190,38 +137,47 @@ class ScoreController {
     }
   }
 
-  clearMap() {
-    _.each(this.markers, (m) => m.setMap(null));
-    this.answerMarker.setMap(null);
-
-    _.each(this.lines, (l) => l.setMap(null));
-
-    this.markers = [];
-    this.answerMarker = null;
-    this.lines = [];
-  }
-
   fitBounds() {
     const markers = this.markers;
-    var bounds = new google.maps.LatLngBounds();
+    let bounds = new google.maps.LatLngBounds();
 
-    for(let i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i++) {
       bounds.extend(markers[i].getPosition());
-    }
-
-    if(this.answerMarker != null) {
-      bounds.extend(this.answerMarker.getPosition());
     }
 
     this.map.fitBounds(bounds);
   }
 
+  subscribeToMapEvents() {
+    google.maps.event.addListener(this.map, 'bounds_changed', () => {
+      this.fitBounds();
+    });
+  }
+
+  clearMap() {
+    this._.each(this.markers, (m) => m.setMap(null));
+    this._.each(this.lines, (l) => l.setMap(null));
+
+    this.markers = [];
+    this.lines = [];
+  }
+
+  startScoring() {
+    this.$timeout(() => {
+      this.showMap = true;
+      this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
+
+      this.calculateGeodesicDistance();
+      this.calculateScore();
+      this.revealScores();
+    }, 2000);
+  }
+
   calculateGeodesicDistance() {
-    const answerLatLng = new google.maps.LatLng(this.question.latitude, this.question.longitude);
 
     this.distances = this._.map(this.players, (p) => {
       const latLng = new google.maps.LatLng(p.lastAnswer.lat, p.lastAnswer.long);
-      return google.maps.geometry.spherical.computeDistanceBetween(latLng, answerLatLng);
+      return google.maps.geometry.spherical.computeDistanceBetween(latLng, this.answerLatLng);
     });
   }
 
@@ -231,10 +187,49 @@ class ScoreController {
     });
   }
 
-  subscribeToMapEvents() {
-    google.maps.event.addListener(this.map, 'bounds_changed', () => {
-      this.fitBounds();
-    });
+  revealScores() {
+    let index = 0;
+    this.$interval(() => {
+      this.pointsRevealed[index] = true;
+      index += 1;
+
+      if (index >= this.players.length) {
+        this.$timeout(() => {
+          this.addScores();
+        }, 800);
+      }
+    }, 800, this.players.length, true);
+  }
+
+  addScores() {
+    let isAllZero = (arr) => {
+      const notZeroArray = arr.filter((value) => value !== 0);
+      return notZeroArray.length === 0;
+    }
+
+    for (let i = 0; i < this.players.length; i++) {
+      let interval = this.$interval(() => {
+        this.players[i].score += 1;
+        this.receivedPoints[i] -= 1;
+        // TODO: play sound
+        if (this.receivedPoints[i] <= 0) {
+          this.$interval.cancel(interval);
+        }
+
+        if (isAllZero(this.receivedPoints)) {
+          this.$log.log('all points are equal');
+          this.$log.log(this.receivedPoints);
+          this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
+
+          const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
+
+          this.SocketService.send({
+            type: 'end_score',
+            haveNextRound: stillHaveQuestion
+          });
+        }
+      }, 7, 0, true);
+    }
   }
 
   handlePlayerDisconnect(message) {
@@ -252,6 +247,10 @@ class ScoreController {
 
   padWithZeroes(value) {
     return this.ScoreService.padWithZeroes(value);
+  }
+
+  isWindowSmall() {
+    return this.$window.innerWidth < 800;
   }
 }
 
