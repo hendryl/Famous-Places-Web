@@ -218,6 +218,19 @@ class ScoreController {
     })
   }
 
+  handlePlayerDisconnect(message) {
+    const toastrMessage = this.GameService.handlePlayerDisconnect(message);
+
+    //no more players!
+    if (this.GameService.players.length === 0) {
+      alert('Last player has disconnected. Ending game.');
+      this.$state.go('home');
+      this.SocketService.deleteRoom();
+    } else {
+      this.toastr.warning(toastrMessage);
+    }
+  }
+
   padWithZeroes(value) {
     return this.ScoreService.padWithZeroes(value);
   }
