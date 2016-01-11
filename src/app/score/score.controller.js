@@ -197,6 +197,8 @@ class ScoreController {
       bounds.extend(markers[i].getPosition());
     }
 
+    bounds.extend(this.answerMarker.getPosition());
+
     this.map.fitBounds(bounds);
   }
 
