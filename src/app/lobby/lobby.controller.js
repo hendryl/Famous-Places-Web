@@ -24,10 +24,9 @@ class LobbyController {
     if (SocketService.isConnected()) {
       this.send({
         type: 'remake',
-        room: this.password,
-        players: this.players
+        room: this.password
       });
-      
+
     } else {
       this.connect();
     }
