@@ -84,8 +84,9 @@ class ScoreController {
 
   drawMapObjects() {
     this.$log.log('drawing map objects');
-    this.preparePlayerMarkers();
+
     this.prepareAnswerMarker();
+    this.preparePlayerMarkers();
 
     this.$log.log('markers created');
     this.$log.log(this.markers);
@@ -102,6 +103,7 @@ class ScoreController {
 
     const marker = new google.maps.Marker();
     marker.setPosition(this.answerLatLng);
+
     marker.setIcon(answerIcon);
     marker.setMap(this.map);
     this.markers.push(marker);
