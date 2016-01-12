@@ -124,10 +124,13 @@ class GameService {
 
   playMusic() {
     let canPlayMusic = () => {
-      if (this.$storage.audioStatus === this.audioOn) {
+      if (this.$storage.audioStatus === this.audioOn && !this.AudioService.music.isPlaying) {
         this.AudioService.playMusic();
       }
     };
+
+    this.$log.log(this.AudioService.music);
+    this.$log.log(this.music);
 
     if (this.AudioService.music._src !== this.music._src) {
       this.AudioService.setMusic(this.music);
