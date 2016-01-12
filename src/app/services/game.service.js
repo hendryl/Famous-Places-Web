@@ -10,7 +10,6 @@ class GameService {
     this.audioOn = audioOn;
 
     this.currentQuestion = 0;
-
     this.game_id = 0;
     this.questions = [];
     this.musicURL = '';
@@ -64,12 +63,11 @@ class GameService {
   }
 
   storeGameData(data) {
-    const _ = this._;
-
     this.game_id = data.game_id;
     this.roomName = data.password;
-    this.questions = _.shuffle(data.questions);
+    this.questions = this._.shuffle(data.questions);
     this.musicURL = data.music;
+    this.currentQuestion = 0;
   }
 
   retrieveAssets() {
