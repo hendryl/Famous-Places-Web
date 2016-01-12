@@ -7,6 +7,7 @@ class ResultController {
     this.GameFactory = GameFactory;
     this.players = GameService.players;
     this.toastr = toastr;
+    this.gameCreator = null;
 
     SocketService.extendedHandler = (message) => {
       if(message.type === 'player_create') {
@@ -19,8 +20,8 @@ class ResultController {
   }
 
   handlePlayerCreate(playerId) {
-    const player = this._.find(this.GameService.players, (n) => n.id === playerId);
-    this.toastr.info(player.name + ' is creating a new game.');
+    this.gameCreator = this._.find(this.GameService.players, (n) => n.id === playerId);
+    this.toastr.info(this.gameCreator.name + ' is creating a new game.');
   }
 
   handlePlayerSelect(message) {
@@ -32,10 +33,9 @@ class ResultController {
       this.GameService.storeGameData(result.data);
       this.GameService.retrieveAssets();
 
-      const player = this._.find(this.GameService.players, (n) => n.id === message.playerId);
       this.GameService.players = [{
-        name: player.name,
-        id: player.id,
+        name: this.gameCreator.name,
+        id: this.gameCreator.id,
         score: 0,
         lastAnswer: null
       }];
