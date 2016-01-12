@@ -4,6 +4,7 @@ class ResultController {
 
     this._ = _;
     this.GameService = GameService;
+    this.GameFactory = GameFactory;
     this.players = GameService.players;
     this.toastr = toastr;
 
