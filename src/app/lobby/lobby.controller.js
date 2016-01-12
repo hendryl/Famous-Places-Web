@@ -23,7 +23,7 @@ class LobbyController {
 
     if (SocketService.isConnected()) {
       this.send({
-        type: 'remake',
+        type: 'rename',
         room: this.password
       });
 
