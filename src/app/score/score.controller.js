@@ -248,9 +248,14 @@ class ScoreController {
     this.$log.log('starting ticker');
     for (let i = 0; i < this.players.length; i++) {
 
-      this.$interval(() => {
-        this.players[i].score += 1;
-        this.receivedPoints[i] -= 1;
+      let interval = this.$interval(() => {
+
+        if(this.receivedPoints[i] > 0) {
+          this.players[i].score += 1;
+          this.receivedPoints[i] -= 1;
+        } else {
+          this.$interval.cancel(interval);
+        }
         // TODO: play sound
 
         if (isAllZero(this.receivedPoints)) {
