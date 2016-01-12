@@ -168,6 +168,7 @@ class ScoreController {
 
       this._.each(this.markers, (m) => {
         bounds.extend(m.getPosition());
+        //TODO: show lat long of each m
       });
 
       this.map.fitBounds(bounds);
