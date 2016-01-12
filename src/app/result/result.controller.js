@@ -27,12 +27,12 @@ class ResultController {
     const mode_id = message.mode_id;
 
     this.GameFactory.createGame(mode_id).then((result) => {
-      this.toastr.info('Moving to lobby');
+      this.toastr.info('Moving to lobby.');
 
       this.GameService.storeGameData(result.data);
       this.GameService.retrieveAssets();
 
-      const player = this._.find(this.GameService.players, (n) => n.id === message.player);
+      const player = this._.find(this.GameService.players, (n) => n.id === message.playerId);
       this.GameService.players = [{
         name: player.name,
         id: player.id,
