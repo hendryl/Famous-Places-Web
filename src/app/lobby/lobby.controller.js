@@ -21,8 +21,8 @@ class LobbyController {
       $state.go('home');
     });
 
-    if (SocketService.isConnected()) {
-      this.send({
+    if (this.SocketService.isConnected()) {
+      this.SocketService.send({
         type: 'rename',
         room: this.password
       });
