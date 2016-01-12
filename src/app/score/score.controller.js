@@ -245,18 +245,17 @@ class ScoreController {
 
     this.$log.log('starting ticker');
     for (let i = 0; i < this.players.length; i++) {
-      var interval = this.$interval(() => {
+
+      this.$interval(() => {
         this.players[i].score += 1;
         this.receivedPoints[i] -= 1;
         // TODO: play sound
 
         if (isAllZero(this.receivedPoints)) {
-          this.$log.log('all points are equal');
-          this.$log.log(this.receivedPoints);
           this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
 
           const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
-          this.$log.log('finished adding score');
+
           this.SocketService.send({
             type: 'end_score',
             haveNextRound: stillHaveQuestion
