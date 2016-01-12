@@ -19,7 +19,7 @@ class ResultController {
 
   handlePlayerCreate(playerId) {
     const player = this._.find(this.GameService.players, (n) => n.id === playerId);
-    this.toastr.info(player + ' is creating a new game.');
+    this.toastr.info(player.name + ' is creating a new game.');
   }
 
   handlePlayerSelect(message) {
