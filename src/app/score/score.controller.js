@@ -70,10 +70,12 @@ class ScoreController {
     const options = {
       streetViewControl: false,
       mapTypeControl: false,
-      zoomControl: false
+      zoomControl: false,
+      maxZoom: 12
     };
 
     map.setOptions(options);
+
     this.$log.log(map);
     this.drawMapObjects();
     this.subscribeToMapEvents();
