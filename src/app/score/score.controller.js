@@ -151,7 +151,7 @@ class ScoreController {
 
   setCenterToAnswer() {
     this.map.panTo(this.markers[0].position);
-    this.map.setZoom(17);
+    this.map.setZoom(12);
   }
 
   fitBounds() {
