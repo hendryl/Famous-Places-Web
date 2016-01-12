@@ -21,24 +21,36 @@ class LobbyController {
       $state.go('home');
     });
 
-    SocketService.connect().then((result) => {
+    if (SocketService.isConnected()) {
+      this.send({
+        type: 'remake',
+        room: this.password,
+        players: this.players
+      });
+      
+    } else {
+      this.connect();
+    }
+
+    this.SocketService.extendedHandler = (message) => {
+      if (message.type === 'join_room') {
+        this.handleJoinRoomMessage(message);
+      }
+
+      if (message.type === 'players_ready') {
+        this.handlePlayersReady();
+      }
+
+      if (message.type === 'player_disconnect') {
+        this.handlePlayerDisconnect(message);
+      }
+    };
+  }
+
+  connect() {
+    this.SocketService.connect().then((result) => {
       this.$log.log('success');
-
-      this.SocketService.extendedHandler = (message) => {
-        if (message.type === 'join_room') {
-          this.handleJoinRoomMessage(message);
-        }
-
-        if(message.type === 'players_ready') {
-          this.handlePlayersReady();
-        }
-
-        if (message.type === 'player_disconnect') {
-          this.handlePlayerDisconnect(message);
-        }
-      };
-
-      SocketService.createRoom(this.password);
+      this.SocketService.createRoom(this.password);
     });
   }
 
@@ -66,7 +78,7 @@ class LobbyController {
 
     this.toastr.warning(toastrMessage);
     this.$scope.$apply(() => {
-        this.$scope.players = this.players;
+      this.$scope.players = this.players;
     });
   }
 
