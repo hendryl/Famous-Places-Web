@@ -152,7 +152,7 @@ class ScoreController {
   }
 
   setCenterToAnswer() {
-    this.map.panTo(this.markers[0].position);
+    this.map.setCenter(this.markers[0].getPosition());
     this.map.setZoom(12);
   }
 
@@ -170,17 +170,11 @@ class ScoreController {
     this.$log.log('subscribing to map events');
 
     this.$log.log(google.maps.event);
-
-    google.maps.event.addListener(this.map, 'idle', () => {
-      this.fitBounds();
-    });
   }
 
   clearMap() {
     this._.each(this.markers, (m) => m.setMap(null));
     this._.each(this.lines, (l) => l.setMap(null));
-
-    google.maps.event.clearInstanceListeners(this.map);
 
     this.markers = [];
     this.lines = [];
