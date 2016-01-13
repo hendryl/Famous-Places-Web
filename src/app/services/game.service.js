@@ -129,9 +129,6 @@ class GameService {
       }
     };
 
-    this.$log.log(this.AudioService.music);
-    this.$log.log(this.music);
-
     if (this.AudioService.music._src !== this.music._src) {
       this.AudioService.setMusic(this.music);
 
