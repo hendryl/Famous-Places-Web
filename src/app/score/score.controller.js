@@ -210,6 +210,7 @@ class ScoreController {
 
       this.$log.log('set the text into answer location');
 
+      google.maps.event.trigger(this.map, 'resize');
       this.calculateGeodesicDistance();
       this.calculateScore();
       this.$log.log(this.receivedPoints);
