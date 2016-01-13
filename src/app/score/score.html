@@ -24,71 +24,71 @@
       </div>
     </div>
   </div>
-</div>
-<div class="score-row">
-  <div class="row">
-    <div class="score-boxes" ng-hide="score.isWindowSmall()" ng-repeat="player in score.players">
-      <div class="col-xs-3 noPad">
-        <div class="score-box text-center" ng-class="{
-          'box-player1': $index === 0,
-          'box-player2': $index === 1,
-          'box-player3': $index === 2,
-          'box-player4': $index === 3,
-        }">
-          <div class="text-center">
-            <em class="textxxMedium monospaced">{{player.name}}</em>
-          </div>
-          <div class="pad-small"></div>
-          <div class="row">
-            <div class="col-xs-6">
-              <span class="textLarge monospaced">SCORE</span>
-            </div>
-            <div class="col-xs-6 text-right">
-              <span class="textLarge monospaced">{{score.padWithZeroes(player.score)}}</span>
-            </div>
-          </div>
-          <span class="score-points textxxMedium" ng-class="{
-            'text-player1': $index === 0,
-            'text-player2': $index === 1,
-            'text-player3': $index === 2,
-            'text-player4': $index === 3,
-            'points-anim': score.pointsRevealed[$index] === true
+  <div class="score-row">
+    <div class="row">
+      <div class="score-boxes" ng-hide="score.isWindowSmall()" ng-repeat="player in score.players">
+        <div class="col-xs-3 noPad">
+          <div class="score-box text-center" ng-class="{
+            'box-player1': $index === 0,
+            'box-player2': $index === 1,
+            'box-player3': $index === 2,
+            'box-player4': $index === 3,
           }">
-            <span ng-hide="score.distances[$index] < 1000">{{score.distances[$index] / 1000 | number: 2}}
-              km</span>
-            <span ng-hide="score.distances[$index] >= 1000">{{score.distances[$index] | number: 0}}
-              m</span>
+            <div class="text-center">
+              <em class="textxxMedium monospaced">{{player.name}}</em>
+            </div>
+            <div class="pad-small"></div>
+            <div class="row">
+              <div class="col-xs-6 text-left">
+                <span class="textLarge monospaced">SCORE</span>
+              </div>
+              <div class="col-xs-6 text-right">
+                <span class="textLarge monospaced">{{score.padWithZeroes(player.score)}}</span>
+              </div>
+            </div>
+            <span class="score-points textxxMedium" ng-class="{
+              'text-player1': $index === 0,
+              'text-player2': $index === 1,
+              'text-player3': $index === 2,
+              'text-player4': $index === 3,
+              'points-anim': score.pointsRevealed[$index] === true
+            }">
+              <span ng-hide="score.distances[$index] < 1000">{{score.distances[$index] / 1000 | number: 2}}
+                km</span>
+              <span ng-hide="score.distances[$index] >= 1000">{{score.distances[$index] | number: 0}}
+                m</span>
 
-            <br>
-            +{{score.receivedPoints[$index]}}</span>
+              <br>
+              +{{score.receivedPoints[$index]}}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div ng-hide="!score.isWindowSmall()">
-      <div ng-repeat="player in score.players">
-        <div class="col-xs-12">
-          <div class="score-line" ng-class="{
-          'box-player1': $index === 0,
-          'box-player2': $index === 1,
-          'box-player3': $index === 2,
-          'box-player4': $index === 3}">
-            <div class="row">
-              <div class="col-xs-7">
-                <em class="textxxMedium monospaced">
-                  {{player.name}}
-                </em>
-                <span ng-hide="score.distances[$index] < 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] / 1000 | number: 0}}
-                  km</span>
-                <span ng-hide="score.distances[$index] >= 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] | number: 0}}
-                  m</span>
-              </div>
-              <div class="col-xs-5 text-right">
-                <span class="textxxMedium monospaced" ng-hide="!score.pointsRevealed[$index]">
-                  +{{score.receivedPoints[$index]}}
-                </span>
-                <span class="textxxMedium monospaced">
-                  {{score.padWithZeroes(player.score)}}
-                </span>
+      <div ng-hide="!score.isWindowSmall()">
+        <div ng-repeat="player in score.players">
+          <div class="col-xs-12">
+            <div class="score-line" ng-class="{
+            'box-player1': $index === 0,
+            'box-player2': $index === 1,
+            'box-player3': $index === 2,
+            'box-player4': $index === 3}">
+              <div class="row">
+                <div class="col-xs-7">
+                  <em class="textxxMedium monospaced">
+                    {{player.name}}
+                  </em>
+                  <span ng-hide="score.distances[$index] < 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] / 1000 | number: 0}}
+                    km</span>
+                  <span ng-hide="score.distances[$index] >= 1000 || !score.pointsRevealed[$index]">{{score.distances[$index] | number: 0}}
+                    m</span>
+                </div>
+                <div class="col-xs-5 text-right">
+                  <span class="textxxMedium monospaced" ng-hide="!score.pointsRevealed[$index]">
+                    +{{score.receivedPoints[$index]}}
+                  </span>
+                  <span class="textxxMedium monospaced">
+                    {{score.padWithZeroes(player.score)}}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
