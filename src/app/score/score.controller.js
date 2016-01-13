@@ -262,7 +262,7 @@ class ScoreController {
 
       let interval = this.$interval(() => {
 
-        if(this.receivedPoints[i] > 0) {
+        if (this.receivedPoints[i] > 0) {
           this.players[i].score += 1;
           this.receivedPoints[i] -= 1;
         } else {
