@@ -9,12 +9,7 @@ class GameService {
     this.AudioService = AudioService;
     this.audioOn = audioOn;
 
-    this.currentQuestion = 0;
-    this.game_id = 0;
-    this.questions = [];
-    this.musicURL = '';
-    this.roomName = '';
-    this.players = [];
+    this.prepareGame();
 
     this.ready = {
       images: false,
@@ -40,6 +35,15 @@ class GameService {
     }
 
     return true;
+  }
+
+  prepareGame() {
+    this.currentQuestion = 0;
+    this.game_id = 0;
+    this.questions = [];
+    this.musicURL = '';
+    this.roomName = '';
+    this.players = [];
   }
 
   moveToNextQuestion() {
