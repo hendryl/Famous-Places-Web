@@ -184,7 +184,7 @@ class ScoreController {
 
     this.$log.log(google.maps.event);
 
-    google.maps.event.addListener(this.map, 'bounds_changed', () => {
+    google.maps.event.addListener(this.map, 'idle', () => {
       this.fitBounds();
     });
   }
