@@ -9,6 +9,12 @@
     </div>
     <div class="pad-small"></div>
     <div class="row">
+      <div ng-hide="select.modes.length > 0">
+        <div class="pad-medium"></div>
+        <div class="text-center">
+          <div class="textxxLarge">Loading...</div>
+        </div>
+      </div>
       <div ng-repeat="mode in select.modes">
         <div class="col-md-4 col-xs-12 text-center mode-pad">
           <button class="btn-unstyled btn-mode" ng-class='{modefloatRight:$first, modefloatLeft:$last}' ng-click="select.selectGameMode(mode.mode_id)" ng-disabled="select.buttonDisabled">
