@@ -157,26 +157,13 @@ class ScoreController {
   }
 
   fitBounds() {
+    let bounds = new google.maps.LatLngBounds();
 
-    //fix for maps sometimes only loading half
-    //http://stackoverflow.com/questions/14444625/angularjs-map-via-google-maps-api-v3-in-a-tab
+    this._.each(this.markers, (m) => {
+      bounds.extend(m.getPosition());
+    });
 
-    this.$timeout( () => {
-      google.maps.event.trigger(this.map, 'resize');
-
-      let bounds = new google.maps.LatLngBounds();
-
-      this._.each(this.markers, (m) => {
-        bounds.extend(m.getPosition());
-        //TODO: show lat long of each m
-      });
-
-      this.map.fitBounds(bounds);
-
-      this.$log.log('fitted bounds');
-      this.$log.log(bounds);
-      this.$log.log('------------------------');
-    }, 100);
+    this.map.fitBounds(bounds);
   }
 
   subscribeToMapEvents() {
