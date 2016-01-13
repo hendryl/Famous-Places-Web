@@ -57,10 +57,11 @@ class SocketService {
     }
   }
 
-  createRoom(name) {
+  createRoom(game_id, name) {
     this.$log.log('creating room');
     this.send({
       type: 'create_room',
+      game_id: game_id,
       name: name
     });
   }
