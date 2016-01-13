@@ -24,7 +24,8 @@ class LobbyController {
     if (this.SocketService.isConnected()) {
       this.SocketService.send({
         type: 'rename',
-        room: this.password
+        room: this.password,
+        game_id: this.game_id
       });
 
     } else {
