@@ -1,8 +1,10 @@
 class ResultController {
-  constructor(SocketService, GameService, toastr, _, GameFactory) {
+  constructor($state, $log, SocketService, GameService, toastr, _, GameFactory) {
     'ngInject';
 
     this._ = _;
+    this.$log = $log;
+    this.$state = $state;
     this.GameService = GameService;
     this.GameFactory = GameFactory;
     this.players = GameService.players;
