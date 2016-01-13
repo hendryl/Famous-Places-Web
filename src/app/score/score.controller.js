@@ -70,10 +70,12 @@ class ScoreController {
     const options = {
       streetViewControl: false,
       mapTypeControl: false,
-      zoomControl: false
+      zoomControl: false,
+      maxZoom: 12
     };
 
     map.setOptions(options);
+
     this.$log.log(map);
     this.drawMapObjects();
     this.subscribeToMapEvents();
@@ -82,8 +84,9 @@ class ScoreController {
 
   drawMapObjects() {
     this.$log.log('drawing map objects');
-    this.preparePlayerMarkers();
+
     this.prepareAnswerMarker();
+    this.preparePlayerMarkers();
 
     this.$log.log('markers created');
     this.$log.log(this.markers);
@@ -100,6 +103,7 @@ class ScoreController {
 
     const marker = new google.maps.Marker();
     marker.setPosition(this.answerLatLng);
+
     marker.setIcon(answerIcon);
     marker.setMap(this.map);
     this.markers.push(marker);
@@ -148,38 +152,29 @@ class ScoreController {
   }
 
   setCenterToAnswer() {
-    this.map.panTo(this.markers[0].position);
-    this.map.setZoom(17);
+    this.map.setCenter(this.markers[0].getPosition());
+    this.map.setZoom(12);
   }
 
   fitBounds() {
-    google.maps.event.trigger(this.map, 'resize');
-    const markers = this.markers;
     let bounds = new google.maps.LatLngBounds();
 
-    for (let i = 0; i < markers.length; i++) {
-      bounds.extend(markers[i].getPosition());
-    }
+    this._.each(this.markers, (m) => {
+      bounds.extend(m.getPosition());
+    });
 
     this.map.fitBounds(bounds);
-    this.$log.log('fitted bounds');
   }
 
   subscribeToMapEvents() {
     this.$log.log('subscribing to map events');
 
     this.$log.log(google.maps.event);
-
-    google.maps.event.addListener(this.map, 'bounds_changed', () => {
-      this.fitBounds();
-    });
   }
 
   clearMap() {
     this._.each(this.markers, (m) => m.setMap(null));
     this._.each(this.lines, (l) => l.setMap(null));
-
-    google.maps.event.clearInstanceListeners(this.map);
 
     this.markers = [];
     this.lines = [];
@@ -196,6 +191,7 @@ class ScoreController {
 
       this.$log.log('set the text into answer location');
 
+      google.maps.event.trigger(this.map, 'resize');
       this.calculateGeodesicDistance();
       this.calculateScore();
       this.$log.log(this.receivedPoints);
@@ -245,18 +241,22 @@ class ScoreController {
 
     this.$log.log('starting ticker');
     for (let i = 0; i < this.players.length; i++) {
-      var interval = this.$interval(() => {
-        this.players[i].score += 1;
-        this.receivedPoints[i] -= 1;
+
+      let interval = this.$interval(() => {
+
+        if (this.receivedPoints[i] > 0) {
+          this.players[i].score += 1;
+          this.receivedPoints[i] -= 1;
+        } else {
+          this.$interval.cancel(interval);
+        }
         // TODO: play sound
 
         if (isAllZero(this.receivedPoints)) {
-          this.$log.log('all points are equal');
-          this.$log.log(this.receivedPoints);
           this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
 
           const stillHaveQuestion = this.GameService.canMoveToNextQuestion();
-          this.$log.log('finished adding score');
+
           this.SocketService.send({
             type: 'end_score',
             haveNextRound: stillHaveQuestion

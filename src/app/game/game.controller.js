@@ -40,7 +40,7 @@ class GameController {
           return;
         }
 
-        const player = _.find(this.players, (p) => p.id === message.id);
+        const player = _.find(this.players, (p) => p.id === message.player);
         player.lastAnswer = {
           lat: message.lat,
           long: message.long

@@ -27,6 +27,8 @@ class SelectController {
   selectGameMode(mode_id) {
     this.buttonDisabled = true;
 
+    this.GameService.prepareGame();
+
     this.GameFactory.createGame(mode_id).then((result) => {
       this.$log.log(result);
       this.GameService.storeGameData(result.data);

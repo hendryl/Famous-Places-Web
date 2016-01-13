@@ -76,7 +76,7 @@ class NavbarController {
   }
 
   handleQuit() {
-    const result = window.confirm('Are you sure you want to quit?');
+    const result = confirm('Are you sure you want to quit?');
 
     if(result) {
       if(this.SocketService.isConnected()) {

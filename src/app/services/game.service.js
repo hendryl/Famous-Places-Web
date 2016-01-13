@@ -9,13 +9,7 @@ class GameService {
     this.AudioService = AudioService;
     this.audioOn = audioOn;
 
-    this.currentQuestion = 0;
-
-    this.game_id = 0;
-    this.questions = [];
-    this.musicURL = '';
-    this.roomName = '';
-    this.players = [];
+    this.prepareGame();
 
     this.ready = {
       images: false,
@@ -43,6 +37,15 @@ class GameService {
     return true;
   }
 
+  prepareGame() {
+    this.currentQuestion = 0;
+    this.game_id = 0;
+    this.questions = [];
+    this.musicURL = '';
+    this.roomName = '';
+    this.players = [];
+  }
+
   moveToNextQuestion() {
     this.currentQuestion += 1;
   }
@@ -64,12 +67,11 @@ class GameService {
   }
 
   storeGameData(data) {
-    const _ = this._;
-
     this.game_id = data.game_id;
     this.roomName = data.password;
-    this.questions = _.shuffle(data.questions);
+    this.questions = this._.shuffle(data.questions);
     this.musicURL = data.music;
+    this.currentQuestion = 0;
   }
 
   retrieveAssets() {
@@ -126,7 +128,7 @@ class GameService {
 
   playMusic() {
     let canPlayMusic = () => {
-      if (this.$storage.audioStatus === this.audioOn) {
+      if (this.$storage.audioStatus === this.audioOn && !this.AudioService.music.isPlaying) {
         this.AudioService.playMusic();
       }
     };
