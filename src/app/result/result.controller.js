@@ -44,7 +44,7 @@ class ResultController {
 
       this.$state.go('lobby');
     }, (error) => {
-      this.$log.log(error);
+      this.$log.debug(error);
     });
   }
 }

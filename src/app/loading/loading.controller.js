@@ -48,13 +48,13 @@ class LoadingController {
 
   checkAssets() {
     if (this.GameService.isGameReady()) {
-      this.$log.log('Game ready');
+      this.$log.debug('Game ready');
       this.$state.go('game');
       this.SocketService.send({
         type: 'game_ready'
       });
     } else {
-      this.$log.log('Game not ready yet');
+      this.$log.debug('Game not ready yet');
 
       if(!this.GameService.ready.images) {
         this.text = 'Game is loading images';

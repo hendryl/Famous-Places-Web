@@ -18,7 +18,7 @@ class SocketService {
 
   connect() {
     return new Promise( (resolve, reject) => {
-      this.$log.log('connecting to sockjs');
+      this.$log.debug('connecting to sockjs');
       this.socket = new this.SockJS(this.baseURLConfig.localAPI + '/sockets');
       this.socket.onopen = () => {
         this.connected = true;
@@ -27,7 +27,7 @@ class SocketService {
 
       this.socket.onclose = () => {
         this.connected = false;
-        this.$log.log('connection closed');
+        this.$log.debug('connection closed');
         this.BroadcastService.send('server_disconnect', null);
       };
 
@@ -38,7 +38,7 @@ class SocketService {
   }
 
   handleMessage(message) {
-    this.$log.log('message received');
+    this.$log.debug('message received');
 
     message = angular.fromJson(message.data);
 
@@ -46,10 +46,10 @@ class SocketService {
       this.$log.error(message.reason);
 
     } else if(message.type === 'create_room') {
-      this.$log.log('create room success');
+      this.$log.debug('create room success');
 
     } else if(message.type === 'join_room') {
-      this.$log.log('player joined');
+      this.$log.debug('player joined');
     }
 
     if(this.extendedHandler != null) {
@@ -58,7 +58,7 @@ class SocketService {
   }
 
   createRoom(game_id, name) {
-    this.$log.log('creating room');
+    this.$log.debug('creating room');
     this.send({
       type: 'create_room',
       game_id: game_id,
@@ -67,7 +67,7 @@ class SocketService {
   }
 
   deleteRoom() {
-    this.$log.log('deleting room');
+    this.$log.debug('deleting room');
     this.send({
       type: 'delete_room'
     });

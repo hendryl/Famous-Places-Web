@@ -49,7 +49,7 @@ class LobbyController {
 
   connect() {
     this.SocketService.connect().then((result) => {
-      this.$log.log('success');
+      this.$log.debug('success');
       this.SocketService.createRoom(this.game_id, this.password);
     });
   }

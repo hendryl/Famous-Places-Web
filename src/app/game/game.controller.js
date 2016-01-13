@@ -33,10 +33,10 @@ class GameController {
 
       } else if (message.type === 'answer') {
 
-        this.$log.log('answer received');
+        this.$log.debug('answer received');
 
         if (_.contains(this.answered, message.player)) {
-          this.$log.log('player already answered before');
+          this.$log.debug('player already answered before');
           return;
         }
 
@@ -53,7 +53,7 @@ class GameController {
             type: 'end_round',
             round: this.round
           });
-          this.$log.log('end');
+          this.$log.debug('end');
           $timeout(() => {
             this.$state.go('score');
           }, 2000);
@@ -84,7 +84,7 @@ class GameController {
           round: this.round
         });
 
-        this.$log.log('sent start_round message');
+        this.$log.debug('sent start_round message');
       });
     }, this.waitTime);
   }

@@ -30,13 +30,13 @@ class SelectController {
     this.GameService.prepareGame();
 
     this.GameFactory.createGame(mode_id).then((result) => {
-      this.$log.log(result);
+      this.$log.debug(result);
       this.GameService.storeGameData(result.data);
       this.GameService.retrieveAssets();
 
       this.$state.go('lobby');
     }, (error) => {
-      this.$log.log(error);
+      this.$log.debug(error);
     });
   }
 }

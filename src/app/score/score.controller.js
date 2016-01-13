@@ -42,8 +42,8 @@ class ScoreController {
 
     this.SocketService.extendedHandler = (message) => this.handleSocketMessage(message);
 
-    this.$log.log(this.question);
-    this.$log.log('finish constructor');
+    this.$log.debug(this.question);
+    this.$log.debug('finish constructor');
   }
 
   handleSocketMessage(message) {
@@ -76,25 +76,25 @@ class ScoreController {
 
     map.setOptions(options);
 
-    this.$log.log(map);
+    this.$log.debug(map);
     this.drawMapObjects();
     this.subscribeToMapEvents();
     this.startScoring();
   }
 
   drawMapObjects() {
-    this.$log.log('drawing map objects');
+    this.$log.debug('drawing map objects');
 
     this.prepareAnswerMarker();
     this.preparePlayerMarkers();
 
-    this.$log.log('markers created');
-    this.$log.log(this.markers);
+    this.$log.debug('markers created');
+    this.$log.debug(this.markers);
 
     this.prepareLines();
     this.setCenterToAnswer();
     this.fitBounds();
-    this.$log.log('finished drawing map objects');
+    this.$log.debug('finished drawing map objects');
   }
 
   prepareAnswerMarker() {
@@ -167,9 +167,9 @@ class ScoreController {
   }
 
   subscribeToMapEvents() {
-    this.$log.log('subscribing to map events');
+    this.$log.debug('subscribing to map events');
 
-    this.$log.log(google.maps.event);
+    this.$log.debug(google.maps.event);
   }
 
   clearMap() {
@@ -183,24 +183,24 @@ class ScoreController {
 
   startScoring() {
 
-    this.$log.log('start scoring');
+    this.$log.debug('start scoring');
 
     this.$timeout(() => {
       this.showMap = true;
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
 
-      this.$log.log('set the text into answer location');
+      this.$log.debug('set the text into answer location');
 
       google.maps.event.trigger(this.map, 'resize');
       this.calculateGeodesicDistance();
       this.calculateScore();
-      this.$log.log(this.receivedPoints);
+      this.$log.debug(this.receivedPoints);
       this.revealScores();
     }, 2000);
   }
 
   calculateGeodesicDistance() {
-    this.$log.log('calculating distance');
+    this.$log.debug('calculating distance');
 
     this.distances = this._.map(this.players, (p) => {
       const latLng = new google.maps.LatLng(p.lastAnswer.lat, p.lastAnswer.long);
@@ -209,19 +209,19 @@ class ScoreController {
   }
 
   calculateScore() {
-    this.$log.log('calculating score');
+    this.$log.debug('calculating score');
     this.receivedPoints = this._.map(this.distances, (dist) => {
       return this.ScoreService.calculateScore(dist);
     });
   }
 
   revealScores() {
-    this.$log.log('revealing score');
+    this.$log.debug('revealing score');
 
     let index = 0;
     this.$interval(() => {
       this.pointsRevealed[index] = true;
-      this.$log.log('revealed point for player ' + index + 1);
+      this.$log.debug('revealed point for player ' + index + 1);
       index += 1;
 
       if (index >= this.players.length) {
@@ -233,13 +233,13 @@ class ScoreController {
   }
 
   addScores() {
-    this.$log.log('adding score');
+    this.$log.debug('adding score');
     let isAllZero = (arr) => {
       const notZeroArray = arr.filter((value) => value !== 0);
       return notZeroArray.length === 0;
     }
 
-    this.$log.log('starting ticker');
+    this.$log.debug('starting ticker');
     for (let i = 0; i < this.players.length; i++) {
 
       let interval = this.$interval(() => {
