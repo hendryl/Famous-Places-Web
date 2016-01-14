@@ -58,7 +58,6 @@ class ScoreController {
         this.$state.go('game');
 
       } else {
-        //TODO: prepare for both solo and multiplayer play
         this.$state.go('result');
       }
     }
@@ -186,6 +185,8 @@ class ScoreController {
     this.$log.debug('start scoring');
 
     this.$timeout(() => {
+      this.AudioService.playSound('flip');
+
       this.showMap = true;
       this.text = 'Location: ' + this.question.name + ', ' + this.question.country;
 
@@ -220,6 +221,7 @@ class ScoreController {
 
     let index = 0;
     this.$interval(() => {
+      this.AudioService.playSound('blub');
       this.pointsRevealed[index] = true;
       this.$log.debug('revealed point for player ' + index + 1);
       index += 1;
@@ -245,12 +247,20 @@ class ScoreController {
       let interval = this.$interval(() => {
 
         if (this.receivedPoints[i] > 0) {
-          this.players[i].score += 1;
-          this.receivedPoints[i] -= 1;
+
+          if(this.receivedPoints[i] >= 7) {
+            this.players[i].score += 7;
+            this.receivedPoints[i] -= 7;
+
+          } else {
+            this.players[i].score += this.receivedPoints[i];
+            this.receivedPoints[i] = 0;
+          }
+
+          this.AudioService.playSound('tick');
         } else {
           this.$interval.cancel(interval);
         }
-        // TODO: play sound
 
         if (isAllZero(this.receivedPoints)) {
           this.pointsRevealed = this._.map(this.pointsRevealed, (n) => false);
@@ -262,7 +272,7 @@ class ScoreController {
             haveNextRound: stillHaveQuestion
           });
         }
-      }, 3, this.receivedPoints[i], true);
+      }, 30, this.receivedPoints[i], true);
     }
   }
 
