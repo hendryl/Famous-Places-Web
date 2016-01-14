@@ -7,6 +7,7 @@ class SelectController {
     this.$state = $state;
     this.GameFactory = GameFactory;
     this.GameService = GameService;
+    this.AudioService = AudioService;
 
     this.modes = [];
     this.buttonDisabled = false;
@@ -26,6 +27,7 @@ class SelectController {
   }
 
   selectGameMode(mode_id) {
+    this.AudioService.playSound('button');
     this.buttonDisabled = true;
 
     this.GameService.prepareGame();
