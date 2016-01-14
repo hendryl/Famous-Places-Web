@@ -1,5 +1,5 @@
 class LobbyController {
-  constructor(_, $state, $scope, toastr, $log, $location, GameService, SocketService) {
+  constructor(_, $state, $scope, toastr, $log, $location, GameService, SocketService, AudioService) {
     'ngInject';
 
     this._ = _;
@@ -9,6 +9,7 @@ class LobbyController {
     this.toastr = toastr;
     this.GameService = GameService;
     this.SocketService = SocketService;
+    this.AudioService = AudioService;
 
     this.game_id = GameService.game_id;
     this.password = GameService.roomName;
@@ -62,6 +63,7 @@ class LobbyController {
       lastAnswer: null
     });
 
+    this.AudioService.playSound('blub');
     this.toastr.success(message.name + ' has connected.');
 
     this.$scope.$apply(() => {
