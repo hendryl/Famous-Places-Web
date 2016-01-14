@@ -8,25 +8,73 @@
       </div>
     </div>
     <div class="pad-small"></div>
-    <div ng-hide="result.winners.length === 1">
-      <div class="row">
-        dasfafsdafdfasd
+    <div ng-hide="result.players.length === 1">
+      <div ng-repeat="player in result.winners">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="result-box" ng-class="{
+              'box-player1':player.number === 0,
+              'box-player2':player.number === 1,
+              'box-player3':player.number === 2,
+              'box-player4':player.number === 3
+            }">
+              <div class="row result-container">
+                <div class="result-box-text star" ng-hide="!(result.isWinner(player) && result.canShowStar())">
+                  <i class="material-icons textHuge text-awesome">star</i>
+                </div>
+                <div class="result-box-text name textxLarge">
+                  <strong>{{player.name}}</strong>
+                </div>
+                <div class="result-box-text score text-right textxLarge">
+                  <strong>{{player.score}}</strong>
+                </div>
+                <div class="textHuge result-box-text rating text-right">
+                  {{player.rating}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pad-small"></div>
       </div>
     </div>
 
     <div class="row">
-      <div ng-hide="result.winners.length > 1">
+      <div ng-hide="result.players.length > 1">
         <div class="col-xs-12">
-          <div class="result-box box-player1">
-            <div class="row">
-              <div class="col-xs-6 textxLarge">
-                {{result.winners[0].name}}
-              </div>
-              <div class="col-xs-6 textxLarge text-right">
-                SCORE: {{result.winners[0].score}}
-              </div>
+          <div class="row">
+            <div class="col-xs-12 textxxLarge text-center">
+              <strong>{{result.winners[0].name}}</strong>
             </div>
+          </div>
 
+          <div class="pad-medium"></div>
+          <div class="row">
+            <div class="col-xs-12 textxLarge text-center">
+              FINAL SCORE
+            </div>
+            <div class="col-xs-12 textHuge text-center">
+              <strong class="text-primary">{{result.winners[0].score}}</strong>
+            </div>
+          </div>
+
+          <div class="pad-medium"></div>
+          <div class="row">
+            <div class="col-xs-12 textxLarge text-center">
+              RATING
+            </div>
+            <div class="col-xs-12 textHuge text-center">
+              <strong ng-class="{
+                  'text-bad': result.winners[0].rating === 'D' || result.winners[0].rating === 'C',
+                  'text-medium': result.winners[0].rating === 'B',
+                  'text-good': result.winners[0].rating === 'A',
+                  'text-awesome': result.winners[0].rating === 'S',
+
+                }">{{result.winners[0].rating}}</strong>
+            </div>
+            <div class="col-xs-12 textxLarge text-center">
+              <strong>{{result.winners[0].flavor}}</strong>
+            </div>
           </div>
         </div>
       </div>

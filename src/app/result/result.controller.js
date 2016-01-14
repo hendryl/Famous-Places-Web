@@ -1,17 +1,20 @@
 class ResultController {
-  constructor($state, $log, SocketService, GameService, toastr, _, GameFactory) {
+  constructor($state, $log, $timeout, SocketService, GameService, toastr, _, GameFactory) {
     'ngInject';
 
     this._ = _;
     this.$log = $log;
     this.$state = $state;
+    this.$timeout = $timeout;
     this.GameService = GameService;
     this.GameFactory = GameFactory;
     this.players = GameService.players;
     this.toastr = toastr;
     this.gameCreator = null;
 
+    this.highestScore = 0;
     this.winners = [];
+    this.starShown = false;
 
     SocketService.extendedHandler = (message) => {
       if (message.type === 'player_create') {
@@ -22,52 +25,87 @@ class ResultController {
       }
     }
 
-    this.players = [{
-      name: 'player 1',
-      score: 1235,
-      id: 123123132132,
-      lastAnswer: null
-    }];
-
-    // this.players = [{
-    //   name: 'player 1',
-    //   score: 1235,
-    //   id: 123123132132,
-    //   lastAnswer: null
-    // },
-    // {
-    //   name: 'player 2',
-    //   score: 3335,
-    //   id: 12312317712,
-    //   lastAnswer: null
-    // },
-    // {
-    //   name: 'player 3',
-    //   score: 4235,
-    //   id: 123123152132,
-    //   lastAnswer: null
-    // },
-    // {
-    //   name: 'player 4',
-    //   score: 2235,
-    //   id: 123999132132,
-    //   lastAnswer: null
-    // }];
-
     this.sortWinners();
-    this.$log.log(this.winners);
+    this.$log.debug(this.winners);
+    this.prepareAnimation();
+  }
+
+  prepareAnimation() {
+    this.$timeout( () => {
+      this.starShown = true;
+      //TODO: play sound tada
+    }, 2000);
+  }
+
+  isWinner(player) {
+    return player.score === this.highestScore;
+  }
+
+  canShowStar() {
+    return this.starShown;
   }
 
   sortWinners() {
     let counter = 0;
+
     this.winners = this._.chain(this.players.slice(0))
       .each(p => {
         p.number = counter;
         counter += 1;
+        p.rating = this.getRating(p.score);
+        p.flavor = this.getFlavorText(p.score);
+
+        this.highestScore = p.score > this.highestScore ? p.score : this.highestScore;
       })
       .sortBy(p => p.score)
       .value()
       .reverse();
+  }
+
+  getRating(score) {
+    if(score < 1000) {
+      return 'E';
+
+    } else if(score < 2000) {
+      return 'D';
+
+    } else if(score < 3000) {
+      return 'C';
+
+    } else if(score < 4000) {
+      return 'B';
+
+    } else if(score < 4900) {
+      return 'A';
+
+    } else return 'S';
+  }
+
+  getFlavorText(score) {
+    if(score < 100) {
+      return '........';
+
+    } else if(score < 1000) {
+      return 'Try harder!';
+
+    } else if(score < 2000) {
+      return 'Try harder!';
+
+    } else if(score < 3000) {
+      return 'Not bad! Play some more and get B rating!';
+
+    } else if(score < 4000) {
+      return 'Well Done! Try to get A rating!';
+
+    } else if(score < 4900) {
+      return 'Awesome!! Just a little more for S rating!';
+
+    } else if(score < 5000) {
+      return 'Awesome!! Just a bit more for the perfect score!';
+
+    } else {
+      return 'PERFECT SCOREEEE!!! AMAZINGGGG!!!';
+    }
   }
 
   handlePlayerCreate(playerId) {
