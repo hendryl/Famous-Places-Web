@@ -17,7 +17,11 @@ const soundFiles = [
   },
   {
     name: 'tick',
-    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/tick.mp3'
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/tick.ogg'
+  },
+  {
+    name: 'flip',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/reverse.mp3'
   }
 ];
 
