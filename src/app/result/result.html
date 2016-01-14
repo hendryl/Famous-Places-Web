@@ -8,26 +8,49 @@
       </div>
     </div>
     <div class="pad-small"></div>
-    <div ng-hide="result.winners.length === 1">
+    <div ng-hide="result.players.length === 1">
       <div class="row">
         dasfafsdafdfasd
       </div>
     </div>
 
     <div class="row">
-      <div ng-hide="result.winners.length > 1">
+      <div ng-hide="result.players.length > 1">
         <div class="col-xs-12">
-          <div class="result-box box-player1">
             <div class="row">
-              <div class="col-xs-6 textxLarge">
-                {{result.winners[0].name}}
-              </div>
-              <div class="col-xs-6 textxLarge text-right">
-                SCORE: {{result.winners[0].score}}
+              <div class="col-xs-12 textxxLarge text-center">
+                <strong>{{result.winners[0].name}}</strong>
               </div>
             </div>
 
-          </div>
+            <div class="pad-medium"></div>
+            <div class="row">
+              <div class="col-xs-12 textxLarge text-center">
+                FINAL SCORE
+              </div>
+              <div class="col-xs-12 textHuge text-center">
+                <strong class="text-primary">{{result.winners[0].score}}</strong>
+              </div>
+            </div>
+
+            <div class="pad-medium"></div>
+            <div class="row">
+              <div class="col-xs-12 textxLarge text-center">
+                RATING
+              </div>
+              <div class="col-xs-12 textHuge text-center">
+                <strong ng-class="{
+                  'text-bad': result.winners[0].rating === 'D' || result.winners[0].rating === 'C',
+                  'text-medium': result.winners[0].rating === 'B',
+                  'text-good': result.winners[0].rating === 'A',
+                  'text-awesome': result.winners[0].rating === 'S',
+
+                }">{{result.winners[0].rating}}</strong>
+              </div>
+              <div class="col-xs-12 textxLarge text-center">
+                <strong>{{result.winners[0].flavor}}</strong>
+              </div>
+            </div>
         </div>
       </div>
     </div>
