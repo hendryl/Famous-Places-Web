@@ -38,6 +38,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controllerAs: 'score'
     })
     .state('result', {
+      url: '/result',
       templateUrl: 'app/result/result.html',
       controller: 'ResultController',
       controllerAs: 'result'

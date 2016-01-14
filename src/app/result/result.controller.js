@@ -11,14 +11,63 @@ class ResultController {
     this.toastr = toastr;
     this.gameCreator = null;
 
+    this.winners = [];
+
     SocketService.extendedHandler = (message) => {
-      if(message.type === 'player_create') {
+      if (message.type === 'player_create') {
         this.handlePlayerCreate(message.player);
 
-      } else if(message.type === 'player_select') {
+      } else if (message.type === 'player_select') {
         this.handlePlayerSelect(message);
       }
     }
+
+    this.players = [{
+      name: 'player 1',
+      score: 1235,
+      id: 123123132132,
+      lastAnswer: null
+    }];
+
+    // this.players = [{
+    //   name: 'player 1',
+    //   score: 1235,
+    //   id: 123123132132,
+    //   lastAnswer: null
+    // },
+    // {
+    //   name: 'player 2',
+    //   score: 3335,
+    //   id: 12312317712,
+    //   lastAnswer: null
+    // },
+    // {
+    //   name: 'player 3',
+    //   score: 4235,
+    //   id: 123123152132,
+    //   lastAnswer: null
+    // },
+    // {
+    //   name: 'player 4',
+    //   score: 2235,
+    //   id: 123999132132,
+    //   lastAnswer: null
+    // }];
+
+    this.sortWinners();
+    this.$log.log(this.winners);
+  }
+
+  sortWinners() {
+    let counter = 0;
+    this.winners = this._.chain(this.players.slice(0))
+      .each(p => {
+        p.number = counter;
+        counter += 1;
+      })
+      .sortBy(p => p.score)
+      .value()
+      .reverse();
   }
 
   handlePlayerCreate(playerId) {
