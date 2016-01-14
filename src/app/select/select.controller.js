@@ -15,7 +15,6 @@ class SelectController {
       this.modes = _.sortBy(result, (n) => n.mode_id);
     });
 
-
     const music = AudioService.prepareMusic(lobbyMusic);
     AudioService.setMusic(music);
 
