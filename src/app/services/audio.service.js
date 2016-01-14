@@ -50,8 +50,6 @@ class AudioService {
       sound.name = soundFile.name;
       return sound;
     });
-
-    this.$log.log(this.sounds);
   }
 
   prepareMusic(url, loop = true) {
