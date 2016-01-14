@@ -3,6 +3,7 @@ class MainController {
     'ngInject';
 
     this.$state = $state;
+    this.AudioService = AudioService;
     this.$storage = $localStorage.$default({
       audioStatus: audioOn
     });
@@ -18,6 +19,7 @@ class MainController {
   }
 
   play() {
+    this.AudioService.playSound('button');
     this.$state.go('select');
   }
 }
