@@ -19,7 +19,7 @@
               'box-player4':player.number === 3
             }">
               <div class="row result-container">
-                <div class="result-box-text star">
+                <div class="result-box-text star" ng-hide="!(result.isWinner(player) && result.canShowStar())">
                   <i class="material-icons textHuge text-awesome">star</i>
                 </div>
                 <div class="result-box-text name textxLarge">

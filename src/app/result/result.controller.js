@@ -1,17 +1,20 @@
 class ResultController {
-  constructor($state, $log, SocketService, GameService, toastr, _, GameFactory) {
+  constructor($state, $log, $timeout, SocketService, GameService, toastr, _, GameFactory) {
     'ngInject';
 
     this._ = _;
     this.$log = $log;
     this.$state = $state;
+    this.$timeout = $timeout;
     this.GameService = GameService;
     this.GameFactory = GameFactory;
     this.players = GameService.players;
     this.toastr = toastr;
     this.gameCreator = null;
 
+    this.highestScore = 0;
     this.winners = [];
+    this.starShown = false;
 
     SocketService.extendedHandler = (message) => {
       if (message.type === 'player_create') {
@@ -22,43 +25,37 @@ class ResultController {
       }
     }
 
-    this.players = [{
-      name: 'ultraman gaia',
-      score: 1235,
-      id: 123123132132,
-      lastAnswer: null
-    },
-    {
-      name: '1234567890123456',
-      score: 3335,
-      id: 12312317712,
-      lastAnswer: null
-    },
-    {
-      name: 'Supermann',
-      score: 4235,
-      id: 123123152132,
-      lastAnswer: null
-    },
-    {
-      name: 'Jaka Tingkir',
-      score: 2235,
-      id: 123999132132,
-      lastAnswer: null
-    }];
-
     this.sortWinners();
-    this.$log.log(this.winners);
+    this.$log.debug(this.winners);
+    this.prepareAnimation();
+  }
+
+  prepareAnimation() {
+    this.$timeout( () => {
+      this.starShown = true;
+      //TODO: play sound tada
+    }, 2000);
+  }
+
+  isWinner(player) {
+    return player.score === this.highestScore;
+  }
+
+  canShowStar() {
+    return this.starShown;
   }
 
   sortWinners() {
     let counter = 0;
+
     this.winners = this._.chain(this.players.slice(0))
       .each(p => {
         p.number = counter;
         counter += 1;
         p.rating = this.getRating(p.score);
         p.flavor = this.getFlavorText(p.score);
+
+        this.highestScore = p.score > this.highestScore ? p.score : this.highestScore;
       })
       .sortBy(p => p.score)
       .value()
