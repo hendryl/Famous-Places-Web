@@ -1,0 +1,83 @@
+<navbar></navbar>
+<div class="basebg fill no-overflow">
+  <div class="container navbar-pad">
+    <div class="pad-small"></div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="text-center mode-title">CONNECT YOUR DEVICE</h1>
+      </div>
+    </div>
+    <div class="pad-small"></div>
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <div class="textxxMedium text-center">
+          Open the link below in your smartphone or tablet browser.
+        </div>
+        <div class="pad-xsmall"></div>
+        <div class="contentbg password-box textxLarge text-center">
+          <em>{{lobby.mobileAddress}}</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <i class="material-icons big-icon red-icon">arrow_downward</i>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <div class="textxxMedium text-center">
+          Enter the code below on the mobile site
+        </div>
+        <div class="pad-xsmall"></div>
+        <div class="contentbg password-box textxLarge text-center">
+          {{lobby.password}}
+        </div>
+      </div>
+    </div>
+    <div class="pad-medium"></div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="row">
+          <div class="col-xs-2 col-xs-offset-2">
+            <label ng-class="{'text-player1':lobby.isPlayerConnected(0)}">
+              Player 1
+            </label>
+            <div>
+              <i class="material-icons phone-icon player1" ng-class="{'text-player1':lobby.isPlayerConnected(0)}">smartphone</i>
+            </div>
+            <label class="text-player1" ng-show="lobby.isPlayerConnected(0)">
+              {{lobby.players[0].name}}
+            </label>
+          </div>
+          <div class="col-xs-2">
+            <label ng-class="{'text-player2':lobby.isPlayerConnected(1)}">Player 2</label>
+            <div>
+              <i class="material-icons phone-icon" ng-class="{'text-player2':lobby.isPlayerConnected(1)}">smartphone</i>
+            </div>
+            <label class="text-player2" ng-show="lobby.isPlayerConnected(1)">
+              {{lobby.players[1].name}}
+            </label>
+          </div>
+          <div class="col-xs-2">
+            <label ng-class="{'text-player3':lobby.isPlayerConnected(2)}">Player 3</label>
+            <div>
+              <i class="material-icons phone-icon" ng-class="{'text-player3':lobby.isPlayerConnected(2)}">smartphone</i>
+            </div>
+            <label class="text-player3" ng-show="lobby.isPlayerConnected(1)">
+              {{lobby.players[2].name}}
+            </label>
+          </div>
+          <div class="col-xs-2" ng-class="{'text-player4':lobby.isPlayerConnected(3)}">
+            <label ng-class="{'text-player4':lobby.isPlayerConnected(3)}">Player 4</label>
+            <div ng-class="{'text-player4':lobby.isPlayerConnected(3)}">
+              <i class="material-icons phone-icon">smartphone</i>
+            </div>
+            <label class="text-player4" ng-show="lobby.isPlayerConnected(3)">
+              {{lobby.players[3].name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

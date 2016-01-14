@@ -14,6 +14,83 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 @import "_variables";
 
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.basebg {
+  background-color: $color-yellowgray;
+}
+
+.contentbg {
+  background-color: $color-white;
+  border: 12px solid $color-blue;
+  border-radius: 12px;
+}
+
+.mainbg {
+  background-color: $color-black;
+  background-image:url("../assets/images/map.png");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.no-overflow {
+  overflow-x: hidden;
+}
+
+.navbar-pad {
+  padding-top: 55px;
+}
+
+.nopad {
+  padding: 0;
+  margin: 0;
+}
+
+.pad-xxsmall {
+  height: 4px;
+}
+
+.pad-xsmall {
+  height: 10px;
+}
+
+.pad-small {
+  height: 20px;
+}
+
+.pad-medium {
+  height: 35px;
+}
+
+.pad-large {
+  height: 80px;
+}
+
+.unstyled {
+  border: none;
+  outline: 0;
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

@@ -1,0 +1,49 @@
+.navbar {
+  background-color: $color-blue;
+  min-height: 30px;
+  padding: 8px 0;
+  margin-bottom: 0px;
+}
+
+.btn.btn-nav {
+  font-weight: 700;
+  padding: 4px 8px;
+  max-height: 36px;
+  min-height: 36px;
+  background-color: $color-red;
+  color: $color-white;
+}
+
+.btn-nav-spacing {
+  margin-right: 4px;
+}
+
+.btn-nav>i {
+  font-size: 28px;
+}
+
+.btn-nav:hover {
+  color: $color-white;
+}
+
+.nav-title {
+  max-height: 36px;
+  min-height: 30px;
+  color: $color-white;
+}
+
+@media screen and (max-width:375px) {
+  .btn.btn-nav {
+    max-height: 25px;
+    min-height: 25px;
+  }
+
+  .btn-nav>i {
+    font-size: 18px;
+  }
+
+  .nav-title {
+    max-height: 25px;
+    min-height: 25px;
+  }
+}

@@ -1,0 +1,111 @@
+<navbar></navbar>
+<div class="basebg fill no-overflow">
+  <div class="container-fluid navbar-pad">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <label class="textxLarge">
+          Question
+          {{game.round + 1}}
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="pad-small"></div>
+      <div class="text-center textHuge" ng-hide="!game.questionHidden">
+        <div class="pad-large"></div>
+        Ready
+      </div>
+      <div class="col-xs-12 text-center" ng-class="{gameQuestion: game.questionHidden, gameAnimQuestion: !game.questionHidden}" ng-hide="game.questionHidden">
+        <span class="textLarge">Locate this place on the map!</span>
+        <div class="pad-small"></div>
+        <img class="question-image" ng-src="{{game.question.photo.url}}"/>
+      </div>
+    </div>
+  </div>
+  <div class="score-row">
+    <div class="row">
+      <div class="score-boxes" ng-hide="game.isWindowSmall()" ng-repeat="player in game.players">
+        <div ng-hide="game.players.length !== 1">
+          <div class="col-xs-6 col-xs-offset-3 noPad">
+            <div class="score-box box-player1" ng-class="{
+              'box-dark': game.isPlayerDone($index)
+            }">
+              <div class="text-center">
+                <em class="textxxMedium monospaced">{{player.name}}</em>
+              </div>
+              <div class="pad-small"></div>
+              <div class="row">
+                <div class="col-xs-6 text-left">
+                  <span class="textLarge monospaced">SCORE</span>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <span class="textLarge monospaced">{{game.padWithZeroes(player.score)}}</span>
+                </div>
+              </div>
+            </div>
+            <i class="material-icons game-check text-player1" ng-class="{
+            'check-anim': game.isPlayerDone($index)
+          }">check</i>
+          </div>
+        </div>
+
+        <div ng-hide="game.players.length === 1">
+          <div class="col-xs-3 noPad">
+            <div class="score-box" ng-class="{
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
+              'box-player3': $index === 2,
+              'box-player4': $index === 3,
+              'box-dark': game.isPlayerDone($index)
+            }">
+              <div class="text-center">
+                <em class="textxxMedium monospaced">{{player.name}}</em>
+              </div>
+              <div class="pad-small"></div>
+              <div class="row">
+                <div class="col-xs-6 text-left">
+                  <span class="textLarge monospaced">SCORE</span>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <span class="textLarge monospaced">{{game.padWithZeroes(player.score)}}</span>
+                </div>
+              </div>
+            </div>
+            <i class="material-icons game-check" ng-class="{
+            'text-player1': $index === 0,
+            'text-player2': $index === 1,
+            'text-player3': $index === 2,
+            'text-player4': $index === 3,
+            'check-anim': game.isPlayerDone($index)
+          }">check</i>
+          </div>
+        </div>
+      </div>
+      <div ng-hide="!game.isWindowSmall()">
+        <div ng-repeat="player in game.players">
+          <div class="col-xs-12">
+            <div class="score-line" ng-class="{
+              'box-player1': $index === 0,
+              'box-player2': $index === 1,
+              'box-player3': $index === 2,
+              'box-player4': $index === 3,
+              'box-dark': game.isPlayerDone($index)}">
+              <div class="row">
+                <div class="col-xs-8">
+                  <em class="textxxMedium monospaced">
+                    {{player.name}}
+                  </em>
+                </div>
+                <div class="col-xs-4 text-right">
+                  <span class="textxxMedium monospaced">
+                    {{game.padWithZeroes(player.score)}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

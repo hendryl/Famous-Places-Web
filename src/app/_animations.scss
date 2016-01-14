@@ -1,0 +1,25 @@
+[ui-view].ng-enter, [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+}
+
+[ui-view].ng-enter {
+  filter: brightness(10%);
+}
+
+[ui-view].ng-enter-active {
+  filter: brightness(100%);
+}
+
+[ui-view].ng-leave {
+  filter: brightness(100%);
+}
+
+[ui-view].ng-leave-active {
+  filter: brightness(10%);
+}

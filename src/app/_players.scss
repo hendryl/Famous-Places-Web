@@ -1,0 +1,51 @@
+.text-player1 {
+  color: $color-red;
+}
+
+.text-player2 {
+  color: $color-lightblue;
+}
+
+.text-player3 {
+  color: $color-green;
+}
+
+.text-player4 {
+  color: $color-gold;
+}
+
+.box-player1 {
+  background-color: $color-red;
+}
+
+.box-player2 {
+  background-color: $color-lightblue;
+}
+
+.box-player3 {
+  background-color: $color-green;
+}
+
+.box-player4 {
+  background-color: $color-gold;
+}
+
+.box-dark.box-player1 {
+  background-color: darken($color-red, 30%);
+  color: $color-lightyellow;
+}
+
+.box-dark.box-player2 {
+  background-color: darken($color-lightblue, 30%);
+  color: $color-lightyellow;
+}
+
+.box-dark.box-player3 {
+  background-color: darken($color-green, 20%);
+  color: $color-lightyellow;
+}
+
+.box-dark.box-player4 {
+  background-color: darken($color-gold, 30%);
+  color: $color-lightyellow;
+}

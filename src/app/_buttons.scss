@@ -1,0 +1,73 @@
+
+.btn {
+  border: none;
+  border-radius: 12px;
+}
+
+.btn-big {
+  max-width: 250px;
+  width: 50%;
+  border-radius: 20px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-unstyled {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.btn-primary,
+.btn-primary:focus {
+  background-color: $color-brown;
+  color:$color-white;
+}
+.btn-primary:hover {
+  background-color: darken($color-brown, 10%);
+}
+.btn-primary:active:focus {
+  background-color: darken($color-brown, 20%);
+}
+.btn-primary:disabled,
+.btn-primary:disabled:hover {
+  background-color: DimGray;
+}
+
+.btn-info,
+.btn-info:focus {
+  background-color: $color-lightblue;
+  color:$color-white;
+}
+.btn-info:hover {
+  background-color: darken($color-lightblue, 10%);
+}
+.btn-info:active:focus {
+  background-color: darken($color-lightblue, 20%);
+}
+
+.btn-danger,
+.btn-danger:focus {
+  background-color: $color-red;
+}
+.btn-danger:hover {
+  background-color: darken($color-red, 10%);
+}
+.btn-danger:active:focus {
+  background-color: darken($color-red, 20%);
+}
+
+.btn-default,
+.btn-default:focus {
+  background-color: $color-lightgray;
+}
+.btn-default:hover {
+  background-color: darken($color-lightgray, 10%);
+}
+.btn-default:active:focus {
+  background-color: darken($color-lightgray, 20%);
+}
