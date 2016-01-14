@@ -19,7 +19,7 @@ class SocketService {
   connect() {
     return new Promise( (resolve, reject) => {
       this.$log.debug('connecting to sockjs');
-      this.socket = new this.SockJS(this.baseURLConfig.localAPI + '/sockets');
+      this.socket = new this.SockJS(this.baseURLConfig.rootAPI + '/sockets');
       this.socket.onopen = () => {
         this.connected = true;
         resolve(this.connected);

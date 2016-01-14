@@ -1,3 +1,30 @@
+const soundFiles = [
+  {
+    name: 'blub',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/blub.mp3'
+  },
+  {
+    name: 'button',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/button.mp3'
+  },
+  {
+    name: 'ping',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/ping.mp3'
+  },
+  {
+    name: 'tada',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/tada.mp3'
+  },
+  {
+    name: 'tick',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/tick.ogg'
+  },
+  {
+    name: 'flip',
+    url:'https://dl.dropboxusercontent.com/u/13188176/Famous%20Places/Sound/reverse.mp3'
+  }
+];
+
 class AudioService {
   constructor($log, _, $q, Howl, Howler, $localStorage, audioOn, baseMusic) {
     'ngInject';
@@ -7,17 +34,17 @@ class AudioService {
     this.$log = $log;
     this.Howl = Howl;
     this.Howler = Howler;
-    this.local = $localStorage;
+    this.$storage = $localStorage;
     this.audioOn = audioOn;
 
     this.sounds = [];
-    this.soundFiles = [];
-    //this.prepareSound();
+
+    this.prepareSound();
   }
 
   prepareSound() {
-    this.sounds = this._.each(this.soundFiles, (soundFile) => {
-      var sound = new this.Howl({
+    this.sounds = this._.map(soundFiles, (soundFile) => {
+      let sound = new this.Howl({
         src: [soundFile.url],
         loop: false,
         preload: true,
@@ -55,10 +82,16 @@ class AudioService {
     const sound = this._.find(this.sounds, (sound) => sound.name === name)
 
     if (sound == null) {
+      this.$log.debug('sound is null');
       return;
     }
 
-    sound.play();
+
+    if(this.$storage.audioStatus === this.audioOn) {
+      sound.play();
+    } else {
+      this.$log.debug('audio not on');
+    }
   }
 
   playMusic() {

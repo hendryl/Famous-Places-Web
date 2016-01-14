@@ -1,5 +1,5 @@
 class GameController {
-  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, $timeout, GameService, SocketService, ScoreService, toastr, audioOn) {
+  constructor(_, $window, $localStorage, $log, $scope, $state, $interval, $timeout, GameService, SocketService, ScoreService, AudioService, toastr, audioOn) {
     'ngInject';
 
     this._ = _;
@@ -13,6 +13,7 @@ class GameController {
     this.GameService = GameService;
     this.ScoreService = ScoreService;
     this.SocketService = SocketService;
+    this.AudioService = AudioService;
 
     this.audioOn = audioOn;
     this.waitTime = 2000;
@@ -45,15 +46,21 @@ class GameController {
           lat: message.lat,
           long: message.long
         }
+
         this.answered.push(message.player);
-        //TODO: play sound
+
+        this.$timeout( () => {
+          this.AudioService.playSound('blub');
+        }, 500);
 
         if (this.answered.length >= this.players.length) {
           this.SocketService.send({
             type: 'end_round',
             round: this.round
           });
+
           this.$log.debug('end');
+
           $timeout(() => {
             this.$state.go('score');
           }, 2000);
@@ -78,7 +85,7 @@ class GameController {
     this.$timeout(() => {
       this.questionHidden = false;
       angular.element(".gameQuestion").one('transitionend', (event) => {
-        //TODO: this.playSound('timerStart');
+        this.AudioService.playSound('ping');
         this.SocketService.send({
           type: 'start_round',
           round: this.round
@@ -90,7 +97,9 @@ class GameController {
   }
 
   playMusic() {
-    this.GameService.playMusic();
+    this.$timeout( () => {
+      this.GameService.playMusic();
+    }, 1000);
   }
 
   handlePlayerDisconnect(message) {

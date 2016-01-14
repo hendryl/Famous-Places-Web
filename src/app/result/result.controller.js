@@ -1,5 +1,5 @@
 class ResultController {
-  constructor($state, $log, $timeout, SocketService, GameService, toastr, _, GameFactory) {
+  constructor($state, $log, $timeout, SocketService, GameService, AudioService, toastr, _, GameFactory) {
     'ngInject';
 
     this._ = _;
@@ -8,6 +8,7 @@ class ResultController {
     this.$timeout = $timeout;
     this.GameService = GameService;
     this.GameFactory = GameFactory;
+    this.AudioService = AudioService;
     this.players = GameService.players;
     this.toastr = toastr;
     this.gameCreator = null;
@@ -27,13 +28,16 @@ class ResultController {
 
     this.sortWinners();
     this.$log.debug(this.winners);
-    this.prepareAnimation();
+
+    if(this.winners.length > 1) {
+      this.prepareAnimation();
+    }
   }
 
   prepareAnimation() {
     this.$timeout( () => {
       this.starShown = true;
-      //TODO: play sound tada
+      this.AudioService.playSound('tada');
     }, 2000);
   }
 
@@ -111,12 +115,14 @@ class ResultController {
   handlePlayerCreate(playerId) {
     this.gameCreator = this._.find(this.GameService.players, (n) => n.id === playerId);
     this.toastr.info(this.gameCreator.name + ' is creating a new game.');
+    this.AudioService.playSound('blub');
   }
 
   handlePlayerSelect(message) {
     const mode_id = message.mode_id;
 
     this.GameFactory.createGame(mode_id).then((result) => {
+      this.AudioService.playSound('blub');
       this.toastr.info('Moving to lobby.');
 
       this.GameService.storeGameData(result.data);
