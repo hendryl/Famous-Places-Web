@@ -7,7 +7,7 @@ class ImageFactory {
   }
 
   getImage(id) {
-    return this.$http.get(this.baseURLConfig.localAPI + '/flickr/photos/' + id + '?type=web&sizing=b');
+    return this.$http.get(this.baseURLConfig.rootAPI + '/flickr/photos/' + id + '?type=web&sizing=b');
   }
 }
 
