@@ -33,6 +33,8 @@ class NavbarController {
   }
 
   toggleFullscreen() {
+    this.AudioService.playSound('button');
+
     const enterFull = this.props.enterFull;
     const exitFull = this.props.exitFull;
 
@@ -66,6 +68,8 @@ class NavbarController {
   }
 
   handleAbout() {
+    this.AudioService.playSound('button');
+
     const $state = this.$state;
 
     if ($state.is('home')) {
@@ -76,6 +80,8 @@ class NavbarController {
   }
 
   handleQuit() {
+    this.AudioService.playSound('button');
+
     const result = confirm('Are you sure you want to quit?');
 
     if(result) {
