@@ -16,7 +16,7 @@ const credits = [{
   "url": "http://gulpjs.com/"
 }, {
   "image": "assets/images/node-sass.png",
-  "title": "Sass Node version",
+  "title": "Sass - Node version",
   "url": "http://sass-lang.com/"
 }, {
   "image": "assets/images/yeoman.png",
