@@ -1,5 +1,45 @@
 .result-box {
-  padding: 20px;
   border: 15px solid $color-black;
   border-radius: 15px;
+  position: relative;
+}
+
+.result-container {
+  position: relative;
+}
+
+.result-box-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.result-box-text.star {
+  left: 0;
+  transform: translate(-100%, -50%);
+}
+
+.result-box-text.name {
+  left: 5%;
+}
+
+.result-box-text.score {
+  right: 20%;
+}
+
+.result-box-text.rating {
+  position: relative;
+  top: 0;
+  right: 2%;
+  padding: 0 15px 0 15px;
+  transform: translateY(0%);
+}
+
+@media screen and (max-width: 840px) {
+  .result-box {
+    border: 8px solid $color-black;
+    border-radius: 10px;
+    position: relative;
+    margin-left: 30px;
+  }
 }

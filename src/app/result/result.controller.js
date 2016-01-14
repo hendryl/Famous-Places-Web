@@ -23,25 +23,25 @@ class ResultController {
     }
 
     this.players = [{
-      name: 'player 1',
+      name: 'ultraman gaia',
       score: 1235,
       id: 123123132132,
       lastAnswer: null
     },
     {
-      name: 'player 2',
+      name: '1234567890123456',
       score: 3335,
       id: 12312317712,
       lastAnswer: null
     },
     {
-      name: 'player 3',
+      name: 'Supermann',
       score: 4235,
       id: 123123152132,
       lastAnswer: null
     },
     {
-      name: 'player 4',
+      name: 'Jaka Tingkir',
       score: 2235,
       id: 123999132132,
       lastAnswer: null
