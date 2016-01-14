@@ -90,7 +90,9 @@ class GameController {
   }
 
   playMusic() {
-    this.GameService.playMusic();
+    this.$timeout( () => {
+      this.GameService.playMusic();
+    }, 1000);
   }
 
   handlePlayerDisconnect(message) {
