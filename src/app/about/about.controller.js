@@ -49,18 +49,20 @@ const credits = [{
 }];
 
 class AboutController {
-  constructor(_, $localStorage, AudioService, audioOn, lobbyMusic) {
+  constructor(_, $localStorage, $timeout, AudioService, audioOn, lobbyMusic) {
     'ngInject';
 
     this.credits = _.sortBy(credits, (n) => {
       return n.title;
     });
 
-    if ($localStorage.audioStatus === audioOn) {
-      const music = AudioService.prepareMusic(lobbyMusic);
-      AudioService.setMusic(music);
-      AudioService.playMusic();
-    }
+    $timeout( () => {
+      if ($localStorage.audioStatus === audioOn) {
+        const music = AudioService.prepareMusic(lobbyMusic);
+        AudioService.setMusic(music);
+        AudioService.playMusic();
+      }
+    }, 1000);
   }
 }
 

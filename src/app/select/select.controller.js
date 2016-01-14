@@ -1,5 +1,5 @@
 class SelectController {
-  constructor($log, _, $state, $localStorage, audioOn, ModeFactory, GameFactory, GameService, AudioService, lobbyMusic) {
+  constructor($log, _, $state, $localStorage, $timeout, audioOn, ModeFactory, GameFactory, GameService, AudioService, lobbyMusic) {
     'ngInject';
 
     this._ = _;
@@ -15,12 +15,14 @@ class SelectController {
       this.modes = _.sortBy(result, (n) => n.mode_id);
     });
 
-    const music = AudioService.prepareMusic(lobbyMusic);
-    AudioService.setMusic(music);
+    $timeout( () => {
+      const music = AudioService.prepareMusic(lobbyMusic);
+      AudioService.setMusic(music);
 
-    if ($localStorage.audioStatus === audioOn) {
-      AudioService.playMusic();
-    }
+      if ($localStorage.audioStatus === audioOn) {
+        AudioService.playMusic();
+      }
+    }, 1000);
   }
 
   selectGameMode(mode_id) {

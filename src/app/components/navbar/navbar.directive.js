@@ -13,13 +13,14 @@ class NavbarDirective {
 }
 
 class NavbarController {
-  constructor($state, $localStorage, AudioService, audioOn, audioOff, SocketService) {
+  constructor($state, $localStorage, AudioService, audioOn, audioOff, SocketService, $timeout) {
     'ngInject';
 
     this.$state = $state;
     this.$storage = $localStorage;
     this.AudioService = AudioService;
     this.SocketService = SocketService;
+    this.$timeout = $timeout;
 
     this.props = {
       enterFull: "fullscreen",
@@ -82,15 +83,17 @@ class NavbarController {
   handleQuit() {
     this.AudioService.playSound('button');
 
-    const result = confirm('Are you sure you want to quit?');
+    this.$timeout( () => {
+      const result = confirm('Are you sure you want to quit?');
 
-    if(result) {
-      if(this.SocketService.isConnected()) {
-        this.SocketService.disconnect();
+      if(result) {
+        if(this.SocketService.isConnected()) {
+          this.SocketService.disconnect();
+        }
+
+        this.$state.go('home');
       }
-
-      this.$state.go('home');
-    }
+    }, 300);
   }
 }
 
