@@ -46,6 +46,14 @@ const credits = [{
   "image": "assets/images/bitballoon.png",
   "title": "BitBalloon",
   "url": "https://www.bitballoon.com"
+}, {
+  "image": "assets/images/redis.png",
+  "title": "Redis",
+  "url": "https://www.redis.io"
+}, {
+  "image": "assets/images/howlerjs.png",
+  "title": "Howler.js",
+  "url": "https://github.com/goldfire/howler.js"
 }];
 
 class AboutController {
