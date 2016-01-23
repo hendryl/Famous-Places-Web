@@ -65,7 +65,7 @@ class NavbarController {
   }
 
   shouldHideQuitButton() {
-    return this.$state.is('home') || this.$state.is('about') || this.$state.is('result');
+    return this.$state.is('home') || this.$state.is('about');
   }
 
   handleAbout() {
@@ -84,7 +84,11 @@ class NavbarController {
     this.AudioService.playSound('button');
 
     this.$timeout( () => {
-      const result = confirm('Are you sure you want to quit?');
+      let result = true;
+
+      if (!this.$state.is('result')) {
+        result = confirm('Are you sure you want to quit?');
+      }
 
       if(result) {
         if(this.SocketService.isConnected()) {
